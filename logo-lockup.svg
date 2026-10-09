@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 72" fill="none">
+  <title>Premium Developers logo</title>
+  <defs>
+    <mask id="forward-p">
+      <rect width="64" height="64" fill="#000"/>
+      <path fill="#fff" d="M10 6h23c15 0 24 8.5 24 23s-9 23-24 23h-9v6H10V6Z"/>
+      <path fill="#000" d="M24 20h10v-5l12 14-12 14v-5H24l9-9-9-9Z"/>
+    </mask>
+  </defs>
+  <path fill="#0B2640" mask="url(#forward-p)" d="M2 4h64v64H2z"/>
+  <text x="84" y="33" fill="#0B2640" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.9">Premium</text>
+  <text x="84" y="57" fill="#0B2640" font-family="Plus Jakarta Sans, Inter, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.9">Developers</text>
+</svg>
