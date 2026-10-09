@@ -1072,7 +1072,7 @@ h2 {
   color: var(--muted)
 }
 
-.cta .btn {
+.cta .btn {  
   height: 40px;
   padding: 0 22px;
   font-size: 16px
