@@ -2126,7 +2126,8 @@ h2 {
   .book__actions .btn {
     min-width: 0;
     max-width: 100%;
-    padding-inline: 14px
+    
+    padding: 14px;
   }
 
   .pill {
