@@ -2110,6 +2110,9 @@ h2 {
 }
 
 @media (max-width:640px) {
+  .stat-card {
+    display: none !important;
+}
 
   .grid--4,
   .grid--3 {
