@@ -1,0 +1,144 @@
+Delivered-To: theofficialzaiqaghar@gmail.com
+Received: by 2002:ad5:5d8e:0:b0:409:e20f:5fa9 with SMTP id c14csp3587469imv;
+        Fri, 9 Oct 2026 12:16:42 -0700 (PDT)
+X-Received: by 2002:a05:6214:4488:b0:917:a1a7:6367 with SMTP id 6a1803df08f44-91b552fb106mr46342856d6.1.1791573402353;
+        Fri, 09 Oct 2026 12:16:42 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1791573402; cv=none;
+        d=google.com; s=arc-20260327;
+        b=Ft0yIfktwn+BSPozbFTfg1yTwZVRgnqrfxEyOyJsyj+1TxmwNSriPop6drK1acWOZl
+         Lmvtst5GAITkzomOksWZ4j4XOuIyyE0zu23c64L4lS2jllZiU4Nu1bisHW10paZbEmbx
+         /8n356XSNK7BXKtHDXb9GqWdk7i7xi1sO2VlpLaeNMonbmwAu+AhJWzdAg2sZ1I+F3j2
+         8e5TrXptNU1GurfZxhQc+xM0wKFsCsX63GVVl6zXqN6cGc+oY69QG9tJqCm5rk4jut60
+         hvrKADhmiDx+enzk+SxaKWcr87KbcE+EbKTKr+/rsNDnp/iY7e7OntxmaDyB45xnH9Bh
+         mFBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=mime-version:to:message-id:subject:date:from:dkim-signature;
+        bh=k7QfV3CvpBOK4W4NbBewLkrCqKsvykOdw/5KZArMABM=;
+        fh=K6vWa02Pw1cAcfYP2BCDhLT46VNOz7S7HUFmViyCXEc=;
+        b=J3jdzBYt+oykj/+DlXYVLb8Huym1d4PuJGShkblD3tcPP0tT4halTBOmVS1uMbk6Zk
+         Kehn40dIXZba+E6ZLtti+oFJ0Ci8opXBH3A5nMFOr309w1+SI4QgdRb9X3IoeAqv1JX2
+         95hQDStOKBBUqkKhkWpWXm8OSwbCzjj5kbaMDS12W2PGF7G58iVfnvOtYJOxQBr1zXT8
+         dcKniXR8CZyTskqXk60wdYLFevzkjesvRFNlPs7HH3dRlBqIdsCVOSZm5sCu3ntec9bQ
+         ZsWPmAiaqrl0guSON1xd9u5+gczqIS0HTa8gRpIs+RLMw26HwtIjS5e0XDGhO3GUIA+0
+         G7TA==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=permerror (no key for signature) header.i=@premiumdevelopers.co header.s=privateemail header.b=NY2VseEv;
+       spf=pass (google.com: domain of hello@premiumdevelopers.co designates 198.54.127.67 as permitted sender) smtp.mailfrom=hello@premiumdevelopers.co
+Return-Path: <hello@premiumdevelopers.co>
+Received: from out-zbxj-a67.jellyfish.systems (out-zbxj-a67.jellyfish.systems. [198.54.127.67])
+        by mx.google.com with ESMTPS id 6a1803df08f44-91b55228addsi32060886d6.509.2026.10.09.12.16.42
+        for <theofficialzaiqaghar@gmail.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2026 12:16:42 -0700 (PDT)
+Received-SPF: pass (google.com: domain of hello@premiumdevelopers.co designates 198.54.127.67 as permitted sender) client-ip=198.54.127.67;
+Authentication-Results: mx.google.com;
+       dkim=permerror (no key for signature) header.i=@premiumdevelopers.co header.s=privateemail header.b=NY2VseEv;
+       spf=pass (google.com: domain of hello@premiumdevelopers.co designates 198.54.127.67 as permitted sender) smtp.mailfrom=hello@premiumdevelopers.co
+Received: from mailcore-847f8df5fb-ph2jw (unknown [172.29.11.45])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.privateemail.com (Postfix) with ESMTPSA id 4j1c6Z3LZ2z6tkK
+	for <theofficialzaiqaghar@gmail.com>; Fri, 09 Oct 2026 19:16:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=premiumdevelopers.co; s=privateemail; t=1791573398;
+	bh=k7QfV3CvpBOK4W4NbBewLkrCqKsvykOdw/5KZArMABM=;
+	h=From:Date:Subject:To:From;
+	b=NY2VseEvLWFxNwHFozGVxLcSj41x2WPULdvU+ctkR3/8IhKsEY77bDb0X9U9GilPY
+	 WttR/LcOi/UOjeQLcE0KUSU42a4nN4VmaksL2Ub4YEQSJAYeUZpsTke+X1TS5nZ6ZP
+	 50uPBpwIcK2gItJDSppoTJvuvHngDGQxB9IOREq4oTTmXD5op2Qf8Ieu+XVJi0xKha
+	 mpbDv7i8EELO86zDXH4hLc25OQaRbAHnzJaX6joxGmhch9br1IYsuWjCcFiTO+sFVl
+	 BSUbrX8R4QVsr1dWwFwFsLtV0GG1FR//leuN329E5GLGWNoo9KOVjYo3rdXJ07wQ4Y
+	 Qdk3X+evjSWGA==
+From: hello <hello@premiumdevelopers.co>
+Date: Fri, 09 Oct 2026 19:16:38 +0000
+Subject: asasasasas
+Message-Id: <Y9FTLMLWIUU4.V2RESLNDSQMS2@mailcore-847f8df5fb-ph2jw>
+To: theofficialzaiqaghar@gmail.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="=-WdazEJsDa1edj6NBH4AGUw=="
+
+--=-WdazEJsDa1edj6NBH4AGUw==
+Content-Type: text/plain; charset=utf-8
+
+asasassa
+
+
+----
+
+Sent securely from Private Email (https://www.namecheap.com/hosting/email/?utm_source=def_email_sign&utm_medium=email&utm_campaign=def_email_sign)
+--=-WdazEJsDa1edj6NBH4AGUw==
+Content-Type: text/html; charset=utf-8
+
+
+ <html >
+   <head>
+      <meta charset="utf-8">
+      <style>
+body,
+.spm-email {
+    font: 400 1rem / 1.5 "GB Proxima Nova", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    overflow-y: hidden;
+    color: var(--sds-color-text-neutral-primary, #2b2b2d);
+    text-rendering: geometricprecision;
+    -webkit-font-smoothing: antialiased;
+    min-width: unset !important;
+}
+
+html[data-sds-mode="dark"] {
+    background: none !important;
+}
+
+pre {
+    word-break: initial;
+    white-space: pre-wrap;
+}
+
+blockquote,
+.spm-email blockquote {
+    margin: 16px 0 0;
+    padding: 16px 0 0;
+    color: var(--sds-color-text-neutral-primary, #2b2b2d);
+    border-top: 1px solid var(--sds-color-border-neutral-subtle, #6f6e6f);
+}
+
+.spm-quoted-email--title,
+.spm-email .spm-quoted-email--title {
+    width: auto;
+    display: inline-block;
+    margin-bottom: 16px;
+    color: var(--sds-color-text-neutral-secondary, #575860);
+    font-size: .875rem;
+    line-height: 1.25rem;
+}
+
+.spm-email .spm-signature-block {
+    margin-top: 24px;
+}
+
+.spm-signature-block p {
+    margin: 0;
+}
+
+.spm-embedded-image:not([width], [style*="width"]) {
+  max-inline-size: 100%;
+  min-inline-size: 38px;
+}
+
+.spm-email hr,
+hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--sds-color-border-inverted-minimal);
+}
+    
+#iframeContentContainer {
+    display: flow-root;
+    width: 100%; 
+    padding-bottom: 18px;
+}</style>
+   </head>
+   <body class="spm-email"><div style="font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;"><br></div><div style="font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt;" class="spm-empty-space">asasassa</div><div style="font-size: 10.5pt; margin-top: 0px;" class="spm-signature-block" signatureid="1566666"><p>----</p><p><em>Sent securely from <a target="_blank" href="https://www.namecheap.com/hosting/email/?utm_source=def_email_sign&amp;utm_medium=email&amp;utm_campaign=def_email_sign" rel="noopener noreferrer">Private Email</a></em></p></div></body>
+</html>
+--=-WdazEJsDa1edj6NBH4AGUw==--

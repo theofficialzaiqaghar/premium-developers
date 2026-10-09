@@ -2123,6 +2123,12 @@ h2 {
     width: 100%
   }
 
+  .book__actions .btn {
+    min-width: 0;
+    max-width: 100%;
+    padding-inline: 14px
+  }
+
   .pill {
     flex-wrap: wrap;
     border-radius: 18px
