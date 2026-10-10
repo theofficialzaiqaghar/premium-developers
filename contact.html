@@ -6,15 +6,15 @@
   <link rel="canonical" href="https://www.premiumdevelopers.co/contact">
   <meta property="og:url" content="https://www.premiumdevelopers.co/contact">
   <title>Contact Us | Premium Developers</title>
-  <meta name="description" content="Contact Premium Developers with questions, project ideas, partnership enquiries, feedback, or WordPress support requests.">
+  <meta name="description" content="Contact Premium Developers with a general question or to discuss your website project.">
   <meta name="keywords" content="contact Premium Developers, WordPress support, web development enquiry">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Premium Developers">
   <meta property="og:title" content="Contact Us | Premium Developers">
-  <meta property="og:description" content="Questions, project ideas, partnerships, or support—we’re here to help.">
+  <meta property="og:description" content="Questions or a website project in mind? Get in touch with Premium Developers.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Contact Us | Premium Developers">
-  <meta name="twitter:description" content="Questions, project ideas, partnerships, or support—we’re here to help.">
+  <meta name="twitter:description" content="Questions or a website project in mind? Get in touch with Premium Developers.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="service-pages.css">
   <link rel="stylesheet" href="contact-page.css">
+  <link rel="stylesheet" href="/exit-intent.css">
   <script src="contact.js" defer></script>
 </head>
 <body class="service-page contact-page">
@@ -39,7 +40,7 @@
         </nav>
         <span class="service-kicker">LET’S TALK</span>
         <h1>Good work starts with a conversation.</h1>
-        <p>Questions, a new idea, a partnership, or a website issue? Tell us what’s on your mind. We’ll read your message and aim to reply within two business days.</p>
+        <p>Have a question or a new project in mind? Tell us what you’re looking for. We’ll read your message and aim to reply within two business days.</p>
       </div>
     </section>
 
@@ -102,12 +103,30 @@
               <option value="" selected disabled>Select a reason</option>
               <option value="General inquiry">General inquiry</option>
               <option value="Project discussion">Project discussion</option>
-              <option value="Partnership">Partnership</option>
-              <option value="Support">Support</option>
-              <option value="Feedback">Feedback</option>
-              <option value="Other">Other</option>
             </select>
             <span class="form-field__error" id="contact-reason-error"></span>
+          </div>
+
+          <div class="contact-project-details" id="project-details" hidden>
+            <fieldset class="contact-services" id="contact-services" aria-describedby="contact-services-hint contact-services-error">
+              <legend>Which services are you interested in? <span aria-hidden="true">*</span></legend>
+              <span class="form-field__hint" id="contact-services-hint">Select all that apply.</span>
+              <div class="contact-services__options">
+                <label><input type="checkbox" name="services" value="WordPress Development"> WordPress Development</label>
+                <label><input type="checkbox" name="services" value="Elementor Development"> Elementor Development</label>
+                <label><input type="checkbox" name="services" value="WooCommerce Development"> WooCommerce Development</label>
+                <label><input type="checkbox" name="services" value="Website Redesign"> Website Redesign</label>
+                <label><input type="checkbox" name="services" value="Custom Development"> Custom Development</label>
+                <label><input type="checkbox" name="services" value="Landing Pages"> Landing Pages</label>
+                <label><input type="checkbox" name="services" value="Speed &amp; Performance"> Speed &amp; Performance</label>
+                <label><input type="checkbox" name="services" value="Maintenance &amp; Support"> Maintenance &amp; Support</label>
+              </div>
+              <span class="form-field__error" id="contact-services-error"></span>
+            </fieldset>
+            <div class="form-field">
+              <label for="contact-promo-code">Promo code <span class="form-field__optional">(optional)</span></label>
+              <input id="contact-promo-code" name="promoCode" type="text" maxlength="100" autocomplete="off">
+            </div>
           </div>
 
           <div class="contact-form__row">
@@ -165,5 +184,6 @@
       </nav>
     </div>
   </footer>
+  <script src="/exit-intent.js" data-frequency-days="30" defer></script>
 </body>
 </html>

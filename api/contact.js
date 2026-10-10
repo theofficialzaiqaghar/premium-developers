@@ -3,6 +3,16 @@ const requestLimits = new Map();
 const rateLimitWindowMs = 10 * 60 * 1000;
 const maxRequestsPerWindow = 5;
 const mailEndpoint = 'https://api.resend.com/emails';
+const availableServices = [
+  'WordPress Development',
+  'Elementor Development',
+  'WooCommerce Development',
+  'Website Redesign',
+  'Custom Development',
+  'Landing Pages',
+  'Speed & Performance',
+  'Maintenance & Support'
+];
 
 function sendJson(res, status, body) {
   res.statusCode = status;
@@ -21,15 +31,25 @@ function validate(payload) {
   const email = clean(payload.email, 254);
   const reason = clean(payload.reason, 60);
   const message = clean(payload.message, 5000);
+  const services = Array.isArray(payload.services)
+    ? [...new Set(payload.services.map(service => clean(service, 80)).filter(Boolean))]
+    : [];
+  const promoCode = clean(payload.promoCode, 100);
 
   if (name.length < 2) fieldErrors.name = 'Enter your name (at least 2 characters).';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = 'Enter a valid email address.';
-  if (!['General inquiry', 'Project discussion', 'Partnership', 'Support', 'Feedback', 'Other'].includes(reason)) {
+  if (!['General inquiry', 'Project discussion'].includes(reason)) {
     fieldErrors.reason = 'Choose a reason for your message.';
   }
   if (message.length < 10) fieldErrors.message = 'Please add a little more detail (at least 10 characters).';
+  if (reason === 'Project discussion') {
+    if (!services.length) fieldErrors.services = 'Select at least one service you’re interested in.';
+    else if (services.some(service => !availableServices.includes(service))) {
+      fieldErrors.services = 'Choose services from the list.';
+    }
+  }
 
-  return { fieldErrors, name, email, reason, message };
+  return { fieldErrors, name, email, reason, message, services, promoCode };
 }
 
 function clientIp(req) {
@@ -99,7 +119,7 @@ module.exports = async function contact(req, res) {
     return sendJson(res, 429, { error: 'Too many messages were sent from this connection. Please try again in a few minutes.' });
   }
 
-  const { fieldErrors, name, email, reason, message } = validate(payload);
+  const { fieldErrors, name, email, reason, message, services, promoCode } = validate(payload);
   if (Object.keys(fieldErrors).length) {
     return sendJson(res, 400, { error: 'Please check the highlighted fields.', fieldErrors });
   }
@@ -121,10 +141,12 @@ module.exports = async function contact(req, res) {
     `Reason: ${reason}`,
     `Phone: ${phone || 'Not provided'}`,
     `Company: ${company || 'Not provided'}`,
-    '',
-    'Message:',
-    message
   ];
+  if (reason === 'Project discussion') {
+    lines.push(`Services: ${services.join(', ')}`);
+    lines.push(`Promo code: ${promoCode || 'Not provided'}`);
+  }
+  lines.push('', 'Message:', message);
 
   try {
     const response = await fetch(mailEndpoint, {

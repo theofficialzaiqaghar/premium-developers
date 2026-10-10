@@ -7,6 +7,11 @@
   const status = document.querySelector('#contact-form-status');
   const success = document.querySelector('#contact-success');
   const fields = ['name', 'email', 'reason', 'message'];
+  const reasonField = form.elements.namedItem('reason');
+  const projectDetails = document.querySelector('#project-details');
+  const servicesFieldset = document.querySelector('#contact-services');
+  const serviceOptions = [...form.querySelectorAll('input[name="services"]')];
+  const servicesError = document.querySelector('#contact-services-error');
   const submitStartedAt = Date.now();
 
   const getField = name => form.elements.namedItem(name);
@@ -23,6 +28,21 @@
     const error = document.querySelector(`#${field.id}-error`);
     field.setAttribute('aria-invalid', message ? 'true' : 'false');
     if (error) error.textContent = message;
+  };
+
+  const setServicesError = message => {
+    servicesFieldset.setAttribute('aria-invalid', message ? 'true' : 'false');
+    servicesError.textContent = message;
+  };
+
+  const updateProjectDetails = () => {
+    const isProjectDiscussion = reasonField.value === 'Project discussion';
+    projectDetails.hidden = !isProjectDiscussion;
+    if (!isProjectDiscussion) {
+      serviceOptions.forEach(option => { option.checked = false; });
+      form.elements.namedItem('promoCode').value = '';
+      setServicesError('');
+    }
   };
 
   const validate = field => {
@@ -55,8 +75,20 @@
     field.addEventListener('change', () => {
       if (field.getAttribute('aria-invalid') === 'true') validate(field);
       status.hidden = true;
+      if (field === reasonField) updateProjectDetails();
     });
   });
+
+  serviceOptions.forEach(option => {
+    option.addEventListener('change', () => {
+      if (serviceOptions.some(service => service.checked)) setServicesError('');
+      status.hidden = true;
+    });
+  });
+  form.elements.namedItem('promoCode').addEventListener('input', () => {
+    status.hidden = true;
+  });
+  updateProjectDetails();
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -71,12 +103,20 @@
       return;
     }
 
+    if (reasonField.value === 'Project discussion' && !serviceOptions.some(option => option.checked)) {
+      setServicesError('Select at least one service you’re interested in.');
+      serviceOptions[0].focus();
+      return;
+    }
+
     submit.disabled = true;
     submit.setAttribute('aria-busy', 'true');
     submit.classList.add('is-loading');
     submitLabel.textContent = 'Sending…';
 
-    const payload = Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+    payload.services = formData.getAll('services');
     payload.elapsedMs = Date.now() - submitStartedAt;
 
     try {
@@ -90,15 +130,19 @@
       if (!response.ok) {
         if (result.fieldErrors && typeof result.fieldErrors === 'object') {
           for (const [name, message] of Object.entries(result.fieldErrors)) {
+            if (name === 'services' && typeof message === 'string') {
+              setServicesError(message);
+              continue;
+            }
             const field = getField(name);
             if (field && typeof message === 'string') setError(field, message);
           }
           const firstInvalid = fields.map(name => getField(name))
             .find(field => field.getAttribute('aria-invalid') === 'true');
-          if (firstInvalid) {
+          if (firstInvalid || servicesFieldset.getAttribute('aria-invalid') === 'true') {
             status.textContent = 'Please review the highlighted fields and try sending your message again.';
             status.hidden = false;
-            firstInvalid.focus();
+            (firstInvalid || serviceOptions[0]).focus();
             return;
           }
         }

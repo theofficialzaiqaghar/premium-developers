@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="service-pages.css">
   <link rel="stylesheet" href="legal-pages.css">
+  <link rel="stylesheet" href="/exit-intent.css">
 </head>
 <body class="service-page legal-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -46,6 +47,7 @@
       <section>
         <h2>Information you choose to share</h2>
         <p>If you use the contact form, we receive the details you submit, such as your name, email address, inquiry type, and message. The form sends that information through our email delivery provider, Resend, to our inquiry inbox so we can respond. If you email us directly or contact us through a linked service such as Upwork or Contra, we may receive the information you choose to provide there as well.</p>
+        <p>If you submit the optional exit feedback offer, we store your email address, selected reason, optional comments, page path, submission time, and promotional email preference in Upstash Redis, and send the discount code you requested through Resend. The code email is sent whether or not you opt in; this form does not subscribe you to ongoing promotional messages. Feedback records are automatically removed after the configured retention period (365 days by default).</p>
         <p>We use that information to respond to you, discuss or provide requested services, and keep records needed to manage our communications and work. Please avoid sending sensitive personal information unless it is necessary for your request.</p>
       </section>
       <section>
@@ -55,15 +57,15 @@
       </section>
       <section>
         <h2>Third-party services and links</h2>
-        <p>This site loads fonts from Google Fonts and service-page photographs from Unsplash. Your browser may connect directly to those providers to retrieve those assets. Contact-form submissions are transmitted through Resend for email delivery. We also use Vercel to host the website and its form endpoint; its infrastructure may process request metadata for delivery and abuse prevention. The site links to external portfolio websites and services, including Upwork and Contra. When you follow an external link, that provider’s privacy terms apply; review them before sharing information.</p>
+        <p>This site loads fonts from Google Fonts and service-page photographs from Unsplash. Your browser may connect directly to those providers to retrieve those assets. Contact-form and requested discount-code emails are transmitted through Resend. Exit-offer feedback is stored in Upstash Redis, and Vercel hosts the website and form endpoints; these providers may process request metadata for delivery and abuse prevention. The site links to external portfolio websites and services, including Upwork and Contra. When you follow an external link, that provider’s privacy terms apply; review them before sharing information.</p>
       </section>
       <section>
         <h2>Cookies and storage</h2>
-        <p>The site does not intentionally set advertising or analytics cookies. Vercel and Resend may process technical request information as part of delivering and protecting their services. You can manage browser cookies through your browser settings, though blocking some third-party resources may affect how pages display.</p>
+        <p>The exit-offer frequency uses browser local storage to remember when the popup was last shown; it is normally shown once every 30 days. The site does not intentionally set advertising or analytics cookies. Vercel, Resend, and Upstash may process technical request information as part of delivering and protecting their services. You can manage browser storage through your browser settings, though blocking it may limit popup frequency to the current tab.</p>
       </section>
       <section>
         <h2>Retention and your choices</h2>
-        <p>We keep direct correspondence only for as long as reasonably needed to respond, manage a project, maintain appropriate business records, or resolve a dispute. You may contact us to request access, correction, or deletion of information you have sent, subject to any obligations that require us to retain it.</p>
+        <p>We keep direct correspondence only for as long as reasonably needed to respond, manage a project, maintain appropriate business records, or resolve a dispute. Exit-offer feedback is removed automatically after its configured retention period (365 days by default). You may contact us to request access, correction, or deletion of information you have sent, subject to any obligations that require us to retain it.</p>
       </section>
       <section>
         <h2>Children and policy changes</h2>
@@ -87,5 +89,6 @@
       </nav>
     </div>
   </footer>
+  <script src="/exit-intent.js" data-frequency-days="30" defer></script>
 </body>
 </html>

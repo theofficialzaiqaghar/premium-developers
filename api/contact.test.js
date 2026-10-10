@@ -57,6 +57,34 @@ test('returns field-specific validation errors', async () => {
   assert.match(response.body.fieldErrors.email, /valid email/i);
 });
 
+test('only accepts general inquiries and project discussions', async () => {
+  for (const reason of ['Partnership', 'Support', 'Feedback', 'Other']) {
+    const response = await request({
+      body: { ...validPayload, reason },
+      headers: { 'x-real-ip': '192.0.2.203' }
+    });
+    assert.equal(response.statusCode, 400);
+    assert.match(response.body.fieldErrors.reason, /choose a reason/i);
+  }
+});
+
+test('requires valid service selections for project discussions', async () => {
+  const headers = { 'x-real-ip': '192.0.2.204' };
+  const noService = await request({
+    body: { ...validPayload, reason: 'Project discussion' },
+    headers
+  });
+  assert.equal(noService.statusCode, 400);
+  assert.match(noService.body.fieldErrors.services, /select at least one service/i);
+
+  const invalidService = await request({
+    body: { ...validPayload, reason: 'Project discussion', services: ['Unlisted service'] },
+    headers
+  });
+  assert.equal(invalidService.statusCode, 400);
+  assert.match(invalidService.body.fieldErrors.services, /choose services from the list/i);
+});
+
 test('returns an explicit configuration error without leaking details', async () => {
   const previousKey = process.env.RESEND_API_KEY;
   delete process.env.RESEND_API_KEY;
@@ -89,6 +117,62 @@ test('sends one inquiry to the configured inbox and never auto-replies', async (
     assert.equal(outgoing.payload.subject, 'Website inquiry: General inquiry');
     assert.equal(outgoing.payload.from, 'Premium Developers <hello@premiumdevelopers.co>');
     assert.equal(outgoing.payload.text.includes(validPayload.message), true);
+  } finally {
+    global.fetch = previousFetch;
+    if (previousKey === undefined) delete process.env.RESEND_API_KEY;
+    else process.env.RESEND_API_KEY = previousKey;
+  }
+});
+
+test('includes project services and an optional promo code in the inquiry email', async () => {
+  const previousKey = process.env.RESEND_API_KEY;
+  const previousFetch = global.fetch;
+  let outgoing;
+  process.env.RESEND_API_KEY = 'test-key';
+  global.fetch = async (url, options) => {
+    outgoing = { url, options, payload: JSON.parse(options.body) };
+    return new Response(null, { status: 200 });
+  };
+  try {
+    const response = await request({
+      body: {
+        ...validPayload,
+        reason: 'Project discussion',
+        services: ['WordPress Development', 'Website Redesign'],
+        promoCode: 'WELCOME10'
+      },
+      headers: { 'x-real-ip': '192.0.2.205' }
+    });
+    assert.equal(response.statusCode, 200);
+    assert.match(outgoing.payload.text, /Services: WordPress Development, Website Redesign/);
+    assert.match(outgoing.payload.text, /Promo code: WELCOME10/);
+  } finally {
+    global.fetch = previousFetch;
+    if (previousKey === undefined) delete process.env.RESEND_API_KEY;
+    else process.env.RESEND_API_KEY = previousKey;
+  }
+});
+
+test('accepts project discussions without a promo code', async () => {
+  const previousKey = process.env.RESEND_API_KEY;
+  const previousFetch = global.fetch;
+  let outgoing;
+  process.env.RESEND_API_KEY = 'test-key';
+  global.fetch = async (url, options) => {
+    outgoing = { url, options, payload: JSON.parse(options.body) };
+    return new Response(null, { status: 200 });
+  };
+  try {
+    const response = await request({
+      body: {
+        ...validPayload,
+        reason: 'Project discussion',
+        services: ['Elementor Development']
+      },
+      headers: { 'x-real-ip': '192.0.2.206' }
+    });
+    assert.equal(response.statusCode, 200);
+    assert.match(outgoing.payload.text, /Promo code: Not provided/);
   } finally {
     global.fetch = previousFetch;
     if (previousKey === undefined) delete process.env.RESEND_API_KEY;
