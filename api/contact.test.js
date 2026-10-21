@@ -138,13 +138,13 @@ test('includes project services and an optional promo code in the inquiry email'
       body: {
         ...validPayload,
         reason: 'Project discussion',
-        services: ['WordPress Development', 'Website Redesign'],
+        services: ['WordPress Development', 'Website Redesign', 'Essential Web', 'Custom Apps', 'Enterprise'],
         promoCode: 'WELCOME10'
       },
       headers: { 'x-real-ip': '192.0.2.205' }
     });
     assert.equal(response.statusCode, 200);
-    assert.match(outgoing.payload.text, /Services: WordPress Development, Website Redesign/);
+    assert.match(outgoing.payload.text, /Services: WordPress Development, Website Redesign, Essential Web, Custom Apps, Enterprise/);
     assert.match(outgoing.payload.text, /Promo code: WELCOME10/);
   } finally {
     global.fetch = previousFetch;

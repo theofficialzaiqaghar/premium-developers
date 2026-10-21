@@ -11,7 +11,10 @@ const availableServices = [
   'Custom Development',
   'Landing Pages',
   'Speed & Performance',
-  'Maintenance & Support'
+  'Maintenance & Support',
+  'Essential Web',
+  'Custom Apps',
+  'Enterprise'
 ];
 
 function sendJson(res, status, body) {

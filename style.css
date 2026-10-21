@@ -2782,22 +2782,13 @@ html {
 }
 
 .partner-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   flex-shrink: 0;
   width: 76px;
   height: 76px;
   border-radius: 20px;
   background: linear-gradient(135deg, #0F3256, #234C79);
-  color: #FFFFFF;
-  font-size: 39px;
-  font-weight: 800;
-  letter-spacing: -2px;
-}
-
-.partner-logo span {
-  color: #A995FF;
+  object-fit: cover;
 }
 
 .partner-label {
