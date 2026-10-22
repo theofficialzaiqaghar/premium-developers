@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="service-pages.css">
   <link rel="stylesheet" href="legal-pages.css">
   <link rel="stylesheet" href="/exit-intent.css">
+  <link rel="stylesheet" href="/offer-popup.css">
 </head>
 <body class="service-page legal-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -36,7 +37,7 @@
         <span class="service-kicker">Your information</span>
         <h1>Privacy Policy</h1>
         <p>This policy explains what information may be handled when you visit Premium Developers or contact us about our services.</p>
-        <span class="legal-updated">Last updated: October 8, 2026</span>
+        <span class="legal-updated">Last updated: October 23, 2026</span>
       </div>
     </header>
     <article class="legal-content">
@@ -48,24 +49,25 @@
         <h2>Information you choose to share</h2>
         <p>If you use the contact form, we receive the details you submit, such as your name, email address, inquiry type, and message. The form sends that information through our email delivery provider, Resend, to our inquiry inbox so we can respond. If you email us directly or contact us through a linked service such as Upwork or Contra, we may receive the information you choose to provide there as well.</p>
         <p>If you submit the optional exit feedback offer, we store your email address, selected reason, optional comments, page path, submission time, and promotional email preference in Upstash Redis, and send the discount code you requested through Resend. The code email is sent whether or not you opt in; this form does not subscribe you to ongoing promotional messages. Feedback records are automatically removed after the configured retention period (365 days by default).</p>
+        <p>If you submit a special-offer inquiry, we receive your name, business email, website URL, selected services, project details, and any optional business name, phone number, or budget you provide. We store the inquiry in Upstash Redis and send its details through Resend to hello@premiumdevelopers.co and muhammadsaadullah093@gmail.com so we can respond. Offer inquiries are automatically removed after the configured retention period (365 days by default). The inquiry does not subscribe you to ongoing marketing messages.</p>
         <p>We use that information to respond to you, discuss or provide requested services, and keep records needed to manage our communications and work. Please avoid sending sensitive personal information unless it is necessary for your request.</p>
       </section>
       <section>
         <h2>Information collected by the website</h2>
-        <p>We have not intentionally added advertising trackers or analytics scripts to this website. The website itself does not ask you to create an account or submit personal information through a form.</p>
+        <p>We have not intentionally added advertising trackers to this website. The site does not ask you to create an account. If you choose to submit the contact form, exit feedback, or a special-offer inquiry, the information described in this policy is handled to respond to your request.</p>
         <p>Like most websites, the hosting provider may process technical information such as IP address, browser, and request logs to deliver the site, protect it, and troubleshoot problems. We do not control the hosting provider’s infrastructure or retention settings.</p>
       </section>
       <section>
         <h2>Third-party services and links</h2>
-        <p>This site loads fonts from Google Fonts and service-page photographs from Unsplash. Your browser may connect directly to those providers to retrieve those assets. Contact-form and requested discount-code emails are transmitted through Resend. Exit-offer feedback is stored in Upstash Redis, and Vercel hosts the website and form endpoints; these providers may process request metadata for delivery and abuse prevention. The site links to external portfolio websites and services, including Upwork and Contra. When you follow an external link, that provider’s privacy terms apply; review them before sharing information.</p>
+        <p>This site loads fonts from Google Fonts and service-page photographs from Unsplash. Your browser may connect directly to those providers to retrieve those assets. Contact-form, special-offer inquiry, and requested discount-code emails are transmitted through Resend. Exit-offer feedback and special-offer inquiries are stored in Upstash Redis, and Vercel hosts the website and form endpoints; these providers may process request metadata for delivery and abuse prevention. The site links to external portfolio websites and services, including Upwork and Contra. When you follow an external link, that provider’s privacy terms apply; review them before sharing information.</p>
       </section>
       <section>
         <h2>Cookies and storage</h2>
-        <p>The exit-offer frequency uses browser local storage to remember when the popup was last shown; it is normally shown once every 30 days. The site does not intentionally set advertising or analytics cookies. Vercel, Resend, and Upstash may process technical request information as part of delivering and protecting their services. You can manage browser storage through your browser settings, though blocking it may limit popup frequency to the current tab.</p>
+        <p>The exit-feedback offer uses browser local storage to remember when it was last shown; it is normally shown once every 30 days. The 50% offer popup uses session storage to appear no more than once per browsing session after it has been shown. If session storage is unavailable, it uses a session cookie. The site does not intentionally set advertising or analytics cookies. Vercel, Resend, and Upstash may process technical request information as part of delivering and protecting their services. You can manage browser storage through your browser settings; blocking it may limit popup frequency to the current tab.</p>
       </section>
       <section>
         <h2>Retention and your choices</h2>
-        <p>We keep direct correspondence only for as long as reasonably needed to respond, manage a project, maintain appropriate business records, or resolve a dispute. Exit-offer feedback is removed automatically after its configured retention period (365 days by default). You may contact us to request access, correction, or deletion of information you have sent, subject to any obligations that require us to retain it.</p>
+        <p>We keep direct correspondence only for as long as reasonably needed to respond, manage a project, maintain appropriate business records, or resolve a dispute. Exit-offer feedback and special-offer inquiries are removed automatically after their configured retention periods (365 days by default). You may contact us to request access, correction, or deletion of information you have sent, subject to any obligations that require us to retain it.</p>
       </section>
       <section>
         <h2>Children and policy changes</h2>
@@ -90,5 +92,6 @@
     </div>
   </footer>
   <script src="/exit-intent.js" data-frequency-days="30" defer></script>
+  <script src="/offer-popup.js" defer></script>
 </body>
 </html>

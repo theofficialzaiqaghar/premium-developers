@@ -9,6 +9,11 @@
       "source": "/about.html",
       "destination": "/about",
       "permanent": true
+    },
+    {
+      "source": "/special-offer.html",
+      "destination": "/special-offer/",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -19,6 +24,14 @@
     {
       "source": "/about",
       "destination": "/about.html"
+    },
+    {
+      "source": "/special-offer",
+      "destination": "/special-offer.html"
+    },
+    {
+      "source": "/special-offer/",
+      "destination": "/special-offer.html"
     }
   ]
 }
