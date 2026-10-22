@@ -77,7 +77,7 @@ function mockServices({ reservation = 1, emailStatus = 200, redisStatus = 200 } 
   global.fetch = async (url, options) => {
     calls.push(url);
     if (url === 'https://api.resend.com/emails') {
-      const email = JSON.parse(options.body);
+      const email = { ...JSON.parse(options.body), headers: options.headers };
       emails.push(email);
       return new Response('{}', { status: emailStatus });
     }
@@ -152,6 +152,7 @@ test('stores the complete lead before notifying both configured recipients', asy
     assert.equal(services.emails[0].reply_to, validPayload.email);
     assert.equal(services.emails[0].subject, 'New Lead — 50% OFF Special Offer');
     assert.equal(services.emails[0].from, 'Premium Developers <hello@example.com>');
+    assert.equal(services.emails[0].headers['Idempotency-Key'], `special-offer-${validPayload.submissionId}`);
     assert.match(services.emails[0].text, /Full name: A Visitor/);
     assert.match(services.emails[0].text, /Business email: visitor@example\.com/);
     assert.match(services.emails[0].text, /Website URL: https:\/\/example\.com\//);
@@ -170,9 +171,11 @@ test('stores the complete lead before notifying both configured recipients', asy
     assert.equal(storedLead[3], 'special-offer:submissions');
     assert.equal(storedLead[4], `special-offer:lead:${validPayload.submissionId}`);
     assert.equal(JSON.parse(storedLead[5]).fullName, validPayload.fullName);
-    const storeIndex = services.calls.findIndex(url => url === 'https://redis.example.com/');
+    const storeIndex = services.redisCommands.findIndex(command =>
+      command[0] === 'EVAL' && command[1].includes("redis.call('SET', KEYS[2]")
+    );
     const emailIndex = services.calls.findIndex(url => url === 'https://api.resend.com/emails');
-    assert.ok(storeIndex < emailIndex);
+    assert.ok(storeIndex >= 0 && storeIndex < emailIndex);
   });
 });
 
@@ -208,17 +211,51 @@ test('stores inquiries but does not claim delivery when Resend is not configured
   });
 });
 
-test('does not notify when durable storage fails and returns idempotent success for completed submissions', async () => {
+test('falls back to both inboxes when Redis is unavailable and keeps completed retries idempotent', async () => {
   await withTestEnvironment(async () => {
     const failedStorage = mockServices({ redisStatus: 503 });
     const storageResponse = await request();
-    assert.equal(storageResponse.statusCode, 503);
-    assert.equal(failedStorage.emails.length, 0);
+    assert.equal(storageResponse.statusCode, 200);
+    assert.deepEqual(storageResponse.body, { ok: true, storage: 'email' });
+    assert.equal(failedStorage.emails.length, 1);
+    assert.deepEqual(failedStorage.emails[0].to, [
+      'hello@premiumdevelopers.co',
+      'muhammadsaadullah093@gmail.com'
+    ]);
+    assert.equal(failedStorage.emails[0].headers['Idempotency-Key'], `special-offer-${validPayload.submissionId}`);
 
     const duplicate = mockServices({ reservation: 2 });
     const duplicateResponse = await request();
     assert.equal(duplicateResponse.statusCode, 200);
     assert.deepEqual(duplicateResponse.body, { ok: true, duplicate: true });
     assert.equal(duplicate.emails.length, 0);
+  });
+});
+
+test('sends leads to both inboxes when Redis is not configured', async () => {
+  await withTestEnvironment(async () => {
+    delete process.env.UPSTASH_REDIS_REST_URL;
+    delete process.env.UPSTASH_REDIS_REST_TOKEN;
+    const services = mockServices();
+    const response = await request();
+    assert.equal(response.statusCode, 200);
+    assert.deepEqual(response.body, { ok: true, storage: 'email' });
+    assert.equal(services.redisCommands.length, 0);
+    assert.equal(services.emails.length, 1);
+    assert.deepEqual(services.emails[0].to, [
+      'hello@premiumdevelopers.co',
+      'muhammadsaadullah093@gmail.com'
+    ]);
+  });
+});
+
+test('does not claim success if Redis and notification delivery are both unavailable', async () => {
+  await withTestEnvironment(async () => {
+    process.env.UPSTASH_REDIS_REST_URL = '';
+    const services = mockServices({ emailStatus: 503 });
+    const response = await request();
+    assert.equal(response.statusCode, 503);
+    assert.match(response.body.error, /couldn’t send your inquiry/i);
+    assert.equal(services.emails.length, 1);
   });
 });

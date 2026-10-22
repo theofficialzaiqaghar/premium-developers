@@ -182,7 +182,8 @@ async function sendNotification(record) {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Idempotency-Key': `special-offer-${record.submissionId}`
     },
     body: JSON.stringify({
       from,
@@ -233,19 +234,36 @@ module.exports = async function specialOffer(req, res) {
     return sendJson(res, 400, { error: 'Please check the highlighted fields.', fieldErrors });
   }
 
+  const record = {
+    ...lead,
+    submissionId,
+    submittedAt: new Date().toISOString()
+  };
+  const notifyWithoutDatabase = async () => {
+    console.error('Special offer lead storage is unavailable; attempting delivery to the configured inboxes.');
+    try {
+      await sendNotification(record);
+      return sendJson(res, 200, { ok: true, storage: 'email' });
+    } catch (error) {
+      console.error('Special offer could not be stored or delivered:', error);
+      return sendJson(res, 503, {
+        error: 'We couldn’t send your inquiry right now. Please try again, or email hello@premiumdevelopers.co and mention the 50% offer.'
+      });
+    }
+  };
+
   let retention;
   try {
     retention = retentionSeconds();
   } catch (error) {
     console.error('Special offer lead retention is misconfigured:', error);
-    return sendJson(res, 503, {
-      error: 'We couldn’t save your inquiry right now. Please try again, or email hello@premiumdevelopers.co and mention the 50% offer.'
-    });
+    return notifyWithoutDatabase();
   }
   const ipHash = createHash('sha256').update(clientIp(req)).digest('hex');
   const submissionKey = `special-offer:submission:${submissionId}`;
+  let reservation;
   try {
-    const reservation = Number(await redisCommand([
+    reservation = Number(await redisCommand([
       'EVAL',
       reservationScript,
       '2',
@@ -253,71 +271,66 @@ module.exports = async function specialOffer(req, res) {
       `special-offer:rate:${ipHash}`,
       '5'
     ]));
-    if (reservation === 2) return sendJson(res, 200, { ok: true, duplicate: true });
-    if (reservation === 3) {
-      return sendJson(res, 409, { error: 'Your inquiry is still being processed. Wait a moment before retrying.' });
-    }
-    if (reservation < 0) {
-      return sendJson(res, 429, { error: 'Too many inquiries from this connection. Please try again later.' });
-    }
-
-    const record = {
-      ...lead,
-      submissionId,
-      submittedAt: new Date().toISOString()
-    };
-    const now = Date.now();
-    try {
-      await redisCommand([
-        'EVAL',
-        storeLeadScript,
-        '2',
-        'special-offer:submissions',
-        `special-offer:lead:${submissionId}`,
-        JSON.stringify(record),
-        String(now - retention * 1000),
-        String(retention),
-        String(now),
-        submissionId
-      ]);
-    } catch (error) {
-      try {
-        await redisCommand(['DEL', submissionKey]);
-      } catch (releaseError) {
-        console.error('Could not release a special offer submission reservation:', releaseError);
-      }
-      throw error;
-    }
-
-    try {
-      await sendNotification(record);
-    } catch (error) {
-      console.error('Special offer notification failed; the lead remains stored.');
-      try {
-        await updateSubmissionState(submissionKey, 'stored', 604800);
-      } catch (stateError) {
-        console.error('Could not update the stored special offer lead status:', stateError);
-      }
-      return sendJson(res, 503, {
-        error: 'Your inquiry was saved, but email notifications could not be sent right now. Please try again shortly.',
-        leadStored: true
-      });
-    }
-
-    try {
-      await updateSubmissionState(submissionKey, 'sent', 31536000);
-    } catch (error) {
-      console.error('Special offer notifications were sent but the completion state could not be stored:', error);
-      return sendJson(res, 503, {
-        error: 'Your inquiry was saved, but we could not confirm notification status. Please contact us if you do not hear back.',
-        leadStored: true
-      });
-    }
-    return sendJson(res, 200, { ok: true });
   } catch (error) {
-    console.error('Special offer inquiry processing failed:', error);
+    console.error('Special offer lead reservation failed:', error);
+    return notifyWithoutDatabase();
+  }
+
+  if (reservation === 2) return sendJson(res, 200, { ok: true, duplicate: true });
+  if (reservation === 3) {
+    return sendJson(res, 409, { error: 'Your inquiry is still being processed. Wait a moment before retrying.' });
+  }
+  if (reservation < 0) {
+    return sendJson(res, 429, { error: 'Too many inquiries from this connection. Please try again later.' });
+  }
+
+  const now = Date.now();
+  try {
+    await redisCommand([
+      'EVAL',
+      storeLeadScript,
+      '2',
+      'special-offer:submissions',
+      `special-offer:lead:${submissionId}`,
+      JSON.stringify(record),
+      String(now - retention * 1000),
+      String(retention),
+      String(now),
+      submissionId
+    ]);
+  } catch (error) {
+    console.error('Special offer lead could not be stored in Redis:', error);
+    try {
+      await redisCommand(['DEL', submissionKey]);
+    } catch (releaseError) {
+      console.error('Could not release a special offer submission reservation:', releaseError);
+    }
+    return notifyWithoutDatabase();
+  }
+
+  try {
+    await sendNotification(record);
+  } catch (error) {
+    console.error('Special offer notification failed; the lead remains stored.');
+    try {
+      await updateSubmissionState(submissionKey, 'stored', 604800);
+    } catch (stateError) {
+      console.error('Could not update the stored special offer lead status:', stateError);
+    }
     return sendJson(res, 503, {
-      error: 'We couldn’t save your inquiry right now. Please try again, or email hello@premiumdevelopers.co and mention the 50% offer.'
+      error: 'Your inquiry was saved, but email notifications could not be sent right now. Please try again shortly.',
+      leadStored: true
     });
   }
+
+  try {
+    await updateSubmissionState(submissionKey, 'sent', 31536000);
+  } catch (error) {
+    console.error('Special offer notifications were sent but the completion state could not be stored:', error);
+    return sendJson(res, 503, {
+      error: 'Your inquiry was saved, but we could not confirm notification status. Please contact us if you do not hear back.',
+      leadStored: true
+    });
+  }
+  return sendJson(res, 200, { ok: true });
 };
