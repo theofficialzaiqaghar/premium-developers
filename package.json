@@ -1,0 +1,8 @@
+{
+  "name": "premium-developers",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes serve . -l 3000",
+    "dev:vercel": "npx --yes vercel dev"
+  }
+}
