@@ -110,24 +110,39 @@
   });
 
   if (video) {
+    const videoSrc = video.getAttribute('data-src');
+    let videoLoaded = false;
+    const ensureVideoSource = () => {
+      if (!videoSrc || videoLoaded) return;
+      if (!video.querySelector('source')) {
+        const source = document.createElement('source');
+        source.src = videoSrc;
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        video.load();
+      }
+      videoLoaded = true;
+    };
+
     if (reduceMotion || !('IntersectionObserver' in window)) {
       video.pause();
-      video.removeAttribute('autoplay');
     } else {
       const videoObserver = new IntersectionObserver(entries => {
         for (const entry of entries) {
           if (entry.isIntersecting && !document.hidden) {
-              video.play().catch(handleVideoPlayError);
+            ensureVideoSource();
+            video.play().catch(handleVideoPlayError);
           } else {
             video.pause();
           }
         }
-      }, { threshold: .15 });
+      }, { threshold: .15, rootMargin: '120px 0px' });
       videoObserver.observe(video);
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) video.pause();
         else if (video.getBoundingClientRect().bottom > 0 &&
           video.getBoundingClientRect().top < window.innerHeight) {
+          ensureVideoSource();
           video.play().catch(handleVideoPlayError);
         }
       });
