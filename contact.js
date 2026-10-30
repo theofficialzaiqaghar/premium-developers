@@ -2,6 +2,12 @@
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
+  const track = window.pdTrack || (() => {});
+  const urlReason = new URLSearchParams(window.location.search).get('reason');
+  track('contact_page_view', {
+    inquiry_reason: urlReason || '(not set)'
+  });
+
   const submit = form.querySelector('button[type="submit"]');
   const submitLabel = form.querySelector('.contact-submit__label');
   const status = document.querySelector('#contact-form-status');
@@ -152,6 +158,14 @@
       form.hidden = true;
       success.hidden = false;
       success.focus();
+
+      const selectedServices = formData.getAll('services');
+      track('generate_lead', {
+        form_name: 'contact',
+        inquiry_reason: payload.reason || reasonField.value,
+        services_selected: selectedServices.length ? selectedServices.join(', ') : '(none)',
+        has_promo_code: Boolean(String(payload.promoCode || '').trim())
+      });
     } catch {
       status.textContent = 'We couldn’t send your message just now. Your details are still here—please try again, or email us directly at hello@premiumdevelopers.co.';
       status.hidden = false;

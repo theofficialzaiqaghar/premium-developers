@@ -2,6 +2,9 @@
   const form = document.querySelector('#special-offer-form');
   if (!form) return;
 
+  const track = window.pdTrack || (() => {});
+  track('special_offer_page_view', { offer_type: '50_percent_off' });
+
   const submit = form.querySelector('button[type="submit"]');
   const submitLabel = form.querySelector('.offer-form__submit-label');
   const status = document.querySelector('#offer-form-status');
@@ -164,6 +167,13 @@
       form.hidden = true;
       success.hidden = false;
       success.focus();
+
+      track('generate_lead', {
+        form_name: 'special_offer',
+        services_selected: payload.services.join(', '),
+        offer_type: '50_percent_off',
+        marketing_consent: payload.consent === true
+      });
     } catch (error) {
       setStatus(error instanceof Error
         ? error.message

@@ -1,4 +1,5 @@
 (() => {
+  const track = window.pdTrack || (() => {});
   const script = document.currentScript;
   const frequencyDays = Math.max(1, Number(script?.dataset.frequencyDays) || 30);
   const storageKey = 'pd-exit-feedback-shown';
@@ -155,6 +156,7 @@
     document.body.classList.add('exit-feedback-open');
     dialog.showModal();
     dialog.querySelector('#exit-feedback-email').focus();
+    track('exit_intent_view', { popup_type: 'exit_discount' });
   }
 
   function closePopup() {
@@ -213,6 +215,11 @@
       }
       form.hidden = true;
       showStatus('Thanks for your feedback! Your discount code has been sent to your email.', 'success');
+      track('generate_lead', {
+        form_name: 'exit_intent',
+        exit_reason: reason,
+        marketing_consent: formData.get('consent') === 'on'
+      });
     } catch (error) {
       showStatus(error instanceof Error ? error.message : 'We couldn’t process your request. Please try again.');
     } finally {

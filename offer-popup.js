@@ -1,4 +1,5 @@
 (() => {
+  const track = window.pdTrack || (() => {});
   const currentPath = window.location.pathname.replace(/\/+$/, '');
   if (currentPath === '/special-offer' || currentPath === '/special-offer.html') return;
 
@@ -59,6 +60,9 @@
 
     dialog.querySelector('.offer-popup__close').addEventListener('click', closePopup);
     dialog.querySelector('[data-offer-dismiss]').addEventListener('click', closePopup);
+    dialog.querySelector('.offer-popup__actions a.btn--primary')?.addEventListener('click', () => {
+      track('offer_popup_click', { offer_type: '50_percent_off', link_url: '/special-offer/' });
+    });
     dialog.addEventListener('cancel', event => {
       event.preventDefault();
       closePopup();
@@ -100,6 +104,7 @@
     returnFocus = document.activeElement;
     dialog.showModal();
     dialog.querySelector('.offer-popup__close').focus();
+    track('offer_popup_view', { offer_type: '50_percent_off' });
   }
 
   window.setTimeout(showPopup, 5000);
