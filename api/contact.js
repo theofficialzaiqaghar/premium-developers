@@ -1,4 +1,15 @@
-const recipient = process.env.CONTACT_TO || 'hello@premiumdevelopers.co';
+const recipients = [
+  'hello@premiumdevelopers.co',
+  'muhammadsaadullah093@gmail.com'
+];
+const projectTimelines = new Set([
+  'ASAP',
+  'Within 1 month',
+  '1-3 months',
+  '3-6 months',
+  '6+ months',
+  'Flexible / not sure yet'
+]);
 const requestLimits = new Map();
 const rateLimitWindowMs = 10 * 60 * 1000;
 const maxRequestsPerWindow = 5;
@@ -38,6 +49,8 @@ function validate(payload) {
     ? [...new Set(payload.services.map(service => clean(service, 80)).filter(Boolean))]
     : [];
   const promoCode = clean(payload.promoCode, 100);
+  const websiteUrl = clean(payload.websiteUrl, 2048);
+  const projectTimeline = clean(payload.projectTimeline, 80);
 
   if (name.length < 2) fieldErrors.name = 'Enter your name (at least 2 characters).';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = 'Enter a valid email address.';
@@ -45,14 +58,51 @@ function validate(payload) {
     fieldErrors.reason = 'Choose a reason for your message.';
   }
   if (message.length < 10) fieldErrors.message = 'Please add a little more detail (at least 10 characters).';
+  if (websiteUrl) {
+    try {
+      const parsed = new URL(websiteUrl);
+      if (!['http:', 'https:'].includes(parsed.protocol) || !parsed.hostname ||
+        parsed.username || parsed.password) {
+        fieldErrors.websiteUrl = 'Enter a valid website URL starting with https:// or http://.';
+      }
+    } catch {
+      fieldErrors.websiteUrl = 'Enter a valid website URL starting with https:// or http://.';
+    }
+  }
+
+  if (projectTimeline && !projectTimelines.has(projectTimeline)) {
+    fieldErrors.projectTimeline = 'Choose a preferred project timeline.';
+  }
+
   if (reason === 'Project discussion') {
     if (!services.length) fieldErrors.services = 'Select at least one service you’re interested in.';
     else if (services.some(service => !availableServices.includes(service))) {
       fieldErrors.services = 'Choose services from the list.';
     }
+    if (!websiteUrl) fieldErrors.websiteUrl = 'Enter your website URL (or the site you want built).';
+    if (!projectTimeline) fieldErrors.projectTimeline = 'Choose a preferred project timeline.';
   }
 
-  return { fieldErrors, name, email, reason, message, services, promoCode };
+  let normalizedWebsiteUrl = websiteUrl;
+  if (websiteUrl && !fieldErrors.websiteUrl) {
+    try {
+      normalizedWebsiteUrl = new URL(websiteUrl).href;
+    } catch {
+      normalizedWebsiteUrl = websiteUrl;
+    }
+  }
+
+  return {
+    fieldErrors,
+    name,
+    email,
+    reason,
+    message,
+    services,
+    promoCode,
+    websiteUrl: normalizedWebsiteUrl,
+    projectTimeline
+  };
 }
 
 function clientIp(req) {
@@ -110,7 +160,7 @@ module.exports = async function contact(req, res) {
     return sendJson(res, 400, { error: 'Please check your message and try again.' });
   }
 
-  if (clean(payload.website, 200)) {
+  if (clean(payload.hp, 200)) {
     return sendJson(res, 200, { ok: true });
   }
 
@@ -122,7 +172,17 @@ module.exports = async function contact(req, res) {
     return sendJson(res, 429, { error: 'Too many messages were sent from this connection. Please try again in a few minutes.' });
   }
 
-  const { fieldErrors, name, email, reason, message, services, promoCode } = validate(payload);
+  const {
+    fieldErrors,
+    name,
+    email,
+    reason,
+    message,
+    services,
+    promoCode,
+    websiteUrl,
+    projectTimeline
+  } = validate(payload);
   if (Object.keys(fieldErrors).length) {
     return sendJson(res, 400, { error: 'Please check the highlighted fields.', fieldErrors });
   }
@@ -144,6 +204,8 @@ module.exports = async function contact(req, res) {
     `Reason: ${reason}`,
     `Phone: ${phone || 'Not provided'}`,
     `Company: ${company || 'Not provided'}`,
+    `Website URL: ${websiteUrl || 'Not provided'}`,
+    `Preferred project timeline: ${projectTimeline || 'Not provided'}`,
   ];
   if (reason === 'Project discussion') {
     lines.push(`Services: ${services.join(', ')}`);
@@ -160,7 +222,7 @@ module.exports = async function contact(req, res) {
       },
       body: JSON.stringify({
         from,
-        to: [recipient],
+        to: recipients,
         reply_to: email,
         subject: `Website inquiry: ${reason}`,
         text: lines.join('\n')

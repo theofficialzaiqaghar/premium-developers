@@ -12,6 +12,7 @@ const validPayload = {
   services: ['SEO Optimization', 'Content Writing'],
   budget: '$1,000–$2,000',
   projectDetails: 'Our website needs clearer service content and better search visibility.',
+  projectTimeline: '1-3 months',
   consent: true,
   elapsedMs: 5000
 };

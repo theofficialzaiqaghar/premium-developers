@@ -792,6 +792,11 @@ h2 {
   align-items: center
 }
 
+.about__grid--copy-only {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 760px
+}
+
 .about__media {
   position: relative
 }

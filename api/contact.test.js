@@ -43,7 +43,7 @@ test('silently accepts honeypot submissions without sending email', async () => 
   const previousFetch = global.fetch;
   global.fetch = async () => { throw new Error('honeypot must not send'); };
   try {
-    const response = await request({ body: { ...validPayload, website: 'bot-filled' } });
+    const response = await request({ body: { ...validPayload, hp: 'bot-filled' } });
     assert.equal(response.statusCode, 200);
     assert.deepEqual(response.body, { ok: true });
   } finally {
@@ -112,7 +112,10 @@ test('sends one inquiry to the configured inbox and never auto-replies', async (
     assert.equal(response.statusCode, 200);
     assert.equal(outgoing.url, 'https://api.resend.com/emails');
     assert.equal(outgoing.options.headers.Authorization, 'Bearer test-key');
-    assert.deepEqual(outgoing.payload.to, ['hello@premiumdevelopers.co']);
+    assert.deepEqual(outgoing.payload.to, [
+      'hello@premiumdevelopers.co',
+      'muhammadsaadullah093@gmail.com'
+    ]);
     assert.equal(outgoing.payload.reply_to, validPayload.email);
     assert.equal(outgoing.payload.subject, 'Website inquiry: General inquiry');
     assert.equal(outgoing.payload.from, 'Premium Developers <hello@premiumdevelopers.co>');
@@ -139,7 +142,9 @@ test('includes project services and an optional promo code in the inquiry email'
         ...validPayload,
         reason: 'Project discussion',
         services: ['WordPress Development', 'Website Redesign', 'Essential Web', 'Custom Apps', 'Enterprise'],
-        promoCode: 'WELCOME10'
+        promoCode: 'WELCOME10',
+        websiteUrl: 'https://example.com',
+        projectTimeline: '1-3 months'
       },
       headers: { 'x-real-ip': '192.0.2.205' }
     });
@@ -167,7 +172,9 @@ test('accepts project discussions without a promo code', async () => {
       body: {
         ...validPayload,
         reason: 'Project discussion',
-        services: ['Elementor Development']
+        services: ['Elementor Development'],
+        websiteUrl: 'https://example.com',
+        projectTimeline: 'ASAP'
       },
       headers: { 'x-real-ip': '192.0.2.206' }
     });

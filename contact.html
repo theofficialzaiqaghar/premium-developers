@@ -110,6 +110,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             </div>
           </div>
 
+          <div class="contact-form__row">
+            <div class="form-field">
+              <label for="contact-website-url">Website URL <span class="form-field__optional" id="contact-website-url-optional">(optional)</span></label>
+              <input id="contact-website-url" name="websiteUrl" type="url" inputmode="url" placeholder="https://example.com" maxlength="2048" aria-describedby="contact-website-url-error">
+              <span class="form-field__error" id="contact-website-url-error"></span>
+            </div>
+            <div class="form-field">
+              <label for="contact-project-timeline">Preferred project timeline <span class="form-field__optional" id="contact-timeline-optional">(optional)</span></label>
+              <select id="contact-project-timeline" name="projectTimeline" aria-describedby="contact-project-timeline-error">
+                <option value="" selected>Select a timeline</option>
+                <option value="ASAP">ASAP</option>
+                <option value="Within 1 month">Within 1 month</option>
+                <option value="1-3 months">1–3 months</option>
+                <option value="3-6 months">3–6 months</option>
+                <option value="6+ months">6+ months</option>
+                <option value="Flexible / not sure yet">Flexible / not sure yet</option>
+              </select>
+              <span class="form-field__error" id="contact-project-timeline-error"></span>
+            </div>
+          </div>
+
           <div class="form-field">
             <label for="contact-reason">What would you like to talk about? <span aria-hidden="true">*</span></label>
             <select id="contact-reason" name="reason" required aria-describedby="contact-reason-error">
@@ -164,8 +185,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </div>
 
           <div class="contact-form__trap" aria-hidden="true">
-            <label for="contact-website">Leave this field empty</label>
-            <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+            <label for="contact-hp">Leave this field empty</label>
+            <input id="contact-hp" name="hp" type="text" tabindex="-1" autocomplete="off">
           </div>
 
           <p class="contact-form__privacy">Your details are used only to respond to your inquiry. <a href="privacy-policy.html">Read our privacy policy</a>.</p>

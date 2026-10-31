@@ -4,6 +4,14 @@ const recipients = [
   'hello@premiumdevelopers.co',
   'muhammadsaadullah093@gmail.com'
 ];
+const projectTimelines = new Set([
+  'ASAP',
+  'Within 1 month',
+  '1-3 months',
+  '3-6 months',
+  '6+ months',
+  'Flexible / not sure yet'
+]);
 const availableServices = new Set([
   'Website Speed & Performance Optimization',
   'SEO Optimization',
@@ -53,6 +61,7 @@ function validate(payload) {
   const phone = clean(payload.phone, 40);
   const budget = clean(payload.budget, 120);
   const projectDetails = clean(payload.projectDetails, 5000);
+  const projectTimeline = clean(payload.projectTimeline, 80);
   const services = Array.isArray(payload.services)
     ? [...new Set(payload.services.map(service => clean(service, 80)).filter(Boolean))]
     : [];
@@ -79,6 +88,11 @@ function validate(payload) {
   if (projectDetails.length < 10) {
     fieldErrors.projectDetails = 'Tell us a little more about your project (at least 10 characters).';
   }
+  if (!projectTimeline) {
+    fieldErrors.projectTimeline = 'Choose a preferred project timeline.';
+  } else if (!projectTimelines.has(projectTimeline)) {
+    fieldErrors.projectTimeline = 'Choose a preferred project timeline.';
+  }
   if (payload.consent !== true) {
     fieldErrors.consent = 'Consent is required so we can respond to your inquiry.';
   }
@@ -93,7 +107,8 @@ function validate(payload) {
       phone,
       services,
       budget,
-      projectDetails
+      projectDetails,
+      projectTimeline
     }
   };
 }
@@ -165,6 +180,7 @@ function emailBody(record) {
     `Business name: ${record.businessName || 'Not provided'}`,
     `Phone / WhatsApp: ${record.phone || 'Not provided'}`,
     `Approximate budget: ${record.budget || 'Not provided'}`,
+    `Preferred project timeline: ${record.projectTimeline || 'Not provided'}`,
     '',
     'Project details / main problem:',
     record.projectDetails,

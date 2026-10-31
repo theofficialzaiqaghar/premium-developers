@@ -162,6 +162,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <label for="offer-budget">Approximate Budget <span>(optional)</span></label>
               <input id="offer-budget" name="budget" type="text" maxlength="120" placeholder="An amount or range">
             </div>
+            <div class="offer-form__field">
+              <label for="offer-project-timeline">Preferred Project Timeline <span aria-hidden="true">*</span></label>
+              <select id="offer-project-timeline" name="projectTimeline" required aria-describedby="offer-project-timeline-error">
+                <option value="" selected disabled>Select a timeline</option>
+                <option value="ASAP">ASAP</option>
+                <option value="Within 1 month">Within 1 month</option>
+                <option value="1-3 months">1–3 months</option>
+                <option value="3-6 months">3–6 months</option>
+                <option value="6+ months">6+ months</option>
+                <option value="Flexible / not sure yet">Flexible / not sure yet</option>
+              </select>
+              <span class="offer-form__error" id="offer-project-timeline-error"></span>
+            </div>
           </div>
 
           <fieldset class="offer-form__services" id="offer-services" aria-describedby="offer-services-error">

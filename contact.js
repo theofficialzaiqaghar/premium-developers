@@ -18,12 +18,19 @@
   const servicesFieldset = document.querySelector('#contact-services');
   const serviceOptions = [...form.querySelectorAll('input[name="services"]')];
   const servicesError = document.querySelector('#contact-services-error');
+  const websiteOptionalLabel = document.querySelector('#contact-website-url-optional');
+  const timelineOptionalLabel = document.querySelector('#contact-timeline-optional');
   const submitStartedAt = Date.now();
 
-  const getField = name => form.elements.namedItem(name);
+  function getField(name) {
+    return form.elements.namedItem(name);
+  }
+
+  const websiteUrlField = getField('websiteUrl');
+  const timelineField = getField('projectTimeline');
+
   const requestedReason = new URLSearchParams(window.location.search).get('reason');
   if (requestedReason) {
-    const reasonField = getField('reason');
     const matchingOption = [...reasonField.options].find(option =>
       option.value.toLowerCase() === requestedReason.toLowerCase()
     );
@@ -31,6 +38,7 @@
   }
 
   const setError = (field, message) => {
+    if (!field) return;
     const error = document.querySelector(`#${field.id}-error`);
     field.setAttribute('aria-invalid', message ? 'true' : 'false');
     if (error) error.textContent = message;
@@ -41,14 +49,64 @@
     servicesError.textContent = message;
   };
 
+  const isProjectDiscussion = () => reasonField.value === 'Project discussion';
+
   const updateProjectDetails = () => {
-    const isProjectDiscussion = reasonField.value === 'Project discussion';
-    projectDetails.hidden = !isProjectDiscussion;
-    if (!isProjectDiscussion) {
+    const project = isProjectDiscussion();
+    projectDetails.hidden = !project;
+    if (websiteOptionalLabel) {
+      websiteOptionalLabel.textContent = project ? '(required for projects)' : '(optional)';
+    }
+    if (timelineOptionalLabel) {
+      timelineOptionalLabel.textContent = project ? '(required for projects)' : '(optional)';
+    }
+    websiteUrlField.required = project;
+    timelineField.required = project;
+    if (!project) {
       serviceOptions.forEach(option => { option.checked = false; });
       form.elements.namedItem('promoCode').value = '';
       setServicesError('');
+      setError(websiteUrlField, '');
+      setError(timelineField, '');
     }
+  };
+
+  const validateUrl = field => {
+    const value = field.value.trim();
+    if (!value) {
+      if (isProjectDiscussion()) {
+        setError(field, 'Enter your website URL (or the site you want built).');
+        return false;
+      }
+      setError(field, '');
+      return true;
+    }
+    try {
+      const url = new URL(value);
+      if (!['http:', 'https:'].includes(url.protocol) || !url.hostname) {
+        setError(field, 'Enter a valid website URL starting with https:// or http://.');
+        return false;
+      }
+    } catch {
+      setError(field, 'Enter a valid website URL starting with https:// or http://.');
+      return false;
+    }
+    setError(field, '');
+    return true;
+  };
+
+  const validateTimeline = field => {
+    const value = field.value.trim();
+    if (!value) {
+      if (isProjectDiscussion()) {
+        setError(field, 'Choose a preferred project timeline.');
+        return false;
+      }
+      setError(field, '');
+      return true;
+    }
+    setError(field, '');
+    return true;
   };
 
   const validate = field => {
@@ -85,6 +143,16 @@
     });
   });
 
+  websiteUrlField.addEventListener('blur', () => validateUrl(websiteUrlField));
+  websiteUrlField.addEventListener('input', () => {
+    if (websiteUrlField.getAttribute('aria-invalid') === 'true') validateUrl(websiteUrlField);
+    status.hidden = true;
+  });
+  timelineField.addEventListener('change', () => {
+    if (timelineField.getAttribute('aria-invalid') === 'true') validateTimeline(timelineField);
+    status.hidden = true;
+  });
+
   serviceOptions.forEach(option => {
     option.addEventListener('change', () => {
       if (serviceOptions.some(service => service.checked)) setServicesError('');
@@ -104,12 +172,15 @@
       .map(name => getField(name))
       .filter(field => !validate(field));
 
+    if (!validateUrl(websiteUrlField)) invalidFields.push(websiteUrlField);
+    if (!validateTimeline(timelineField)) invalidFields.push(timelineField);
+
     if (invalidFields.length) {
       invalidFields[0].focus();
       return;
     }
 
-    if (reasonField.value === 'Project discussion' && !serviceOptions.some(option => option.checked)) {
+    if (isProjectDiscussion() && !serviceOptions.some(option => option.checked)) {
       setServicesError('Select at least one service you’re interested in.');
       serviceOptions[0].focus();
       return;
@@ -143,8 +214,11 @@
             const field = getField(name);
             if (field && typeof message === 'string') setError(field, message);
           }
-          const firstInvalid = fields.map(name => getField(name))
-            .find(field => field.getAttribute('aria-invalid') === 'true');
+          const firstInvalid = [
+            ...fields.map(name => getField(name)),
+            websiteUrlField,
+            timelineField
+          ].find(field => field?.getAttribute('aria-invalid') === 'true');
           if (firstInvalid || servicesFieldset.getAttribute('aria-invalid') === 'true') {
             status.textContent = 'Please review the highlighted fields and try sending your message again.';
             status.hidden = false;

@@ -63,12 +63,14 @@
       message = 'Enter your full name (at least 2 characters).';
     } else if (field.name === 'projectDetails' && value.length < 10) {
       message = 'Tell us a little more about your project (at least 10 characters).';
+    } else if (field.name === 'projectTimeline' && !value) {
+      message = 'Choose a preferred project timeline.';
     }
     setError(field, message);
     return !message;
   }
 
-  const requiredFields = ['fullName', 'email', 'websiteUrl', 'projectDetails'].map(getField);
+  const requiredFields = ['fullName', 'email', 'websiteUrl', 'projectDetails', 'projectTimeline'].map(getField);
   requiredFields.forEach(field => {
     field.addEventListener('blur', () => {
       if (field.value.trim()) validateField(field);
