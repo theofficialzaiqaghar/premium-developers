@@ -114,8 +114,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="stylesheet" href="../service-pages.css">
   <link rel="stylesheet" href="/exit-intent.css">
   <link rel="stylesheet" href="/offer-popup.css">
+
+  <link rel="stylesheet" href="../contact-page.css">
+  <link rel="stylesheet" href="/service-inquiry.css">
 </head>
-<body class="service-page">
+<body class="service-page" data-pd-primary-service="Essential Web">
     <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF285DKZ"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -127,9 +130,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <nav class="service-breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="../services.html">Services</a><span>/</span><span>Essential Web</span></nav>
       <span class="service-kicker">Essential Web · From R5k+</span><h1>A professional online home for your small business.</h1>
       <p class="service-hero__intro">Get a high-speed, professional landing page that helps customers understand your business, find you online, and get in touch—with a mobile-friendly experience from day one.</p>
-      <div class="service-actions"><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss your website</a><a class="btn btn--ghost" href="../services.html">Explore all services</a></div>
+      <div class="service-actions"><a class="btn btn--primary pd-lead-cta" href="#project-inquiry">Discuss your website</a><a class="btn btn--ghost" href="../services.html">Explore all services</a></div>
     </div><figure class="service-photo"><img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&amp;fit=crop&amp;crop=faces&amp;w=1100&amp;h=1375&amp;q=88" alt="A professional small business website displayed on a screen" width="1100" height="1375" loading="eager" fetchpriority="high" decoding="async"><figcaption class="service-photo__caption">Essential Web · From R5k+</figcaption></figure></section>
-    <section class="service-benefits"><div class="service-wrap"><div class="service-section-head"><span class="service-kicker">Everything you need to get online</span><h2>A focused website that works hard for your business.</h2><p>Essential foundations for a polished first impression and a clear way for customers to reach you.</p></div><div class="service-benefit-grid">
+    <section class="service-benefits"><div class="service-wrap"><div class="service-section-head"><span class="service-kicker">Everything you need to get online</span><h2>A focused website that works hard for your business.</h2><p>Essential foundations for a polished first impression and a clear way for customers to reach you.</p><p class="service-inline-cta"><a class="pd-lead-cta" href="#project-inquiry" data-cta-location="mid_page">Get a free quote</a> · <a class="pd-lead-cta" href="#project-inquiry" data-cta-location="mid_page">Request pricing</a></p></div><div class="service-benefit-grid">
       <article class="service-benefit"><span class="service-benefit__number">01 / BUSINESS</span><h3>Single Page Business Site</h3><p>A professional landing page that introduces your business, services, and next step.</p></article>
       <article class="service-benefit"><span class="service-benefit__number">02 / SEARCH</span><h3>SEO Setup</h3><p>Search-friendly page structure and essential on-page SEO setup.</p></article>
       <article class="service-benefit"><span class="service-benefit__number">03 / CONTACT</span><h3>Contact Integration</h3><p>Make it simple for potential customers to call, email, or send an enquiry.</p></article>
@@ -140,11 +143,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <article class="service-step"><span class="service-step__number">02</span><div><h3>Design and build</h3><p>We create a professional responsive page with SEO essentials and contact integration.</p></div></article>
       <article class="service-step"><span class="service-step__number">03</span><div><h3>Review and launch</h3><p>We check the page across screen sizes and help you get it ready to share with customers.</p></div></article>
     </div></section>
-    <section class="service-wrap"><div class="service-cta"><div><h2>Ready for a professional business website?</h2><p>Essential Web projects start from R5k+.</p></div><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Start a project <span aria-hidden="true">→</span></a></div></section>
+    
+    <section class="service-wrap service-inquiry" id="project-inquiry" aria-labelledby="project-inquiry-title" data-pd-service="Essential Web">
+      <div class="service-inquiry__grid">
+        <div class="service-inquiry__copy">
+          <span class="service-kicker">GET A FREE QUOTE</span>
+          <h2 id="project-inquiry-title">Request a project estimate</h2>
+          <p>Tell us about your goals, timeline, and website. We aim to reply within two business days.</p>
+          <ul class="service-inquiry__points">
+            <li>Free, no-obligation review</li>
+            <li>Clear scope and pricing conversation</li>
+            <li>Secure — same system as our contact page</li>
+          </ul>
+        </div>
+        <div class="service-inquiry__form contact-form-card" data-pd-lead-form-mount data-pd-service="Essential Web"></div>
+      </div>
+    </section>
+    <section class="service-wrap"><div class="service-cta"><div><h2>Ready for a professional business website?</h2><p>Essential Web projects start from R5k+.</p></div><a class="btn btn--primary pd-lead-cta" href="#project-inquiry">Start a project <span aria-hidden="true">→</span></a></div></section>
   </main>
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden><span aria-hidden="true">↑</span></button>
   <footer class="service-footer"><div class="service-wrap service-footer__inner"><a class="logo" href="../index.html"><img class="logo__mark" src="../logo.svg" alt="Premium Developers logo" width="64" height="64"><span>Premium Developers</span></a><nav class="service-footer__links" aria-label="Footer"><a href="../services.html">More services</a><a href="../index.html#work">Portfolio</a><a href="/contact">Contact</a><a href="../privacy-policy.html">Privacy</a><a href="../terms-and-conditions.html">Terms</a></nav></div></footer>
   <script src="../script.js" defer></script>
+    <script src="/analytics.js"></script>
+<script src="/lead-forms.js" defer></script>
+  <script src="/service-page-leads.js" defer></script>
     <script src="/analytics.js"></script>
 <script src="/exit-intent.js" data-frequency-days="30" defer></script>
   <script src="/offer-popup.js" defer></script>

@@ -1,0 +1,136 @@
+.service-inquiry {
+  padding: clamp(48px, 7vw, 88px) 0;
+  background:
+    radial-gradient(ellipse at 12% 0, rgba(106, 69, 227, .06), transparent 42%),
+    #f8f9fc;
+  border-top: 1px solid var(--line);
+}
+
+.service-inquiry__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 5vw, 48px);
+  align-items: start;
+}
+
+.service-inquiry__copy h2 {
+  margin: 10px 0 12px;
+  color: var(--navy-d);
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  line-height: 1.15;
+  letter-spacing: -.03em;
+}
+
+.service-inquiry__copy p {
+  color: var(--muted-2);
+  line-height: 1.7;
+}
+
+.service-inquiry__points {
+  margin: 18px 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted-2);
+  display: grid;
+  gap: 8px;
+}
+
+.service-inquiry__email {
+  margin-top: 18px;
+  font-size: .95rem;
+}
+
+.service-inquiry__email a {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.service-inquiry__form.contact-form-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  box-shadow: 0 18px 40px rgba(11, 38, 64, .06);
+}
+
+.service-inquiry__service-tag {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(106, 69, 227, .08);
+  color: var(--navy-d);
+  font-size: .92rem;
+}
+
+.service-inline-cta {
+  margin: 14px 0 0;
+}
+
+.service-inline-cta a {
+  color: var(--purple);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.service-actions .btn--ghost.pd-lead-cta,
+.service-cta .btn--primary.pd-lead-cta {
+  scroll-margin-top: 96px;
+}
+
+#project-inquiry {
+  scroll-margin-top: 96px;
+}
+
+.home-inquiry {
+  margin-top: clamp(36px, 6vw, 56px);
+  padding: clamp(24px, 4vw, 36px);
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fff;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(20px, 4vw, 36px);
+  scroll-margin-top: 96px;
+}
+
+.home-inquiry__copy h3 {
+  margin: 8px 0 10px;
+  color: var(--navy-d);
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+}
+
+.home-inquiry__copy p {
+  color: var(--muted-2);
+  line-height: 1.7;
+}
+
+.home-inquiry__form.contact-form-card {
+  padding: clamp(16px, 3vw, 24px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8f9fc;
+}
+
+@media (max-width: 900px) {
+  .home-inquiry {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .service-inquiry__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-cta__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

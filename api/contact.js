@@ -20,6 +20,7 @@ const availableServices = [
   'WooCommerce Development',
   'Website Redesign',
   'Custom Development',
+  'Custom WordPress Plugin Development',
   'Landing Pages',
   'Speed & Performance',
   'Maintenance & Support',
@@ -196,9 +197,13 @@ module.exports = async function contact(req, res) {
   const from = process.env.MAIL_FROM || 'Premium Developers <hello@premiumdevelopers.co>';
   const phone = clean(payload.phone, 40);
   const company = clean(payload.company, 120);
+  const sourcePage = clean(payload.sourcePage, 500);
+  const formName = clean(payload.formName, 80);
   const lines = [
     'New website contact inquiry',
     '',
+    `Form: ${formName || 'contact'}`,
+    `Source page: ${sourcePage || 'Not provided'}`,
     `Name: ${name}`,
     `Email: ${email}`,
     `Reason: ${reason}`,

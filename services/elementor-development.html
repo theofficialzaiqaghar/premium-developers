@@ -164,8 +164,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="stylesheet" href="../service-pages.css">
   <link rel="stylesheet" href="/exit-intent.css">
   <link rel="stylesheet" href="/offer-popup.css">
+
+  <link rel="stylesheet" href="../contact-page.css">
+  <link rel="stylesheet" href="/service-inquiry.css">
 </head>
-<body class="service-page">
+<body class="service-page" data-pd-primary-service="Elementor Development">
     <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF285DKZ"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -179,11 +182,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <span class="service-kicker">Elementor developer</span>
         <h1>Elementor development for sites your team can manage</h1>
         <p class="service-hero__intro">Get a distinctive WordPress website using Elementor—built with responsive layouts, reusable components, and an editing experience your team can actually use day to day.</p>
-        <div class="service-actions"><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss your project <span aria-hidden="true">→</span></a><a class="btn btn--ghost" href="https://www.upwork.com/freelancers/~0181e957ec9a52d41b?mp_source=share" target="_blank" rel="noopener noreferrer">Hire on Upwork</a></div>
+        <div class="service-actions"><a class="btn btn--primary pd-lead-cta" href="#project-inquiry">Discuss your project <span aria-hidden="true">→</span></a><a class="btn btn--ghost" href="https://www.upwork.com/freelancers/~0181e957ec9a52d41b?mp_source=share" target="_blank" rel="noopener noreferrer">Hire on Upwork</a></div>
       </div>
       <figure class="service-photo"><img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&amp;fit=crop&amp;crop=faces&amp;w=900&amp;h=1125&amp;q=80" alt="Web designer planning a responsive Elementor page layout" width="900" height="1125" loading="lazy" decoding="async"><figcaption class="service-photo__caption">Elementor · Designed around you</figcaption></figure>
     </section>
-    <section class="service-benefits"><div class="service-wrap"><div class="service-section-head"><span class="service-kicker">Built to be edited</span><h2>Flexible pages with a consistent design system.</h2><p>Elementor should make updates easier while keeping the quality and consistency of your website intact.</p></div><div class="service-benefit-grid">
+    <section class="service-benefits"><div class="service-wrap"><div class="service-section-head"><span class="service-kicker">Built to be edited</span><h2>Flexible pages with a consistent design system.</h2><p>Elementor should make updates easier while keeping the quality and consistency of your website intact.</p><p class="service-inline-cta"><a class="pd-lead-cta" href="#project-inquiry" data-cta-location="mid_page">Get a free quote</a> · <a class="pd-lead-cta" href="#project-inquiry" data-cta-location="mid_page">Request pricing</a></p></div><div class="service-benefit-grid">
       <article class="service-benefit"><span class="service-benefit__number">01 / DESIGN</span><h3>Layouts that feel like you</h3><p>Custom page sections shaped around your brand, content, and customer journey.</p></article>
       <article class="service-benefit"><span class="service-benefit__number">02 / RESPONSIVE</span><h3>Every screen considered</h3><p>Careful adjustments for desktop, tablet, and mobile—not just scaled-down desktop pages.</p></article>
       <article class="service-benefit"><span class="service-benefit__number">03 / EDIT</span><h3>Reusable building blocks</h3><p>Clear styles and sensible reusable sections to make routine content edits simpler.</p></article>
@@ -213,11 +216,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><a href="landing-pages.html">Landing pages</a></li>
       </ul>
     </section>
-    <section class="service-wrap"><div class="service-cta"><div><h2>Ready to improve your Elementor site?</h2><p>Tell us what you want to build or refine—we will reply with practical next steps.</p></div><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Book a consultation <span aria-hidden="true">→</span></a></div></section>
+    
+    <section class="service-wrap service-inquiry" id="project-inquiry" aria-labelledby="project-inquiry-title" data-pd-service="Elementor Development">
+      <div class="service-inquiry__grid">
+        <div class="service-inquiry__copy">
+          <span class="service-kicker">GET A FREE QUOTE</span>
+          <h2 id="project-inquiry-title">Request a project estimate</h2>
+          <p>Tell us about your goals, timeline, and website. We aim to reply within two business days.</p>
+          <ul class="service-inquiry__points">
+            <li>Free, no-obligation review</li>
+            <li>Clear scope and pricing conversation</li>
+            <li>Secure — same system as our contact page</li>
+          </ul>
+        </div>
+        <div class="service-inquiry__form contact-form-card" data-pd-lead-form-mount data-pd-service="Elementor Development"></div>
+      </div>
+    </section>
+    <section class="service-wrap"><div class="service-cta"><div><h2>Ready to improve your Elementor site?</h2><p>Tell us what you want to build or refine—we will reply with practical next steps.</p></div><a class="btn btn--primary pd-lead-cta" href="#project-inquiry">Book a consultation <span aria-hidden="true">→</span></a></div></section>
   </main>
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden><span aria-hidden="true">↑</span></button>
   <footer class="service-footer"><div class="service-wrap service-footer__inner"><a class="logo" href="../index.html"><img class="logo__mark" src="../logo.svg" alt="Premium Developers logo"><span>Premium Developers</span></a><nav class="service-footer__links" aria-label="Footer"><a href="../services.html">More services</a><a href="../index.html#work">Portfolio</a><a href="/contact">Contact</a><a href="../privacy-policy.html">Privacy</a><a href="../terms-and-conditions.html">Terms</a></nav></div></footer>
   <script src="../script.js" defer></script>
+    <script src="/analytics.js"></script>
+<script src="/lead-forms.js" defer></script>
+  <script src="/service-page-leads.js" defer></script>
     <script src="/analytics.js"></script>
 <script src="/exit-intent.js" data-frequency-days="30" defer></script>
   <script src="/offer-popup.js" defer></script>

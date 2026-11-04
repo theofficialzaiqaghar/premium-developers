@@ -133,7 +133,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <a href="index.html#work">Portfolio</a>
       <a href="/blog/">Blog</a>
       <a href="/contact">Contact</a>
-      <a class="btn btn--primary about-nav__cta" href="/contact?reason=Project%20discussion">Book a Consultation <span aria-hidden="true">↗</span></a>
+      <a class="btn btn--primary about-nav__cta" href="#project-inquiry">Book a Consultation <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
@@ -147,7 +147,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <span class="about-kicker">ABOUT PREMIUM DEVELOPERS</span>
           <h1>We Build Websites That Work for the Business Behind Them.</h1>
           <p>We help businesses build, redesign, optimize, and maintain professional websites—with considered design and dependable development shaped around what your business actually needs.</p>
-          <a class="btn btn--primary about-button" href="/contact?reason=Project%20discussion">Let's Work Together <span aria-hidden="true">↗</span></a>
+          <a class="btn btn--primary about-button" href="#project-inquiry">Let's Work Together <span aria-hidden="true">↗</span></a>
         </div>
         <div class="about-hero__visual" aria-hidden="true">
           <div class="about-visual__orbit about-visual__orbit--outer"></div>
@@ -270,12 +270,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </section>
 
+    <section class="about-wrap service-inquiry" id="project-inquiry" aria-labelledby="about-inquiry-title">
+      <div class="service-inquiry__grid">
+        <div class="service-inquiry__copy">
+          <span class="service-kicker">REQUEST A QUOTE</span>
+          <h2 id="about-inquiry-title">Discuss your project with our team</h2>
+          <p>Choose your service, share your timeline, and tell us what you want to achieve.</p>
+        </div>
+        <div class="service-inquiry__form contact-form-card" data-pd-home-inquiry></div>
+      </div>
+    </section>
+
     <section class="about-cta" aria-labelledby="about-cta-title">
       <div class="about-wrap about-cta__inner">
         <span class="about-kicker">YOUR NEXT CHAPTER STARTS HERE</span>
         <h2 id="about-cta-title">Ready to Build Something Better?</h2>
         <p>Let's discuss your project and find  right website solution for your business.</p>
-        <a class="btn about-cta__button" href="/contact?reason=Project%20discussion">Start Your Project <span aria-hidden="true">↗</span></a>
+        <a class="btn about-cta__button" href="#project-inquiry">Start Your Project <span aria-hidden="true">↗</span></a>
       </div>
     </section>
   </main>
@@ -293,8 +304,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </nav>
     </div>
   </footer>
-    <script src="/analytics.js"></script>
-<script src="/exit-intent.js" data-frequency-days="30" defer></script>
+  <link rel="stylesheet" href="contact-page.css">
+  <link rel="stylesheet" href="/service-inquiry.css">
+  <script src="/analytics.js"></script>
+  <script src="/lead-forms.js" defer></script>
+  <script src="/homepage-leads.js" defer></script>
+  <script src="/exit-intent.js" data-frequency-days="30" defer></script>
   <script src="/offer-popup.js" defer></script>
 </body>
 </html>

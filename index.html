@@ -300,11 +300,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="#process">Process</a>
         <a href="/blog/">Blog</a>
         <a href="/contact">Contact</a>
-        <a href="/contact?reason=Project%20discussion" class="nav__mobile-cta">Book a Consultation</a>
+        <a href="#home-project-inquiry" class="nav__mobile-cta">Book a Consultation</a>
 
       </nav>
 
-      <a href="/contact?reason=Project%20discussion" class="btn btn--primary btn--sm">
+      <a href="#home-project-inquiry" class="btn btn--primary btn--sm">
 
         Book a Consultation
 
@@ -1479,7 +1479,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 explore device repairs, request a quote, and book service.
               </p>
 
-              <a href="/contact?reason=Project%20discussion" class="link">
+              <a href="#home-project-inquiry" class="link">
                 Discuss a similar project
 
                 <svg class="ico">
@@ -1813,7 +1813,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               goals, and references.
             </p>
 
-            <a class="cc__val" href="/contact?reason=Project%20discussion">
+            <a class="cc__val" href="#home-project-inquiry">
 
               Discuss Your Project
 
@@ -1850,6 +1850,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </article>
 
 
+        </div>
+
+        <div class="home-inquiry" id="home-project-inquiry">
+          <div class="home-inquiry__copy">
+            <span class="eyebrow">REQUEST A QUOTE</span>
+            <h3>Start your project without leaving this page</h3>
+            <p>Tell us which service you need, your timeline, and a few project details. We use the same secure inquiry system as our contact page.</p>
+          </div>
+          <div class="home-inquiry__form contact-form-card" data-pd-home-inquiry></div>
         </div>
 
       </div>
@@ -2105,9 +2114,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </svg>
   </button>
 
+  <link rel="stylesheet" href="contact-page.css">
+  <link rel="stylesheet" href="/service-inquiry.css">
   <script src="script.js" defer></script>
-    <script src="/analytics.js"></script>
-<script src="/exit-intent.js" data-frequency-days="30" defer></script>
+  <script src="/analytics.js"></script>
+  <script src="/lead-forms.js" defer></script>
+  <script src="/homepage-leads.js" defer></script>
+  <script src="/exit-intent.js" data-frequency-days="30" defer></script>
   <script src="/offer-popup.js" defer></script>
 
 </body>
