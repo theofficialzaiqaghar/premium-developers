@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="maleSil" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#e8edf5" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#maleSil)">
+    <circle cx="60" cy="42" r="19"/>
+    <path d="M34 108c3.5-19 15.5-30 26-30s22.5 11 26 30H34z"/>
+    <path d="M48 72h24v6c-4 2-8 3-12 3s-8-1-12-3v-6z" opacity="0.35"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="femaleSil" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#f0eaf8" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#femaleSil)">
+    <path d="M60 24c-16 0-28 11-28 26 0 6 2 11 5 15-9 4-15 12-17 21h80c-2-9-8-17-17-21 3-4 5-9 5-15 0-15-12-26-28-26z"/>
+    <path d="M48 76h24v5c-4 2-8 3-12 3s-8-1-12-3v-5z" opacity="0.28"/>
+  </g>
+</svg>
