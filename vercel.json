@@ -30,6 +30,11 @@
       "source": "/blog/:slug([^/.]+)",
       "destination": "/blog/:slug/",
       "permanent": true
+    },
+    {
+      "source": "/blog/index.html",
+      "destination": "/blog/",
+      "permanent": true
     }
   ],
   "rewrites": [

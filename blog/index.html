@@ -300,8 +300,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
   </footer>
 
-<p class="service-wrap" style="margin-top:1rem;color:var(--muted,#64748b);font-size:0.95rem">This static file is a fallback. On production, <a href="/blog/">/blog/</a> is server-rendered from the CMS.</p>
-  <script src="blog-archive-enhance.js" defer></script>
+<p id="blog-static-fallback-note" class="service-wrap" style="margin-top:1rem;color:var(--muted,#64748b);font-size:0.95rem">Loading articles from the blog…</p>
+  <script src="/blog/config.js"></script>
+  <script src="/blog/blog-archive-enhance.js" defer></script>
     <script src="/script.js" defer></script>
 <script src="/analytics.js"></script>  <script src="/whatsapp-config.js"></script>
   <script src="/whatsapp-button.js" defer></script>
