@@ -321,58 +321,68 @@
 
 .about-team__grid--leadership {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(18px, 4vw, 28px);
-  max-width: 560px;
+  gap: clamp(16px, 3vw, 24px);
+  max-width: 920px;
   margin-inline: auto;
 }
 
-.about-team-card {
-  display: grid;
-  justify-items: center;
-  text-align: center;
-  padding: 28px 20px 26px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 5px 18px rgba(15, 23, 42, .025);
-  transition: border-color .22s ease, transform .22s ease, box-shadow .22s ease;
-}
-
-.about-team-card:hover {
-  transform: translateY(-3px);
-  border-color: #d5cdf7;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, .075);
-}
-
-.about-team-card__avatar {
+.about-leader-card {
   position: relative;
   display: grid;
-  place-items: center;
-  width: 104px;
-  height: 104px;
-  border-radius: 50%;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 2.5vw, 22px);
+  min-height: 148px;
+  padding: clamp(16px, 2.5vw, 22px) clamp(16px, 2.5vw, 24px);
+  border: 1px solid #e8ebf2;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, .06);
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+
+.about-leader-card:hover {
+  transform: translateY(-2px);
+  border-color: #dcd4f7;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, .09);
+}
+
+.about-leader-card__accent {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, #6a45e3 0%, #1d4f82 100%);
+  border-radius: 100% 0 18px 0;
+  opacity: .92;
+  pointer-events: none;
+}
+
+.about-leader-card__portrait {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(96px, 22vw, 118px);
+  height: clamp(96px, 22vw, 118px);
+  margin: 0;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, .35) inset,
-    0 12px 32px rgba(15, 23, 42, .14);
+  background: linear-gradient(165deg, #e9e2f8 0%, #ddd4f2 45%, #d4cbec 100%);
+  box-shadow: 0 4px 14px rgba(106, 69, 227, .12);
 }
 
-.about-team-card__avatar--male,
-.about-team-card__avatar--female {
-  background: #eef1f6;
-  box-shadow:
-    0 0 0 1px rgba(15, 23, 42, .06) inset,
-    0 12px 32px rgba(15, 23, 42, .12);
+.about-leader-card__portrait--female {
+  background: linear-gradient(165deg, #ebe3f9 0%, #e0d6f4 50%, #d8cef0 100%);
 }
 
-.about-team-card__portrait,
-.about-team-card__photo {
+.about-leader-card__portrait .about-team-card__portrait,
+.about-leader-card__portrait .about-team-card__photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 12%;
+  object-position: center 8%;
 }
 
 .about-team-card__portrait[hidden],
@@ -380,20 +390,62 @@
   display: none;
 }
 
-.about-team-card h3 {
-  margin-top: 18px;
-  color: var(--navy-d);
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: -.025em;
-  line-height: 1.35;
+.about-leader-card__info {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding-bottom: 4px;
 }
 
-.about-team-card__role {
-  margin-top: 6px;
+.about-leader-card__name {
+  color: var(--navy-d);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -.04em;
+  line-height: 1.15;
+}
+
+.about-leader-card__badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #ebe6fa;
+  color: #5b48a8;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+
+.about-leader-card__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #e8ebf2;
+}
+
+.about-leader-card__social a {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3f4f8;
+  color: #8b94a8;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.about-leader-card__social a:hover {
+  background: #ebe6fa;
   color: var(--purple);
-  font-size: .84rem;
-  font-weight: 700;
+  transform: translateY(-1px);
+}
+
+.about-leader-card__social svg {
+  width: 17px;
+  height: 17px;
 }
 
 .about-founder--no-photo .about-founder__grid {
@@ -840,11 +892,12 @@
   }
 
   .about-team__grid--leadership {
-    max-width: 100%;
+    grid-template-columns: 1fr;
+    max-width: 420px;
   }
 
-  .about-team-card {
-    padding: 22px 18px;
+  .about-leader-card {
+    grid-template-columns: auto minmax(0, 1fr);
   }
 
   .about-services__grid {
