@@ -1,0 +1,222 @@
+[
+  {
+    "id": "b1000001-0001-4001-8001-000000000001",
+    "slug": "roofing-website-design-features",
+    "title": "Roofing Website Design: 10 Features Every Roofing Company Needs",
+    "seoTitle": "Roofing Website Design: 10 Essential Features",
+    "metaDescription": "Learn the essential roofing website design features that help contractors showcase services, build trust, improve mobile usability, and generate quote requests.",
+    "primaryKeyword": "roofing website design",
+    "secondaryKeywords": ["roofing company website", "roofer web design", "roofing contractor website design", "roofing website development"],
+    "categorySlugs": ["web-design"],
+    "tagSlugs": ["roofing", "web-design", "small-business"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1632779324768-0f4486aa3651?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Roofer working on a residential roof — roofing website design inspiration",
+      "filename": "roofing-website-design.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/landing-pages.html", "anchor": "Landing page development" },
+      { "href": "https://www.premiumdevelopers.co/services/essential-web.html", "anchor": "Essential Web packages" }
+    ],
+    "bodyFile": "roofing-website-design-features.html",
+    "publishPriority": 1
+  },
+  {
+    "id": "b1000002-0002-4002-8002-000000000002",
+    "slug": "woocommerce-website-development-cost",
+    "title": "How Much Does WooCommerce Website Development Cost?",
+    "seoTitle": "WooCommerce Website Development Cost Guide",
+    "metaDescription": "Discover WooCommerce website development costs, key pricing factors, essential features, and how to plan your ecommerce store budget.",
+    "primaryKeyword": "woocommerce website development cost",
+    "secondaryKeywords": ["woocommerce development pricing", "woocommerce store cost", "ecommerce website cost", "woocommerce developer"],
+    "categorySlugs": ["woocommerce"],
+    "tagSlugs": ["woocommerce", "ecommerce"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Customer paying at an ecommerce checkout — WooCommerce development cost context",
+      "filename": "woocommerce-development-cost.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/woocommerce-development.html", "anchor": "WooCommerce development services" },
+      { "href": "https://www.premiumdevelopers.co/blog/custom-woocommerce-development/", "anchor": "Custom WooCommerce development" }
+    ],
+    "bodyFile": "woocommerce-website-development-cost.html",
+    "publishPriority": 2
+  },
+  {
+    "id": "b1000003-0003-4003-8003-000000000003",
+    "slug": "hire-woocommerce-developer",
+    "title": "How to Hire the Right WooCommerce Developer for Your Business",
+    "seoTitle": "How to Hire a WooCommerce Developer",
+    "metaDescription": "Learn how to hire a WooCommerce developer, evaluate portfolios, compare proposals, and choose the right ecommerce development partner.",
+    "primaryKeyword": "hire woocommerce developer",
+    "secondaryKeywords": ["woocommerce developer for hire", "ecommerce developer", "woocommerce development services", "custom woocommerce developer"],
+    "categorySlugs": ["woocommerce"],
+    "tagSlugs": ["woocommerce", "ecommerce"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Development team planning an ecommerce project",
+      "filename": "hire-woocommerce-developer.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/woocommerce-development.html", "anchor": "WooCommerce development" },
+      { "href": "https://www.premiumdevelopers.co/blog/woocommerce-website-development-cost/", "anchor": "WooCommerce website development cost" }
+    ],
+    "bodyFile": "hire-woocommerce-developer.html",
+    "publishPriority": 3
+  },
+  {
+    "id": "b1000004-0004-4004-8004-000000000004",
+    "slug": "wordpress-website-redesign-signs",
+    "title": "10 Signs Your Business Needs a WordPress Website Redesign",
+    "seoTitle": "10 Signs You Need a WordPress Website Redesign",
+    "metaDescription": "Discover 10 signs your WordPress website needs a redesign, from outdated layouts and poor mobile usability to slow performance and low conversions.",
+    "primaryKeyword": "wordpress website redesign",
+    "secondaryKeywords": ["website redesign services", "redesign wordpress website", "business website redesign", "website modernization"],
+    "categorySlugs": ["wordpress"],
+    "tagSlugs": ["wordpress", "web-design"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Modern website layout on a laptop — WordPress website redesign",
+      "filename": "wordpress-website-redesign.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/website-redesign.html", "anchor": "Website redesign services" },
+      { "href": "https://www.premiumdevelopers.co/blog/speed-up-wordpress-website/", "anchor": "Speed up a WordPress website" }
+    ],
+    "bodyFile": "wordpress-website-redesign-signs.html",
+    "publishPriority": 4
+  },
+  {
+    "id": "b1000005-0005-4005-8005-000000000005",
+    "slug": "elementor-website-development-guide",
+    "title": "Elementor Website Development: Features, Benefits, and Limitations",
+    "seoTitle": "Elementor Website Development Guide for Businesses",
+    "metaDescription": "Explore Elementor website development, its business benefits, design flexibility, limitations, and when to hire an Elementor developer.",
+    "primaryKeyword": "elementor website development",
+    "secondaryKeywords": ["elementor developer", "elementor web design", "elementor website builder", "elementor development services"],
+    "categorySlugs": ["wordpress"],
+    "tagSlugs": ["elementor", "wordpress"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Developer building a WordPress site with Elementor",
+      "filename": "elementor-website-development.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/elementor-development.html", "anchor": "Elementor development services" },
+      { "href": "https://www.premiumdevelopers.co/services/wordpress-development.html", "anchor": "WordPress development" }
+    ],
+    "bodyFile": "elementor-website-development-guide.html",
+    "publishPriority": 5
+  },
+  {
+    "id": "b1000006-0006-4006-8006-000000000006",
+    "slug": "custom-woocommerce-development",
+    "title": "Custom WooCommerce Development: When Does Your Store Need It?",
+    "seoTitle": "Custom WooCommerce Development for Online Stores",
+    "metaDescription": "Discover when custom WooCommerce development makes sense, including checkout changes, integrations, custom product features, and store automation.",
+    "primaryKeyword": "custom woocommerce development",
+    "secondaryKeywords": ["woocommerce custom development", "woocommerce customization services", "custom woocommerce plugin", "woocommerce developer"],
+    "categorySlugs": ["woocommerce"],
+    "tagSlugs": ["woocommerce", "ecommerce"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Analytics dashboard for an online store",
+      "filename": "custom-woocommerce-development.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/custom-wordpress-plugin-development.html", "anchor": "Custom WordPress plugin development" },
+      { "href": "https://www.premiumdevelopers.co/blog/woocommerce-checkout-optimization/", "anchor": "WooCommerce checkout optimization" }
+    ],
+    "bodyFile": "custom-woocommerce-development.html",
+    "publishPriority": 6
+  },
+  {
+    "id": "b1000007-0007-4007-8007-000000000007",
+    "slug": "small-business-website-design-guide",
+    "title": "Small Business Website Design: Essential Pages and Features",
+    "seoTitle": "Small Business Website Design: Complete Guide",
+    "metaDescription": "Learn how to plan a small business website with essential pages, responsive design, clear messaging, contact forms, and SEO-friendly structure.",
+    "primaryKeyword": "small business website design",
+    "secondaryKeywords": ["business website development", "professional business website", "small business web design services", "business website design"],
+    "categorySlugs": ["web-design", "guides"],
+    "tagSlugs": ["small-business", "web-design"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Small business website displayed on a laptop",
+      "filename": "small-business-website-design.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/essential-web.html", "anchor": "Essential Web for small businesses" },
+      { "href": "https://www.premiumdevelopers.co/blog/roofing-website-design-features/", "anchor": "Roofing website design features" }
+    ],
+    "bodyFile": "small-business-website-design-guide.html",
+    "publishPriority": 7
+  },
+  {
+    "id": "b1000008-0008-4008-8008-000000000008",
+    "slug": "woocommerce-checkout-optimization",
+    "title": "How to Improve WooCommerce Checkout and Reduce Cart Abandonment",
+    "seoTitle": "WooCommerce Checkout Optimization Guide",
+    "metaDescription": "Improve WooCommerce checkout with better form design, fewer unnecessary fields, mobile usability, clear shipping costs, and reliable payment options.",
+    "primaryKeyword": "woocommerce checkout optimization",
+    "secondaryKeywords": ["woocommerce checkout design", "reduce cart abandonment", "woocommerce conversion optimization", "ecommerce checkout ux"],
+    "categorySlugs": ["woocommerce"],
+    "tagSlugs": ["woocommerce", "ecommerce", "performance"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Mobile ecommerce checkout screen",
+      "filename": "woocommerce-checkout-optimization.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/woocommerce-development.html", "anchor": "WooCommerce development" },
+      { "href": "https://www.premiumdevelopers.co/services/speed-performance.html", "anchor": "Speed and performance optimization" }
+    ],
+    "bodyFile": "woocommerce-checkout-optimization.html",
+    "publishPriority": 8
+  },
+  {
+    "id": "b1000009-0009-4009-8009-000000000009",
+    "slug": "speed-up-wordpress-website",
+    "title": "How to Speed Up a WordPress Website: Practical Optimization Guide",
+    "seoTitle": "How to Speed Up WordPress Website Performance",
+    "metaDescription": "Learn how to speed up a WordPress website using image optimization, caching, efficient plugins, hosting improvements, and performance testing.",
+    "primaryKeyword": "speed up wordpress website",
+    "secondaryKeywords": ["wordpress speed optimization", "improve website loading speed", "wordpress performance optimization", "website speed optimization"],
+    "categorySlugs": ["wordpress"],
+    "tagSlugs": ["wordpress", "performance"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Server and performance monitoring — WordPress speed optimization",
+      "filename": "speed-up-wordpress-website.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/speed-performance.html", "anchor": "WordPress speed and performance services" },
+      { "href": "https://www.premiumdevelopers.co/blog/wordpress-website-redesign-signs/", "anchor": "WordPress website redesign signs" }
+    ],
+    "bodyFile": "speed-up-wordpress-website.html",
+    "publishPriority": 9
+  },
+  {
+    "id": "b1000010-0010-4010-8010-000000000010",
+    "slug": "woocommerce-vs-shopify",
+    "title": "WooCommerce vs Shopify: Which Platform Is Better for Your Online Store?",
+    "seoTitle": "WooCommerce vs Shopify: Complete Comparison",
+    "metaDescription": "Compare WooCommerce vs Shopify based on costs, customization, ownership, integrations, maintenance, and scalability to choose the right ecommerce platform.",
+    "primaryKeyword": "woocommerce vs shopify",
+    "secondaryKeywords": ["shopify vs woocommerce", "woocommerce or shopify", "ecommerce platform comparison", "woocommerce store development"],
+    "categorySlugs": ["woocommerce", "guides"],
+    "tagSlugs": ["woocommerce", "ecommerce"],
+    "featuredImage": {
+      "url": "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&h=630&q=80",
+      "alt": "Retail and ecommerce platform comparison concept",
+      "filename": "woocommerce-vs-shopify.jpg"
+    },
+    "internalLinks": [
+      { "href": "https://www.premiumdevelopers.co/services/woocommerce-development.html", "anchor": "WooCommerce store development" },
+      { "href": "https://www.premiumdevelopers.co/blog/woocommerce-website-development-cost/", "anchor": "WooCommerce development cost guide" }
+    ],
+    "bodyFile": "woocommerce-vs-shopify.html",
+    "publishPriority": 10
+  }
+]

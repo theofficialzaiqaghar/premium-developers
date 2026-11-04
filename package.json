@@ -7,7 +7,8 @@
     "test": "node --test api/**/*.test.js lib/**/*.test.js automation/**/*.test.js",
     "automation:hardware": "node automation/scripts/hardware-report.js",
     "automation:health": "node automation/scripts/health-check.js",
-    "automation:smoke": "node automation/scripts/ollama-smoke-test.js"
+    "automation:smoke": "node automation/scripts/ollama-smoke-test.js",
+    "blog:build-seo-pack": "node scripts/build-blog-seo-pack-backup.js"
   },
   "version": "1.0.0",
   "description": "",
