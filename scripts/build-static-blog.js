@@ -1,0 +1,247 @@
+#!/usr/bin/env node
+/**
+ * Builds static blog archive (blog/index.html grid) and article pages under blog/{slug}/index.html
+ * Source: content/blog-seo-pack/manifest.json + bodies/*.html
+ */
+const fs = require('node:fs');
+const path = require('node:path');
+const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
+
+const root = path.join(__dirname, '..');
+const manifestPath = path.join(root, 'content', 'blog-seo-pack', 'manifest.json');
+const backupPath = path.join(root, 'content', 'blog-seo-pack', 'seo-pack-10-draft.backup.json');
+const bodiesDir = path.join(root, 'content', 'blog-seo-pack', 'bodies');
+const blogIndexPath = path.join(root, 'blog', 'index.html');
+const SITE = 'https://www.premiumdevelopers.co';
+const GTM = 'GTM-WF285DKZ';
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replace(/'/g, '&#39;');
+}
+
+function categoryTags(slugs) {
+  if (!slugs?.length) return '';
+  const chips = slugs
+    .slice(0, 2)
+    .map((s) => `<span class="blog-card__cat">${escapeHtml(s.replace(/-/g, ' '))}</span>`)
+    .join('');
+  return `<div class="blog-card__cats">${chips}</div>`;
+}
+
+function formatDate(iso) {
+  return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(
+    new Date(iso)
+  );
+}
+
+const PUBLISHED_DATES = [
+  '2025-09-02T10:00:00.000Z',
+  '2025-09-09T10:00:00.000Z',
+  '2025-09-16T10:00:00.000Z',
+  '2025-09-23T10:00:00.000Z',
+  '2025-09-30T10:00:00.000Z',
+  '2025-10-07T10:00:00.000Z',
+  '2025-10-14T10:00:00.000Z',
+  '2025-10-21T10:00:00.000Z',
+  '2025-10-28T10:00:00.000Z',
+  '2025-11-04T10:00:00.000Z'
+];
+
+function articleUrl(slug) {
+  return `/blog/${encodeURIComponent(slug)}/`;
+}
+
+function renderArchiveCard(post) {
+  const url = articleUrl(post.slug);
+  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
+  const alt = post.featuredImage?.alt || post.title;
+  const excerpt = post.excerpt || post.metaDescription || '';
+  return `<a class="blog-card" href="${escapeAttr(url)}" data-title="${escapeAttr(
+    post.title.toLowerCase()
+  )}" data-slug="${escapeAttr(post.slug)}">
+      <figure class="blog-card__thumb"><img src="${escapeAttr(img)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async" width="640" height="400"></figure>
+      <div class="blog-card__body">
+        ${categoryTags(post.categorySlugs)}
+        <h3>${escapeHtml(post.title)}</h3>
+        <p>${escapeHtml(excerpt)}</p>
+        <div class="blog-meta"><span>Premium Developers</span><span>${escapeHtml(formatDate(post.publishedAt))}</span></div>
+      </div>
+    </a>`;
+}
+
+function renderFeaturedCard(post) {
+  const url = articleUrl(post.slug);
+  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
+  const alt = post.featuredImage?.alt || post.title;
+  const excerpt = post.excerpt || post.metaDescription || '';
+  return `<a class="blog-featured__card" href="${escapeAttr(url)}">
+      <figure class="blog-featured__media"><img src="${escapeAttr(img)}" alt="${escapeAttr(alt)}" loading="eager" fetchpriority="high" decoding="async" width="1200" height="630"></figure>
+      <div class="blog-featured__body">
+        <span class="blog-badge">Featured article</span>
+        <h2>${escapeHtml(post.title)}</h2>
+        <p>${escapeHtml(excerpt)}</p>
+        <div class="blog-meta"><span>Premium Developers</span><span>${escapeHtml(formatDate(post.publishedAt))}</span></div>
+      </div>
+    </a>`;
+}
+
+function gtmHead() {
+  return `<!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM}');</script>
+  <!-- End Google Tag Manager -->`;
+}
+
+function gtmBody() {
+  return `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
+}
+
+function headLinks() {
+  return `<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" href="/assets/icons/icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#0B2640">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/blog/blog.css">
+  <link rel="stylesheet" href="/service-pages.css">
+  <link rel="stylesheet" href="/exit-intent.css">
+  <link rel="stylesheet" href="/offer-popup.css">
+  <link rel="stylesheet" href="/whatsapp-button.css">`;
+}
+
+function scriptsBlock() {
+  return `  <script src="/script.js" defer></script>
+  <script src="/blog/blog-archive-enhance.js" defer></script>
+  <script src="/analytics.js"></script>
+  <script src="/whatsapp-config.js"></script>
+  <script src="/whatsapp-button.js" defer></script>
+  <script src="/exit-intent.js" data-frequency-days="30" defer></script>
+  <script src="/offer-popup.js" defer></script>`;
+}
+
+function renderArticlePage(post, bodyHtml, related) {
+  const canonical = `${SITE}${articleUrl(post.slug)}`;
+  const title = `${post.seoTitle || post.title} | Premium Developers Blog`;
+  const description = post.metaDescription || post.excerpt || post.title;
+  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
+  const relatedHtml = related.length
+    ? `<section class="blog-related service-wrap">
+      <h2>Related articles</h2>
+      <div class="blog-grid">${related.map(renderArchiveCard).join('')}</div>
+    </section>`
+    : '';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+${gtmHead()}
+${headLinks()}
+  <title>${escapeHtml(title)}</title>
+  <meta name="description" content="${escapeAttr(description)}">
+  <link rel="canonical" href="${escapeAttr(canonical)}">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="${escapeAttr(post.seoTitle || post.title)}">
+  <meta property="og:description" content="${escapeAttr(description)}">
+  <meta property="og:url" content="${escapeAttr(canonical)}">
+  <meta property="og:image" content="${escapeAttr(img)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${escapeAttr(img)}">
+</head>
+<body class="service-page blog-page" data-blog-archive="static">
+${gtmBody()}
+<a class="skip-link" href="#main-content">Skip to main content</a>
+${siteChromeIcons()}
+${siteChromeNav({ active: 'blog' })}
+<main id="main-content" tabindex="-1">
+  <article class="service-wrap blog-article-hero">
+    <nav class="service-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog/">Blog</a><span>/</span><span aria-current="page">${escapeHtml(post.title)}</span></nav>
+    <span class="service-kicker">Article</span>
+    <h1>${escapeHtml(post.title)}</h1>
+    <div class="blog-meta"><span>Premium Developers</span><span>Published ${escapeHtml(formatDate(post.publishedAt))}</span></div>
+    <figure class="blog-article-featured"><img src="${escapeAttr(img)}" alt="${escapeAttr(post.featuredImage?.alt || post.title)}" width="1200" height="630" loading="eager" fetchpriority="high" decoding="async"></figure>
+  </article>
+  <div class="service-wrap blog-article-layout">
+    <div class="blog-article-content">${bodyHtml}</div>
+  </div>
+  <div class="service-wrap">
+    <p style="margin-top:28px"><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss a project with us <span aria-hidden="true">→</span></a></p>
+  </div>
+  ${relatedHtml}
+</main>
+${siteChromeFooter()}
+<button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></button>
+${scriptsBlock()}
+</body>
+</html>`;
+}
+
+function main() {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const backup = JSON.parse(fs.readFileSync(backupPath, 'utf8'));
+  const bodyBySlug = new Map(backup.articles.map((a) => [a.slug, a.bodyHtml]));
+
+  const posts = manifest
+    .sort((a, b) => a.publishPriority - b.publishPriority)
+    .map((entry, i) => ({
+      ...entry,
+      excerpt: backup.articles.find((a) => a.slug === entry.slug)?.excerpt || entry.metaDescription,
+      publishedAt: PUBLISHED_DATES[i] || PUBLISHED_DATES[0],
+      bodyHtml: bodyBySlug.get(entry.slug) || fs.readFileSync(path.join(bodiesDir, entry.bodyFile), 'utf8')
+    }));
+
+  const [featured, ...rest] = posts;
+  const featuredHtml = `<div id="blog-featured" class="blog-featured">${renderFeaturedCard(featured)}</div>`;
+  const gridHtml = rest.map(renderArchiveCard).join('\n      ');
+
+  let indexHtml = fs.readFileSync(blogIndexPath, 'utf8');
+  indexHtml = indexHtml.replace(
+    /<body class="service-page blog-page" data-blog-archive="[^"]*">/,
+    '<body class="service-page blog-page" data-blog-archive="static">'
+  );
+  indexHtml = indexHtml.replace(
+    /<div id="blog-featured"[\s\S]*?<\/div>\s*<div id="blog-grid"[\s\S]*?<\/div>/,
+    `${featuredHtml}
+      <div id="blog-grid" class="blog-grid" aria-live="polite">
+      ${gridHtml}
+      </div>`
+  );
+  indexHtml = indexHtml.replace(
+    /<p id="blog-static-fallback-note"[\s\S]*?<\/p>\s*/i,
+    ''
+  );
+  indexHtml = indexHtml.replace(
+    /<script src="\/blog\/config\.js"><\/script>\s*/i,
+    ''
+  );
+  fs.writeFileSync(blogIndexPath, indexHtml, 'utf8');
+  console.log('Updated', path.relative(root, blogIndexPath));
+
+  for (const post of posts) {
+    const dir = path.join(root, 'blog', post.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+    const html = renderArticlePage(post, post.bodyHtml, related);
+    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
+    console.log('Wrote', path.relative(root, path.join(dir, 'index.html')));
+  }
+
+  console.log(`Static blog: ${posts.length} articles.`);
+}
+
+main();

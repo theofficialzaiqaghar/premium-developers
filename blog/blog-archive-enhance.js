@@ -143,7 +143,12 @@
   }
 
   async function hydrateIfEmpty() {
-    if (document.body.getAttribute('data-blog-archive') !== 'client') {
+    const mode = document.body.getAttribute('data-blog-archive');
+    if (mode === 'static' || mode === 'server') {
+      if (fallbackNote) fallbackNote.hidden = true;
+      return;
+    }
+    if (mode !== 'client') {
       if (fallbackNote) fallbackNote.hidden = true;
       return;
     }

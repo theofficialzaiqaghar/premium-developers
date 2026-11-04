@@ -84,15 +84,11 @@
     },
     {
       "source": "/blog",
-      "destination": "/api/blog/ssr/archive"
+      "destination": "/blog/index.html"
     },
     {
       "source": "/blog/",
-      "destination": "/api/blog/ssr/archive"
-    },
-    {
-      "source": "/blog/:slug/",
-      "destination": "/api/blog/ssr/article?slug=:slug"
+      "destination": "/blog/index.html"
     }
   ]
 }
