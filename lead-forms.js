@@ -105,7 +105,7 @@
     <label for="${id('hp')}">Leave this field empty</label>
     <input id="${id('hp')}" name="hp" type="text" tabindex="-1" autocomplete="off">
   </div>
-  <p class="contact-form__privacy">Your details are used only to respond to your inquiry. <a href="../privacy-policy.html">Privacy policy</a></p>
+  <p class="contact-form__privacy">Your details are used only to respond to your inquiry. <a href="/privacy-policy.html">Privacy policy</a></p>
   <p class="contact-form__status" id="${id('status')}" role="status" aria-live="polite" tabindex="-1" hidden></p>
   <button class="btn btn--primary contact-submit" type="submit">
     <span class="contact-submit__label">Request quote</span>
@@ -144,6 +144,7 @@
     const websiteOptionalLabel = form.querySelector('#contact-website-url-optional');
     const timelineOptionalLabel = form.querySelector('#contact-timeline-optional');
     const submitStartedAt = Date.now();
+    let submitting = false;
     const sourceInput = form.querySelector('input[name="sourcePage"]');
     if (sourceInput) sourceInput.value = window.location.pathname + window.location.search;
 
@@ -306,6 +307,7 @@
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      if (submitting) return;
       if (status) status.hidden = true;
 
       const invalidFields = fields.map((name) => getField(name)).filter((field) => field && !validate(field));
@@ -324,6 +326,7 @@
         return;
       }
 
+      submitting = true;
       submit.disabled = true;
       submit.setAttribute('aria-busy', 'true');
       submit.classList.add('is-loading');
@@ -400,6 +403,7 @@
           status.focus();
         }
       } finally {
+        submitting = false;
         submit.disabled = false;
         submit.removeAttribute('aria-busy');
         submit.classList.remove('is-loading');

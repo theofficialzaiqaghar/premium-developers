@@ -9,7 +9,8 @@
     "automation:health": "node automation/scripts/health-check.js",
     "automation:smoke": "node automation/scripts/ollama-smoke-test.js",
     "blog:build-seo-pack": "node scripts/build-blog-seo-pack-backup.js",
-    "blog:build-static": "node scripts/build-static-blog.js"
+    "blog:build-static": "node scripts/build-static-blog.js",
+    "ads:patch-site": "node scripts/patch-google-ads-site.js"
   },
   "version": "1.0.0",
   "description": "",

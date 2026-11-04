@@ -1,0 +1,96 @@
+.pd-cookie-banner {
+  position: fixed;
+  z-index: 10050;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: #0b2640;
+  color: #f4f7fb;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.pd-cookie-banner[hidden] {
+  display: none !important;
+}
+
+.pd-cookie-banner__title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.pd-cookie-banner p {
+  margin: 0 0 14px;
+}
+
+.pd-cookie-banner a {
+  color: #7ec8ff;
+}
+
+.pd-cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pd-cookie-banner__actions button {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pd-cookie-banner__accept {
+  background: #2ecc71;
+  color: #0b2640;
+}
+
+.pd-cookie-banner__reject {
+  background: transparent;
+  color: #f4f7fb;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+.pd-cookie-banner__settings {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f4f7fb;
+}
+
+.pd-cookie-settings {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pd-cookie-settings label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.pd-cookie-settings input {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .pd-cookie-banner {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    margin: 0;
+  }
+}

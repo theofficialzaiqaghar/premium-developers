@@ -169,4 +169,56 @@
       revealObserver.observe(target);
     });
   }
+
+  document.addEventListener('click', event => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor || anchor.getAttribute('href') === '#') return;
+    const id = anchor.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    if (history.replaceState) history.replaceState(null, '', `#${id}`);
+    else location.hash = id;
+  });
+
+  const isInternalProjectHref = href => {
+    if (!href) return false;
+    if (href.startsWith('#')) return true;
+    if (href.startsWith('/')) return true;
+    return /^(?:\.\.\/|\.\/|work\/)/.test(href);
+  };
+
+  const primaryProjectLink = card => {
+    const links = [...card.querySelectorAll('.proj__body a.link')];
+    return (
+      links.find(a => !a.classList.contains('proj__case-study') && isInternalProjectHref(a.getAttribute('href'))) ||
+      links.find(a => a.classList.contains('proj__case-study') && isInternalProjectHref(a.getAttribute('href'))) ||
+      links[0]
+    );
+  };
+
+  const followProjectLink = link => {
+    if (!link) return;
+    if (link.target === '_blank') window.open(link.href, '_blank', 'noopener,noreferrer');
+    else window.location.assign(link.href);
+  };
+
+  document.querySelectorAll('.card.proj').forEach(card => {
+    card.classList.add('proj--interactive');
+    const title = card.querySelector('.proj h3')?.textContent?.trim();
+    if (title) card.setAttribute('aria-label', `${title} — open project`);
+
+    card.addEventListener('click', event => {
+      if (event.target.closest('a')) return;
+      followProjectLink(primaryProjectLink(card));
+    });
+
+    card.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      if (event.target.closest('a')) return;
+      event.preventDefault();
+      followProjectLink(primaryProjectLink(card));
+    });
+  });
 })();

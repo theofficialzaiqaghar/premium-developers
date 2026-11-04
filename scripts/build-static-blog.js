@@ -6,6 +6,12 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
+const {
+  gtmHead,
+  gtmBody,
+  trackingStylesLink,
+  trackingScriptsAfterAnalytics
+} = require('../lib/tracking-snippets');
 
 const root = path.join(__dirname, '..');
 const manifestPath = path.join(root, 'content', 'blog-seo-pack', 'manifest.json');
@@ -13,7 +19,6 @@ const backupPath = path.join(root, 'content', 'blog-seo-pack', 'seo-pack-10-draf
 const bodiesDir = path.join(root, 'content', 'blog-seo-pack', 'bodies');
 const blogIndexPath = path.join(root, 'blog', 'index.html');
 const SITE = 'https://www.premiumdevelopers.co';
-const GTM = 'GTM-WF285DKZ';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -110,7 +115,8 @@ function renderImg(rawUrl, alt, { variant = 'card', loading = 'lazy', priority =
   const img = buildResponsiveImage(rawUrl, { variant });
   const fetch = priority ? ' fetchpriority="high"' : '';
   const srcsetAttr = img.srcset ? ` srcset="${escapeAttr(img.srcset)}" sizes="${escapeAttr(img.sizes)}"` : '';
-  return `<img src="${escapeAttr(img.src)}"${srcsetAttr} alt="${escapeAttr(alt)}" width="${img.width}" height="${img.height}" loading="${loading}" decoding="async" referrerpolicy="no-referrer"${fetch} onerror="this.onerror=null;this.src='${escapeAttr(FALLBACK_IMG)}';">`;
+  const onerr = `this.onerror=null;this.removeAttribute('srcset');this.removeAttribute('sizes');this.src='${escapeAttr(FALLBACK_IMG)}';`;
+  return `<img src="${escapeAttr(img.src)}"${srcsetAttr} alt="${escapeAttr(alt)}" width="${img.width}" height="${img.height}" loading="${loading}" decoding="async" referrerpolicy="no-referrer"${fetch} onerror="${escapeAttr(onerr)}">`;
 }
 
 function renderArchiveCard(post) {
@@ -145,20 +151,6 @@ function renderFeaturedCard(post) {
     </a>`;
 }
 
-function gtmHead() {
-  return `<!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM}');</script>
-  <!-- End Google Tag Manager -->`;
-}
-
-function gtmBody() {
-  return `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
-}
-
 function headLinks() {
   return `<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -176,13 +168,15 @@ function headLinks() {
   <link rel="stylesheet" href="/service-pages.css">
   <link rel="stylesheet" href="/exit-intent.css">
   <link rel="stylesheet" href="/offer-popup.css">
-  <link rel="stylesheet" href="/whatsapp-button.css">`;
+  <link rel="stylesheet" href="/whatsapp-button.css">
+${trackingStylesLink()}`;
 }
 
 function scriptsBlock() {
   return `  <script src="/script.js" defer></script>
   <script src="/blog/blog-archive-enhance.js" defer></script>
   <script src="/analytics.js"></script>
+${trackingScriptsAfterAnalytics()}
   <script src="/whatsapp-config.js"></script>
   <script src="/whatsapp-button.js" defer></script>
   <script src="/exit-intent.js" data-frequency-days="30" defer></script>
@@ -245,7 +239,16 @@ ${scriptsBlock()}
 </html>`;
 }
 
-function main() {
+async function verifyImageUrl(url) {
+  try {
+    const res = await fetch(url.split('?')[0] + '?auto=format&fit=crop&w=400&q=80', { method: 'HEAD' });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function main() {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   const backup = JSON.parse(fs.readFileSync(backupPath, 'utf8'));
   const bodyBySlug = new Map(backup.articles.map((a) => [a.slug, a.bodyHtml]));
@@ -258,6 +261,17 @@ function main() {
       publishedAt: PUBLISHED_DATES[i] || PUBLISHED_DATES[0],
       bodyHtml: bodyBySlug.get(entry.slug) || fs.readFileSync(path.join(bodiesDir, entry.bodyFile), 'utf8')
     }));
+
+  for (const post of posts) {
+    const ok = await verifyImageUrl(post.featuredImage?.url || '');
+    if (!ok) {
+      console.warn(`WARN: featured image not reachable for "${post.slug}" — using site fallback OG image.`);
+      post.featuredImage = {
+        ...(post.featuredImage || {}),
+        url: FALLBACK_IMG
+      };
+    }
+  }
 
   const [featured, ...rest] = posts;
   const featuredHtml = `<div id="blog-featured" class="blog-featured">${renderFeaturedCard(featured)}</div>`;
@@ -306,4 +320,7 @@ function main() {
   console.log(`Static blog: ${posts.length} articles.`);
 }
 
-main();
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

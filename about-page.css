@@ -299,6 +299,70 @@
   background: #f8f9fd;
 }
 
+.about-team {
+  background: #fff;
+}
+
+.about-team__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.about-team-card {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding: 28px 20px 26px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, .025);
+  transition: border-color .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+
+.about-team-card:hover {
+  transform: translateY(-3px);
+  border-color: #d5cdf7;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, .075);
+}
+
+.about-team-card__avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f1edff;
+  box-shadow: 0 8px 24px rgba(106, 69, 227, .12);
+}
+
+.about-team-card__avatar--female {
+  border-color: #fce8f3;
+  box-shadow: 0 8px 24px rgba(180, 80, 140, .12);
+}
+
+.about-team-card__avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.about-team-card h3 {
+  margin-top: 18px;
+  color: var(--navy-d);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.35;
+}
+
+.about-team-card__role {
+  margin-top: 6px;
+  color: var(--purple);
+  font-size: .84rem;
+  font-weight: 700;
+}
+
 .about-founder--no-photo .about-founder__grid {
   grid-template-columns: minmax(0, 1fr);
   max-width: 720px;
@@ -642,6 +706,10 @@
     min-height: 330px;
   }
 
+  .about-team__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-services__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -731,6 +799,15 @@
 
   .about-founder__photo {
     min-height: 310px;
+  }
+
+  .about-team__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .about-team-card {
+    padding: 22px 18px;
   }
 
   .about-services__grid {

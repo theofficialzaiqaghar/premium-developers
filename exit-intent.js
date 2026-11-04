@@ -215,11 +215,16 @@
       }
       form.hidden = true;
       showStatus('Thanks for your feedback! Your discount code has been sent to your email.', 'success');
-      track('generate_lead', {
-        form_name: 'exit_intent',
-        exit_reason: reason,
-        marketing_consent: formData.get('consent') === 'on'
-      });
+      const trackOnce = window.pdTrackOnce || track;
+      trackOnce(
+        'exit_offer_submit',
+        {
+          form_name: 'exit_intent',
+          exit_reason: reason,
+          marketing_consent: formData.get('consent') === 'on'
+        },
+        `exit_offer_submit:${submissionId}`
+      );
     } catch (error) {
       showStatus(error instanceof Error ? error.message : 'We couldn’t process your request. Please try again.');
     } finally {

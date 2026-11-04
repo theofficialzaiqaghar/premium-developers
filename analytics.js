@@ -1,14 +1,16 @@
 (() => {
   /**
    * Push events for Google Tag Manager (Custom Event triggers).
-   * Configure GA4 Event tags in GTM for each `event` name below.
+   * See docs/GOOGLE-ADS-READINESS.md for GTM / Google Ads setup.
    *
-   * Suggested GTM custom events:
-   * - generate_lead (conversion)
-   * - cta_click
-   * - click_to_call (conversion)
-   * - click_whatsapp (conversion)
-   * - contact_page_view
+   * Primary Google Ads conversion (recommended trigger):
+   *   Event name: generate_lead
+   *   Fire only from successful /api/contact submissions (contact, service_inquiry, home_inquiry).
+   *
+   * Secondary / micro-conversions:
+   * - click_whatsapp, click_to_call, cta_click, contact_page_view
+   * - special_offer_submit, exit_offer_submit (do not use as primary Ads conversion)
+   * - pd_consent_update (consent banner)
    */
   window.dataLayer = window.dataLayer || [];
   window.__pdTrackedEvents = window.__pdTrackedEvents || new Set();
