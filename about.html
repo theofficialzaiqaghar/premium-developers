@@ -283,32 +283,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="about-team__grid">
           <article class="about-team-card">
             <div class="about-team-card__avatar about-team-card__avatar--male">
-              <img class="about-team-card__photo" src="/assets/team/saad-ullah-khan.jpg" width="104" height="104" alt="" loading="lazy" decoding="async" hidden>
-              <img class="about-team-card__figure" src="/assets/team/avatar-male.svg" width="120" height="120" alt="" aria-hidden="true">
+              <img class="about-team-card__portrait" src="/assets/team/avatar-professional-male.png" width="112" height="112" alt="" decoding="async">
+              <img class="about-team-card__photo" src="/assets/team/saad-ullah-khan.jpg" width="112" height="112" alt="" loading="lazy" decoding="async" hidden>
             </div>
             <h3>Muhammad Saad Ullah Khan</h3>
             <p class="about-team-card__role">CEO &amp; Founder</p>
           </article>
           <article class="about-team-card">
             <div class="about-team-card__avatar about-team-card__avatar--female">
-              <img class="about-team-card__photo" src="/assets/team/zahida-mumtaz.jpg" width="104" height="104" alt="" loading="lazy" decoding="async" hidden>
-              <img class="about-team-card__figure" src="/assets/team/avatar-female.svg" width="120" height="120" alt="" aria-hidden="true">
+              <img class="about-team-card__portrait" src="/assets/team/avatar-professional-female.png" width="112" height="112" alt="" decoding="async">
+              <img class="about-team-card__photo" src="/assets/team/zahida-mumtaz.jpg" width="112" height="112" alt="" loading="lazy" decoding="async" hidden>
             </div>
             <h3>Zahida Mumtaz</h3>
             <p class="about-team-card__role">Co-Founder &amp; COO</p>
           </article>
           <article class="about-team-card">
             <div class="about-team-card__avatar about-team-card__avatar--male">
-              <img class="about-team-card__photo" src="/assets/team/daniyal.jpg" width="104" height="104" alt="" loading="lazy" decoding="async" hidden>
-              <img class="about-team-card__figure" src="/assets/team/avatar-male.svg" width="120" height="120" alt="" aria-hidden="true">
+              <img class="about-team-card__portrait" src="/assets/team/avatar-professional-male.png" width="112" height="112" alt="" decoding="async">
+              <img class="about-team-card__photo" src="/assets/team/daniyal.jpg" width="112" height="112" alt="" loading="lazy" decoding="async" hidden>
             </div>
             <h3>Daniyal</h3>
             <p class="about-team-card__role">Senior CMS Developer</p>
           </article>
           <article class="about-team-card">
             <div class="about-team-card__avatar about-team-card__avatar--male">
-              <img class="about-team-card__photo" src="/assets/team/meer-anas.jpg" width="104" height="104" alt="" loading="lazy" decoding="async" hidden>
-              <img class="about-team-card__figure" src="/assets/team/avatar-male.svg" width="120" height="120" alt="" aria-hidden="true">
+              <img class="about-team-card__portrait" src="/assets/team/avatar-professional-male.png" width="112" height="112" alt="" decoding="async">
+              <img class="about-team-card__photo" src="/assets/team/meer-anas.jpg" width="112" height="112" alt="" loading="lazy" decoding="async" hidden>
             </div>
             <h3>Meer Anas</h3>
             <p class="about-team-card__role">Graphic Designer</p>
@@ -491,17 +491,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script>
     document.querySelectorAll('.about-team-card__photo').forEach((img) => {
       const avatar = img.closest('.about-team-card__avatar');
-      const figure = avatar?.querySelector('.about-team-card__figure');
+      const portrait = avatar?.querySelector('.about-team-card__portrait');
       const showPhoto = () => {
         if (img.naturalWidth > 0) {
           img.hidden = false;
-          figure?.setAttribute('hidden', '');
+          portrait?.setAttribute('hidden', '');
         }
       };
-      const keepPlaceholder = () => img.remove();
+      const keepIllustration = () => img.remove();
       img.addEventListener('load', showPhoto);
-      img.addEventListener('error', keepPlaceholder);
-      if (img.complete) (img.naturalWidth > 0 ? showPhoto : keepPlaceholder)();
+      img.addEventListener('error', keepIllustration);
+      if (img.complete) (img.naturalWidth > 0 ? showPhoto : keepIllustration)();
     });
   </script>
 </body>
