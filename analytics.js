@@ -7,6 +7,7 @@
    * - generate_lead (conversion)
    * - cta_click
    * - click_to_call (conversion)
+   * - click_whatsapp (conversion)
    * - contact_page_view
    */
   window.dataLayer = window.dataLayer || [];

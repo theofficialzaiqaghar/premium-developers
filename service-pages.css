@@ -18,6 +18,17 @@
     linear-gradient(180deg, #fafaff 0, #fff 560px);
 }
 
+/* Homepage-style fixed nav on inner pages */
+body.service-page:has(.nav) #main-content {
+  padding-top: 62px;
+}
+
+@media (min-width: 901px) {
+  body.service-page:has(.nav) #main-content {
+    padding-top: 76px;
+  }
+}
+
 .service-nav {
   position: relative;
   z-index: 1;

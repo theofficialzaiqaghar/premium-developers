@@ -1,0 +1,101 @@
+.pd-whatsapp-fab {
+  --pd-wa-size: 56px;
+  position: fixed;
+  z-index: 44;
+  right: clamp(16px, 3vw, 28px);
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  width: var(--pd-wa-size);
+  height: var(--pd-wa-size);
+  border: none;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.pd-whatsapp-fab:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+  background: #20bd5a;
+}
+
+.pd-whatsapp-fab:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.45);
+  outline-offset: 3px;
+}
+
+.pd-whatsapp-fab svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+.pd-whatsapp-fab__tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #0b2640;
+  color: #fff;
+  font-family: var(--font, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 8px 20px rgba(11, 38, 64, 0.18);
+}
+
+.pd-whatsapp-fab__tooltip::after {
+  content: '';
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-left-color: #0b2640;
+}
+
+.pd-whatsapp-fab:hover .pd-whatsapp-fab__tooltip,
+.pd-whatsapp-fab:focus-visible .pd-whatsapp-fab__tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Stack above back-to-top when visible */
+body:has(.back-to-top:not([hidden])) .pd-whatsapp-fab {
+  bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Hide when modal dialogs are open (exit intent, offer popup) */
+body:has(dialog[open]) .pd-whatsapp-fab {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
+@media (max-width: 640px) {
+  .pd-whatsapp-fab {
+    --pd-wa-size: 52px;
+    right: 14px;
+  }
+
+  .pd-whatsapp-fab__tooltip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-whatsapp-fab,
+  .pd-whatsapp-fab__tooltip {
+    transition: none;
+  }
+}
