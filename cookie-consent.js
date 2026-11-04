@@ -55,8 +55,9 @@
     banner.setAttribute('aria-labelledby', 'pd-cookie-banner-title');
     banner.setAttribute('aria-live', 'polite');
     banner.innerHTML = `
-      <h2 class="pd-cookie-banner__title" id="pd-cookie-banner-title">Cookies &amp; privacy</h2>
-      <p>We use essential cookies for site function. With your permission we also use analytics and advertising cookies (Google Tag Manager, Google Analytics, Google Ads) to measure inquiries and improve campaigns. See our <a href="/privacy-policy.html">Privacy Policy</a>.</p>
+      <span class="pd-cookie-banner__kicker">Privacy</span>
+      <h2 class="pd-cookie-banner__title" id="pd-cookie-banner-title">Cookie preferences</h2>
+      <p>We use essential cookies so the site works. If you agree, we also use analytics and ads tools (Google Tag Manager, GA4, Google Ads) to measure visits and leads. <a href="/privacy-policy.html">Privacy policy</a></p>
       <div class="pd-cookie-settings" id="pd-cookie-settings" hidden>
         <label><input type="checkbox" id="pd-consent-analytics" checked> Analytics cookies (measure site use and form performance)</label>
         <label><input type="checkbox" id="pd-consent-marketing"> Marketing cookies (Google Ads measurement and remarketing)</label>
