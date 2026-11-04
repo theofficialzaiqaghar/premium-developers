@@ -132,25 +132,45 @@
     grid.dataset.empty = visible === 0 && q ? 'true' : 'false';
   }
 
+  function archiveErrorMessage(status) {
+    if (status === 503) {
+      return '<div class="blog-empty"><h2>Blog is temporarily unavailable</h2><p>The blog database is not connected yet. On Vercel, add <strong>UPSTASH_REDIS_REST_URL</strong> and <strong>UPSTASH_REDIS_REST_TOKEN</strong> in Project → Settings → Environment Variables, then redeploy.</p></div>';
+    }
+    if (status === 404) {
+      return '<div class="blog-empty"><h2>Blog API not found</h2><p>Open the blog at <a href="/blog/">/blog/</a> on your deployed site (not the <code>blog/index.html</code> file directly). Redeploy the latest code if this persists.</p></div>';
+    }
+    return '<div class="blog-empty"><h2>Could not load articles</h2><p>Use <a href="/blog/">/blog/</a> on your live site, or run <code>vercel dev</code> locally (plain Live Server cannot load the CMS).</p></div>';
+  }
+
   async function hydrateIfEmpty() {
+    if (document.body.getAttribute('data-blog-archive') !== 'client') {
+      if (fallbackNote) fallbackNote.hidden = true;
+      return;
+    }
+
     const hasCards = grid.querySelector('.blog-card');
     const hasEmpty = grid.querySelector('.blog-empty');
-    if (hasCards || hasEmpty) return;
+    if (hasCards || hasEmpty) {
+      if (fallbackNote) fallbackNote.hidden = true;
+      return;
+    }
 
     grid.setAttribute('aria-busy', 'true');
+    let status = 0;
     try {
       const res = await fetch('/api/blog/public/articles?limit=100', {
         headers: { Accept: 'application/json' },
         credentials: 'same-origin'
       });
+      status = res.status;
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       renderArchive(Array.isArray(data.items) ? data.items : []);
     } catch {
-      grid.innerHTML =
-        '<div class="blog-empty"><h2>Unable to load articles</h2><p>Please refresh the page. If you are previewing locally, run <code>vercel dev</code> with Upstash Redis configured, or open <a href="/blog/">/blog/</a> on your deployed site.</p></div>';
+      grid.innerHTML = archiveErrorMessage(status);
     } finally {
       grid.removeAttribute('aria-busy');
+      if (fallbackNote) fallbackNote.hidden = true;
     }
   }
 

@@ -11,10 +11,15 @@ module.exports = async function blogSsrArchive(req, res) {
   }
 
   if (!isConfigured()) {
-    res.statusCode = 503;
+    const html = renderArchivePage([]);
+    res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'no-store');
-    res.end('<!DOCTYPE html><html><body><h1>Blog temporarily unavailable</h1></body></html>');
+    if (req.method === 'HEAD') {
+      res.end();
+      return;
+    }
+    res.end(html);
     return;
   }
 
