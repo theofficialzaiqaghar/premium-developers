@@ -217,6 +217,16 @@
   box-shadow: 0 12px 38px rgba(15, 23, 42, .055);
 }
 
+/* Embedded quote forms — layout owned by service-inquiry.css */
+.service-inquiry .contact-form-card,
+.home-inquiry .contact-form-card {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+}
+
 .contact-form-card__head {
   margin-bottom: 24px;
 }

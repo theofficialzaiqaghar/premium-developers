@@ -1,35 +1,40 @@
+/* Lead / quote forms — scoped so they match service pages (no extra purple band) */
+
 .service-inquiry {
   padding: clamp(48px, 7vw, 88px) 0;
-  background:
-    radial-gradient(ellipse at 12% 0, rgba(106, 69, 227, .06), transparent 42%),
-    #f8f9fc;
-  border-top: 1px solid var(--line);
+  background: transparent;
+  border-top: 1px solid rgba(231, 234, 243, .95);
 }
 
 .service-inquiry__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  gap: clamp(24px, 5vw, 48px);
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(28px, 5vw, 48px);
   align-items: start;
+  padding: clamp(24px, 4vw, 36px);
+  border: 1px solid #e7eaf3;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 38px rgba(15, 23, 42, .06);
 }
 
 .service-inquiry__copy h2 {
   margin: 10px 0 12px;
-  color: var(--navy-d);
+  color: var(--navy-d, #0b2640);
   font-size: clamp(1.65rem, 3.2vw, 2.35rem);
   line-height: 1.15;
   letter-spacing: -.03em;
 }
 
 .service-inquiry__copy p {
-  color: var(--muted-2);
+  color: var(--muted-2, #64748b);
   line-height: 1.7;
 }
 
 .service-inquiry__points {
   margin: 18px 0 0;
   padding-left: 1.1rem;
-  color: var(--muted-2);
+  color: var(--muted-2, #64748b);
   display: grid;
   gap: 8px;
 }
@@ -40,16 +45,20 @@
 }
 
 .service-inquiry__email a {
-  color: var(--purple);
+  color: var(--purple, #6a45e3);
   font-weight: 700;
 }
 
-.service-inquiry__form.contact-form-card {
+/* Form sits inside the unified white panel — no nested gray/purple card */
+.service-inquiry__form.contact-form-card,
+.service-inquiry .contact-form-card {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
   background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: clamp(20px, 3vw, 28px);
-  box-shadow: 0 18px 40px rgba(11, 38, 64, .06);
+  box-shadow: none;
 }
 
 .service-inquiry__service-tag {
@@ -57,8 +66,16 @@
   padding: 10px 12px;
   border-radius: 10px;
   background: rgba(106, 69, 227, .08);
-  color: var(--navy-d);
+  color: var(--navy-d, #0b2640);
   font-size: .92rem;
+}
+
+.service-inquiry .contact-form {
+  gap: 16px;
+}
+
+.service-inquiry .contact-form__row {
+  gap: 14px;
 }
 
 .service-inline-cta {
@@ -66,7 +83,7 @@
 }
 
 .service-inline-cta a {
-  color: var(--purple);
+  color: var(--purple, #6a45e3);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -77,16 +94,19 @@
   scroll-margin-top: 96px;
 }
 
-#project-inquiry {
+#project-inquiry,
+#home-project-inquiry {
   scroll-margin-top: 96px;
 }
 
+/* Homepage contact section — single white panel */
 .home-inquiry {
   margin-top: clamp(36px, 6vw, 56px);
   padding: clamp(24px, 4vw, 36px);
-  border-radius: 18px;
-  border: 1px solid var(--line);
+  border-radius: 20px;
+  border: 1px solid #e7eaf3;
   background: #fff;
+  box-shadow: 0 12px 38px rgba(15, 23, 42, .06);
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: clamp(20px, 4vw, 36px);
@@ -95,26 +115,35 @@
 
 .home-inquiry__copy h3 {
   margin: 8px 0 10px;
-  color: var(--navy-d);
+  color: var(--navy-d, #0b2640);
   font-size: clamp(1.35rem, 2.5vw, 1.75rem);
 }
 
 .home-inquiry__copy p {
-  color: var(--muted-2);
+  color: var(--muted-2, #64748b);
   line-height: 1.7;
 }
 
 .home-inquiry__form.contact-form-card {
-  padding: clamp(16px, 3vw, 24px);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #f8f9fc;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: none;
 }
 
-@media (max-width: 900px) {
-  .home-inquiry {
-    grid-template-columns: 1fr;
-  }
+/* About page: inquiry uses about-wrap width, not full service-wrap */
+.about-wrap.service-inquiry {
+  width: min(1080px, 100% - 48px);
+  margin-inline: auto;
+  padding-top: clamp(40px, 6vw, 64px);
+  padding-bottom: clamp(40px, 6vw, 64px);
+  border-top: 1px solid rgba(231, 234, 243, .95);
+  background: transparent;
+}
+
+.about-wrap.service-inquiry .service-inquiry__grid {
+  margin: 0;
 }
 
 .service-cta__actions {
@@ -125,7 +154,8 @@
 }
 
 @media (max-width: 900px) {
-  .service-inquiry__grid {
+  .service-inquiry__grid,
+  .home-inquiry {
     grid-template-columns: 1fr;
   }
 
