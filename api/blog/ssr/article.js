@@ -1,8 +1,8 @@
-const store = require('../_lib/store');
-const { isConfigured } = require('../_lib/redis');
-const { renderArticlePage, renderNotFoundPage, pickRelated } = require('../_lib/ssr');
-const { toPublicArticle } = require('../_lib/public');
-const { normalizeSlug } = require('../_lib/validate');
+const store = require('../../../lib/blog/_lib/store');
+const { isConfigured } = require('../../../lib/blog/_lib/redis');
+const { renderArticlePage, renderNotFoundPage, pickRelated } = require('../../../lib/blog/_lib/ssr');
+const { toPublicArticle } = require('../../../lib/blog/_lib/public');
+const { normalizeSlug } = require('../../../lib/blog/_lib/validate');
 
 function slugFromRequest(req) {
   const url = new URL(req.url, `https://${req.headers.host || 'localhost'}`);

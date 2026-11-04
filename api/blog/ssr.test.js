@@ -6,12 +6,12 @@ const {
   renderArchivePage,
   canonicalArticleUrl,
   escapeHtml
-} = require('./_lib/ssr');
+} = require('../../lib/blog/_lib/ssr');
 const blogSsrArticle = require('./ssr/article');
 const blogSsrArchive = require('./ssr/archive');
 const sitemapBlog = require('../sitemap-blog');
-const { createMockRedis } = require('./_lib/test/mock-redis');
-const store = require('./_lib/store');
+const { createMockRedis } = require('../../lib/blog/test/mock-redis');
+const store = require('../../lib/blog/_lib/store');
 
 const publishedArticle = {
   id: '11111111-1111-4111-8111-111111111111',

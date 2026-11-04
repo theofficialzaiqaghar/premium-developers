@@ -1,6 +1,6 @@
-const store = require('../_lib/store');
-const { isConfigured } = require('../_lib/redis');
-const { renderArchivePage } = require('../_lib/ssr');
+const store = require('../../../lib/blog/_lib/store');
+const { isConfigured } = require('../../../lib/blog/_lib/redis');
+const { renderArchivePage } = require('../../../lib/blog/_lib/ssr');
 module.exports = async function blogSsrArchive(req, res) {
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.statusCode = 405;

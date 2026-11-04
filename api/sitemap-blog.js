@@ -1,6 +1,6 @@
-const store = require('./blog/_lib/store');
-const { isConfigured } = require('./blog/_lib/redis');
-const { SITE_ORIGIN, canonicalArticleUrl } = require('./blog/_lib/ssr');
+const store = require('../lib/blog/_lib/store');
+const { isConfigured } = require('../lib/blog/_lib/redis');
+const { SITE_ORIGIN, canonicalArticleUrl } = require('../lib/blog/_lib/ssr');
 
 function xmlEscape(value) {
   return String(value)

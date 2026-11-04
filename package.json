@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "npx --yes serve . -l 3000",
     "dev:vercel": "npx --yes vercel dev",
-    "test": "node --test api/**/*.test.js automation/**/*.test.js",
+    "test": "node --test api/**/*.test.js lib/**/*.test.js automation/**/*.test.js",
     "automation:hardware": "node automation/scripts/hardware-report.js",
     "automation:health": "node automation/scripts/health-check.js",
     "automation:smoke": "node automation/scripts/ollama-smoke-test.js"

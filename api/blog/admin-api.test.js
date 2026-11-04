@@ -1,12 +1,12 @@
 const assert = require('node:assert/strict');
 const { test, beforeEach, afterEach } = require('node:test');
-const { createMockRedis } = require('./_lib/test/mock-redis');
-const blogPreview = require('./preview');
-const blogStats = require('./stats');
-const blogLogin = require('./login');
-const blogArticles = require('./articles');
-const store = require('./_lib/store');
-const { CSRF_HEADER } = require('./_lib/auth');
+const { createMockRedis } = require('../../lib/blog/test/mock-redis');
+const blogPreview = require('../../lib/blog/routes/preview');
+const blogStats = require('../../lib/blog/routes/stats');
+const blogLogin = require('../../lib/blog/routes/login');
+const blogArticles = require('../../lib/blog/routes/articles');
+const store = require('../../lib/blog/_lib/store');
+const { CSRF_HEADER } = require('../../lib/blog/_lib/auth');
 
 const ENV_KEYS = [
   'UPSTASH_REDIS_REST_URL',
