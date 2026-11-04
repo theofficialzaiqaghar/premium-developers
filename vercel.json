@@ -20,6 +20,16 @@
       "source": "/special-offer.html",
       "destination": "/special-offer/",
       "permanent": true
+    },
+    {
+      "source": "/work/the-resumer.html",
+      "destination": "/case-studies/the-resumer/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug([^/.]+)",
+      "destination": "/blog/:slug/",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -38,6 +48,46 @@
     {
       "source": "/special-offer/",
       "destination": "/special-offer.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies/index.html"
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/case-studies/index.html"
+    },
+    {
+      "source": "/case-studies/the-resumer",
+      "destination": "/case-studies/the-resumer.html"
+    },
+    {
+      "source": "/case-studies/the-resumer/",
+      "destination": "/case-studies/the-resumer.html"
+    },
+    {
+      "source": "/admin/blog",
+      "destination": "/admin/blog/index.html"
+    },
+    {
+      "source": "/admin/blog/",
+      "destination": "/admin/blog/index.html"
+    },
+    {
+      "source": "/sitemap-blog.xml",
+      "destination": "/api/sitemap-blog"
+    },
+    {
+      "source": "/blog",
+      "destination": "/api/blog/ssr/archive"
+    },
+    {
+      "source": "/blog/",
+      "destination": "/api/blog/ssr/archive"
+    },
+    {
+      "source": "/blog/:slug/",
+      "destination": "/api/blog/ssr/article?slug=:slug"
     }
   ]
 }

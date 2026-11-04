@@ -151,7 +151,7 @@ test('stores the complete lead before notifying both configured recipients', asy
       'muhammadsaadullah093@gmail.com'
     ]);
     assert.equal(services.emails[0].reply_to, validPayload.email);
-    assert.equal(services.emails[0].subject, 'New Lead — 50% OFF Special Offer');
+    assert.equal(services.emails[0].subject, 'New Lead — 30% OFF Special Offer');
     assert.equal(services.emails[0].from, 'Premium Developers <hello@example.com>');
     assert.equal(services.emails[0].headers['Idempotency-Key'], `special-offer-${validPayload.submissionId}`);
     assert.match(services.emails[0].text, /Full name: A Visitor/);

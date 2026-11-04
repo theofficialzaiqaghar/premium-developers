@@ -1,0 +1,8 @@
+{
+  "ollamaBaseUrl": "http://127.0.0.1:11434",
+  "model": "llama3.2:3b",
+  "fallbackModel": "gemma2:2b",
+  "requestTimeoutMs": 120000,
+  "connectTimeoutMs": 8000,
+  "_comment": "Copy to config.local.json (gitignored). fallbackModel is documentation only — provider never auto-switches models."
+}

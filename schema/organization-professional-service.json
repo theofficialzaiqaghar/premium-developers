@@ -1,0 +1,33 @@
+{
+  "@type": ["Organization", "ProfessionalService"],
+  "@id": "https://www.premiumdevelopers.co/#organization",
+  "name": "Premium Developers",
+  "alternateName": "PremiumDevelopers.co",
+  "url": "https://www.premiumdevelopers.co/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.premiumdevelopers.co/logo.svg"
+  },
+  "email": "hello@premiumdevelopers.co",
+  "description": "WordPress, WooCommerce, and Elementor development for business websites, online stores, redesigns, performance, and custom WordPress functionality.",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Worldwide"
+  },
+  "knowsAbout": [
+    "WordPress development",
+    "WooCommerce development",
+    "Elementor development",
+    "Custom WordPress plugin development",
+    "Website redesign",
+    "Website performance optimization"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "hello@premiumdevelopers.co",
+    "url": "https://www.premiumdevelopers.co/contact",
+    "availableLanguage": ["en"]
+  },
+  "image": "https://www.premiumdevelopers.co/assets/images/og/premium-developers-og.jpg"
+}

@@ -1,0 +1,11 @@
+{
+  "@type": "WebSite",
+  "@id": "https://www.premiumdevelopers.co/#website",
+  "url": "https://www.premiumdevelopers.co/",
+  "name": "Premium Developers",
+  "alternateName": "PremiumDevelopers.co",
+  "publisher": {
+    "@id": "https://www.premiumdevelopers.co/#organization"
+  },
+  "inLanguage": "en"
+}

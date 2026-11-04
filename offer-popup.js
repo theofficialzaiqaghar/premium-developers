@@ -3,7 +3,7 @@
   const currentPath = window.location.pathname.replace(/\/+$/, '');
   if (currentPath === '/special-offer' || currentPath === '/special-offer.html') return;
 
-  const storageKey = 'pd-50-percent-offer-seen';
+  const storageKey = 'pd-30-percent-offer-seen';
   let seenInMemory = false;
   let returnFocus;
   let dialog;
@@ -40,10 +40,10 @@
       <section class="offer-popup">
         <button class="offer-popup__close" type="button" aria-label="Close offer popup">&times;</button>
         <p class="offer-popup__eyebrow">A special offer from Premium Developers</p>
-        <h2 id="offer-popup-title">Get 50% OFF Your Next Digital Growth Project</h2>
-        <p class="offer-popup__description" id="offer-popup-description">Upgrade your website with professional optimization, SEO, and content writing services — now at 50% off for a limited time.</p>
-        <div class="offer-popup__discount" aria-label="50 percent off">
-          <strong>50% <span>OFF</span></strong>
+        <h2 id="offer-popup-title">Get 30% OFF Your Next Digital Growth Project</h2>
+        <p class="offer-popup__description" id="offer-popup-description">Upgrade your website with professional optimization, SEO, and content writing services — now at 30% off for a limited time.</p>
+        <div class="offer-popup__discount" aria-label="30 percent off">
+          <strong>30% <span>OFF</span></strong>
           <span>Selected digital growth services</span>
         </div>
         <ul class="offer-popup__services">
@@ -52,7 +52,7 @@
           <li>Professional Website Content Writing</li>
         </ul>
         <div class="offer-popup__actions">
-          <a class="btn btn--primary" href="/special-offer/">Claim My 50% OFF <span aria-hidden="true">→</span></a>
+          <a class="btn btn--primary" href="/special-offer/">Claim My 30% OFF <span aria-hidden="true">→</span></a>
           <button class="btn btn--ghost" type="button" data-offer-dismiss>No Thanks</button>
         </div>
       </section>`;
@@ -61,7 +61,7 @@
     dialog.querySelector('.offer-popup__close').addEventListener('click', closePopup);
     dialog.querySelector('[data-offer-dismiss]').addEventListener('click', closePopup);
     dialog.querySelector('.offer-popup__actions a.btn--primary')?.addEventListener('click', () => {
-      track('offer_popup_click', { offer_type: '50_percent_off', link_url: '/special-offer/' });
+      track('offer_popup_click', { offer_type: '30_percent_off', link_url: '/special-offer/' });
     });
     dialog.addEventListener('cancel', event => {
       event.preventDefault();
@@ -104,7 +104,7 @@
     returnFocus = document.activeElement;
     dialog.showModal();
     dialog.querySelector('.offer-popup__close').focus();
-    track('offer_popup_view', { offer_type: '50_percent_off' });
+    track('offer_popup_view', { offer_type: '30_percent_off' });
   }
 
   window.setTimeout(showPopup, 5000);

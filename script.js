@@ -111,7 +111,7 @@
 
   if (video) {
     const videoSrc = video.getAttribute('data-src');
-    let videoLoaded = false;
+    let videoLoaded = Boolean(video.querySelector('source[src]'));
     const ensureVideoSource = () => {
       if (!videoSrc || videoLoaded) return;
       if (!video.querySelector('source')) {

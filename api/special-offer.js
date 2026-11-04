@@ -171,7 +171,7 @@ function emailBody(record) {
     timeZone: 'UTC'
   }).format(new Date(record.submittedAt));
   return [
-    'New Lead — 50% OFF Special Offer',
+    'New Lead — 30% OFF Special Offer',
     '',
     `Full name: ${record.fullName}`,
     `Business email: ${record.email}`,
@@ -205,7 +205,7 @@ async function sendNotification(record) {
       from,
       to: recipients,
       reply_to: record.email,
-      subject: 'New Lead — 50% OFF Special Offer',
+      subject: 'New Lead — 30% OFF Special Offer',
       text: emailBody(record)
     }),
     signal: AbortSignal.timeout(10000)
@@ -263,7 +263,7 @@ module.exports = async function specialOffer(req, res) {
     } catch (error) {
       console.error('Special offer could not be stored or delivered:', error);
       return sendJson(res, 503, {
-        error: 'We couldn’t send your inquiry right now. Please try again, or email hello@premiumdevelopers.co and mention the 50% offer.'
+        error: 'We couldn’t send your inquiry right now. Please try again, or email hello@premiumdevelopers.co and mention the 30% offer.'
       });
     }
   };

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Blog CMS | Premium Developers</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin/blog/admin.css">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+</head>
+<body class="admin-blog">
+  <div id="login-view" class="admin-login">
+    <div class="admin-login__card">
+      <img src="/logo.svg" alt="" width="56" height="56" class="admin-login__logo">
+      <h1>Blog CMS</h1>
+      <p>Premium Developers — sign in to manage articles.</p>
+      <form id="login-form">
+        <label for="login-password">Admin password</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required minlength="12">
+        <p id="login-error" class="admin-error" hidden role="alert"></p>
+        <button type="submit" class="btn btn--primary">Sign in</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="app-shell" class="admin-shell" hidden>
+    <header class="admin-topbar">
+      <a class="admin-brand" href="/admin/blog/"><img src="/logo.svg" alt="" width="40" height="40"><span>Blog CMS</span></a>
+      <div class="admin-topbar__actions">
+        <span id="session-expiry" class="admin-muted"></span>
+        <button type="button" class="btn btn--ghost" id="btn-logout">Log out</button>
+      </div>
+    </header>
+    <div class="admin-layout">
+      <nav class="admin-nav" aria-label="Blog admin">
+        <button type="button" data-view="dashboard" class="admin-nav__btn is-active">Overview</button>
+        <button type="button" data-view="articles" class="admin-nav__btn">Articles</button>
+        <button type="button" data-view="editor" class="admin-nav__btn">New article</button>
+        <button type="button" data-view="taxonomy" class="admin-nav__btn">Categories &amp; tags</button>
+        <button type="button" data-view="backup" class="admin-nav__btn">Backup</button>
+        <a class="admin-nav__link" href="/blog/" target="_blank" rel="noopener noreferrer">View public blog ↗</a>
+      </nav>
+      <main class="admin-main" id="admin-main">
+        <section id="view-dashboard" class="admin-view">
+          <h2>Overview</h2>
+          <div id="stats-grid" class="admin-stats"></div>
+        </section>
+
+        <section id="view-articles" class="admin-view" hidden>
+          <div class="admin-toolbar">
+            <h2>Articles</h2>
+            <input type="search" id="articles-search" placeholder="Search title or slug" aria-label="Search articles">
+            <select id="articles-status-filter" aria-label="Filter by status">
+              <option value="">All statuses</option>
+            </select>
+            <button type="button" class="btn btn--primary" id="btn-new-article">New article</button>
+          </div>
+          <div id="articles-table-wrap" class="admin-table-wrap"></div>
+          <div class="admin-pagination">
+            <button type="button" class="btn btn--ghost" id="articles-prev">Previous</button>
+            <span id="articles-page-info" class="admin-muted"></span>
+            <button type="button" class="btn btn--ghost" id="articles-next">Next</button>
+          </div>
+        </section>
+
+        <section id="view-editor" class="admin-view" hidden>
+          <div class="admin-toolbar">
+            <h2 id="editor-heading">New article</h2>
+            <div class="admin-toolbar__actions">
+              <button type="button" class="btn btn--ghost" id="btn-preview">Preview</button>
+              <button type="button" class="btn btn--ghost" id="btn-save-draft">Save draft</button>
+              <button type="button" class="btn btn--primary" id="btn-publish">Publish…</button>
+            </div>
+          </div>
+          <p id="editor-form-error" class="admin-error" hidden role="alert"></p>
+          <form id="article-form" class="admin-form">
+            <input type="hidden" id="field-id">
+            <div class="admin-form__grid">
+              <label>Title<input id="field-title" required maxlength="200"></label>
+              <label>URL slug
+                <input id="field-slug" required maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*">
+                <span id="slug-hint" class="admin-hint"></span>
+              </label>
+              <label>Status
+                <select id="field-status"></select>
+              </label>
+              <label>Author<input id="field-author" maxlength="80" value="Premium Developers"></label>
+            </div>
+            <div class="admin-form__grid">
+              <label>SEO title<input id="field-seo-title" maxlength="70"></label>
+              <label>Meta description<textarea id="field-meta-description" maxlength="320" rows="2"></textarea></label>
+              <label>Excerpt<textarea id="field-excerpt" maxlength="500" rows="2"></textarea></label>
+            </div>
+            <div class="admin-form__grid">
+              <label>Primary keyword<input id="field-primary-keyword" maxlength="80"></label>
+              <label>Search intent<input id="field-search-intent" maxlength="80"></label>
+              <label>Scheduled at (required for Scheduled status)
+                <input id="field-scheduled-at" type="datetime-local">
+              </label>
+            </div>
+            <fieldset class="admin-fieldset">
+              <legend>Featured image</legend>
+              <div class="admin-form__grid">
+                <label>Image URL<input id="field-fi-url" type="url" maxlength="2048" placeholder="https://…"></label>
+                <label>Alt text<input id="field-fi-alt" maxlength="200"></label>
+                <label>Filename<input id="field-fi-filename" maxlength="120"></label>
+              </div>
+            </fieldset>
+            <fieldset class="admin-fieldset">
+              <legend>Categories &amp; tags (slugs)</legend>
+              <label>Category slugs (comma-separated)<input id="field-categories" placeholder="wordpress, technical-seo"></label>
+              <label>Tag slugs (comma-separated)<input id="field-tags" placeholder="performance, elementor"></label>
+            </fieldset>
+            <label class="admin-editor-label">Article body</label>
+            <div id="quill-editor" class="admin-quill"></div>
+            <div id="toc-preview" class="admin-toc-preview" hidden>
+              <h3>Table of contents (H2/H3)</h3>
+              <ol id="toc-list"></ol>
+            </div>
+            <div class="admin-form__actions">
+              <button type="button" class="btn btn--ghost" id="btn-history">Revision history</button>
+              <button type="submit" class="btn btn--primary">Save changes</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="view-taxonomy" class="admin-view" hidden>
+          <h2>Categories &amp; tags</h2>
+          <div class="admin-tax-grid">
+            <div>
+              <h3>Categories</h3>
+              <form id="category-form" class="admin-inline-form">
+                <input id="cat-name" placeholder="Name" required maxlength="120">
+                <input id="cat-slug" placeholder="slug (optional)" maxlength="60">
+                <button type="submit" class="btn btn--primary">Add / update</button>
+              </form>
+              <ul id="category-list" class="admin-list"></ul>
+            </div>
+            <div>
+              <h3>Tags</h3>
+              <form id="tag-form" class="admin-inline-form">
+                <input id="tag-name" placeholder="Name" required maxlength="80">
+                <input id="tag-slug" placeholder="slug (optional)" maxlength="60">
+                <button type="submit" class="btn btn--primary">Add / update</button>
+              </form>
+              <ul id="tag-list" class="admin-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-backup" class="admin-view" hidden>
+          <h2>Backup</h2>
+          <p class="admin-muted">Export all CMS data as JSON, or import a previous backup (admin authentication required).</p>
+          <div class="admin-backup-actions">
+            <button type="button" class="btn btn--primary" id="btn-export">Download backup</button>
+            <label class="btn btn--ghost admin-file-label">
+              Import backup<input type="file" id="import-file" accept="application/json" hidden>
+            </label>
+          </div>
+          <pre id="backup-result" class="admin-log" hidden></pre>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="history-dialog" class="admin-dialog">
+    <form method="dialog">
+      <h3>Revision history</h3>
+      <div id="history-content" class="admin-log"></div>
+      <button value="close" class="btn btn--ghost">Close</button>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"></script>
+  <script src="/admin/blog/admin.js" defer></script>
+</body>
+</html>

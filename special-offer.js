@@ -3,7 +3,7 @@
   if (!form) return;
 
   const track = window.pdTrack || (() => {});
-  track('special_offer_page_view', { offer_type: '50_percent_off' });
+  track('special_offer_page_view', { offer_type: '30_percent_off' });
 
   const submit = form.querySelector('button[type="submit"]');
   const submitLabel = form.querySelector('.offer-form__submit-label');
@@ -173,7 +173,7 @@
       track('generate_lead', {
         form_name: 'special_offer',
         services_selected: payload.services.join(', '),
-        offer_type: '50_percent_off',
+        offer_type: '30_percent_off',
         marketing_consent: payload.consent === true
       });
     } catch (error) {
@@ -186,7 +186,7 @@
       submit.disabled = false;
       submit.removeAttribute('aria-busy');
       submit.classList.remove('is-loading');
-      submitLabel.textContent = 'Claim My 50% OFF';
+      submitLabel.textContent = 'Claim My 30% OFF';
     }
   });
 })();

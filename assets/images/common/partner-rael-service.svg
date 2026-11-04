@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 76 76" fill="none" role="img" aria-labelledby="title">
+  <title id="title">Rael Service CM</title>
+  <rect width="76" height="76" rx="20" fill="url(#g)"/>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="76" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F3256"/>
+      <stop offset="1" stop-color="#234C79"/>
+    </linearGradient>
+  </defs>
+  <text x="38" y="44" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,Segoe UI,sans-serif" font-size="22" font-weight="800" letter-spacing="-0.5">RS</text>
+</svg>

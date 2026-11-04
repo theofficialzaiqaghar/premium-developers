@@ -1,0 +1,3 @@
+Blog automation is intentionally stopped (user request).
+Remove this file to allow automation:health / automation:smoke and future daily pipeline work.
+No auto-publish or scheduled tasks were enabled in this repo.

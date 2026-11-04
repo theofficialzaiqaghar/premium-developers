@@ -30,6 +30,16 @@
   border-bottom: 1px solid rgba(231, 234, 243, .8);
 }
 
+.service-nav .logo__mark {
+  width: clamp(28px, 4.2vw, 36px);
+  height: clamp(28px, 4.2vw, 36px);
+  min-width: 28px;
+  min-height: 28px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center;
+}
+
 .service-nav__back {
   display: inline-flex;
   align-items: center;
@@ -443,8 +453,13 @@
   }
 
   .service-nav .logo__mark {
-    width: 30px;
-    height: 30px;
+    width: clamp(28px, 4.2vw, 36px);
+    height: clamp(28px, 4.2vw, 36px);
+    min-width: 28px;
+    min-height: 28px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    object-position: center;
   }
 
   .service-nav__back {
