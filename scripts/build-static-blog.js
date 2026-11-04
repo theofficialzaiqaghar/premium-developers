@@ -59,15 +59,68 @@ function articleUrl(slug) {
   return `/blog/${encodeURIComponent(slug)}/`;
 }
 
+const FALLBACK_IMG = `${SITE}/assets/images/og/premium-developers-og.jpg`;
+
+/** Responsive Unsplash URLs; passthrough for other hosts. */
+function buildResponsiveImage(rawUrl, { variant = 'card' } = {}) {
+  const fallback = FALLBACK_IMG;
+  const url = String(rawUrl || '').trim() || fallback;
+  if (!url.includes('images.unsplash.com')) {
+    const w = variant === 'hero' ? 1200 : 640;
+    const h = variant === 'hero' ? 630 : 400;
+    return {
+      src: url,
+      srcset: '',
+      sizes: variant === 'hero' ? '100vw' : '(max-width: 640px) 100vw, (max-width: 960px) 50vw, 320px',
+      width: w,
+      height: h
+    };
+  }
+
+  const widths = variant === 'hero' ? [480, 768, 1024, 1200] : [320, 480, 640, 800];
+  const aspect = variant === 'hero' ? 630 / 1200 : 10 / 16;
+
+  function urlAt(w) {
+    const u = new URL(url.split('?')[0]);
+    u.searchParams.set('auto', 'format');
+    u.searchParams.set('fit', 'crop');
+    u.searchParams.set('q', variant === 'hero' ? '82' : '78');
+    u.searchParams.set('w', String(w));
+    u.searchParams.set('h', String(Math.round(w * aspect)));
+    return u.toString();
+  }
+
+  const src = urlAt(widths[widths.length - 1]);
+  const srcset = widths.map((w) => `${urlAt(w)} ${w}w`).join(', ');
+  const sizes =
+    variant === 'hero'
+      ? '(max-width: 640px) 100vw, (max-width: 960px) 100vw, 720px'
+      : '(max-width: 640px) 100vw, (max-width: 960px) 50vw, 320px';
+
+  return {
+    src,
+    srcset,
+    sizes,
+    width: widths[widths.length - 1],
+    height: Math.round(widths[widths.length - 1] * aspect)
+  };
+}
+
+function renderImg(rawUrl, alt, { variant = 'card', loading = 'lazy', priority = false } = {}) {
+  const img = buildResponsiveImage(rawUrl, { variant });
+  const fetch = priority ? ' fetchpriority="high"' : '';
+  const srcsetAttr = img.srcset ? ` srcset="${escapeAttr(img.srcset)}" sizes="${escapeAttr(img.sizes)}"` : '';
+  return `<img src="${escapeAttr(img.src)}"${srcsetAttr} alt="${escapeAttr(alt)}" width="${img.width}" height="${img.height}" loading="${loading}" decoding="async" referrerpolicy="no-referrer"${fetch} onerror="this.onerror=null;this.src='${escapeAttr(FALLBACK_IMG)}';">`;
+}
+
 function renderArchiveCard(post) {
   const url = articleUrl(post.slug);
-  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
   const alt = post.featuredImage?.alt || post.title;
   const excerpt = post.excerpt || post.metaDescription || '';
   return `<a class="blog-card" href="${escapeAttr(url)}" data-title="${escapeAttr(
     post.title.toLowerCase()
   )}" data-slug="${escapeAttr(post.slug)}">
-      <figure class="blog-card__thumb"><img src="${escapeAttr(img)}" alt="${escapeAttr(alt)}" loading="lazy" decoding="async" width="640" height="400"></figure>
+      <figure class="blog-card__thumb">${renderImg(post.featuredImage?.url, alt, { variant: 'card' })}</figure>
       <div class="blog-card__body">
         ${categoryTags(post.categorySlugs)}
         <h3>${escapeHtml(post.title)}</h3>
@@ -79,11 +132,10 @@ function renderArchiveCard(post) {
 
 function renderFeaturedCard(post) {
   const url = articleUrl(post.slug);
-  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
   const alt = post.featuredImage?.alt || post.title;
   const excerpt = post.excerpt || post.metaDescription || '';
   return `<a class="blog-featured__card" href="${escapeAttr(url)}">
-      <figure class="blog-featured__media"><img src="${escapeAttr(img)}" alt="${escapeAttr(alt)}" loading="eager" fetchpriority="high" decoding="async" width="1200" height="630"></figure>
+      <figure class="blog-featured__media">${renderImg(post.featuredImage?.url, alt, { variant: 'hero', loading: 'eager', priority: true })}</figure>
       <div class="blog-featured__body">
         <span class="blog-badge">Featured article</span>
         <h2>${escapeHtml(post.title)}</h2>
@@ -114,6 +166,8 @@ function headLinks() {
   <link rel="icon" type="image/png" href="/assets/icons/icon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
   <meta name="theme-color" content="#0B2640">
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -174,7 +228,7 @@ ${siteChromeNav({ active: 'blog' })}
     <span class="service-kicker">Article</span>
     <h1>${escapeHtml(post.title)}</h1>
     <div class="blog-meta"><span>Premium Developers</span><span>Published ${escapeHtml(formatDate(post.publishedAt))}</span></div>
-    <figure class="blog-article-featured"><img src="${escapeAttr(img)}" alt="${escapeAttr(post.featuredImage?.alt || post.title)}" width="1200" height="630" loading="eager" fetchpriority="high" decoding="async"></figure>
+    <figure class="blog-article-featured">${renderImg(post.featuredImage?.url, post.featuredImage?.alt || post.title, { variant: 'hero', loading: 'eager', priority: true })}</figure>
   </article>
   <div class="service-wrap blog-article-layout">
     <div class="blog-article-content">${bodyHtml}</div>
@@ -225,6 +279,14 @@ function main() {
     /<p id="blog-static-fallback-note"[\s\S]*?<\/p>\s*/i,
     ''
   );
+  if (!indexHtml.includes('preconnect" href="https://images.unsplash.com"')) {
+    indexHtml = indexHtml.replace(
+      '<link rel="preconnect" href="https://fonts.googleapis.com">',
+      `<link rel="dns-prefetch" href="https://images.unsplash.com">
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">`
+    );
+  }
   indexHtml = indexHtml.replace(
     /<script src="\/blog\/config\.js"><\/script>\s*/i,
     ''
