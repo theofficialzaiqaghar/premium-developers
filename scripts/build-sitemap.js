@@ -54,9 +54,9 @@ const STATIC_PAGES = [
   { loc: `${SITE}/blog/`, changefreq: 'weekly', priority: '0.8' },
   { loc: `${SITE}/case-studies/`, changefreq: 'monthly', priority: '0.7' },
   { loc: `${SITE}/case-studies/the-resumer/`, changefreq: 'yearly', priority: '0.75' },
-  { loc: `${SITE}/work/the-lynx-med-spa.html`, changefreq: 'yearly', priority: '0.65' },
-  { loc: `${SITE}/work/regenerative-wellness-nc.html`, changefreq: 'yearly', priority: '0.65' },
-  { loc: `${SITE}/work/top-dog-waste.html`, changefreq: 'yearly', priority: '0.65' },
+  { loc: `${SITE}/case-studies/the-lynx-med-spa/`, changefreq: 'yearly', priority: '0.75' },
+  { loc: `${SITE}/case-studies/regenerative-wellness-nc/`, changefreq: 'yearly', priority: '0.75' },
+  { loc: `${SITE}/case-studies/top-dog-waste/`, changefreq: 'yearly', priority: '0.75' },
   { loc: `${SITE}/work/ajj-vans-canarias.html`, changefreq: 'yearly', priority: '0.65' },
   { loc: `${SITE}/work/routhexit.html`, changefreq: 'yearly', priority: '0.65' },
   { loc: `${SITE}/special-offer/`, changefreq: 'monthly', priority: '0.5' },
@@ -168,6 +168,9 @@ ${siteChromeNav({ active: null })}
         <li><a href="/contact">Contact</a></li>
         <li><a href="/case-studies/">Case studies</a></li>
         <li><a href="/case-studies/the-resumer/">The Resumer case study</a></li>
+        <li><a href="/case-studies/the-lynx-med-spa/">The Lynx Med Spa case study</a></li>
+        <li><a href="/case-studies/regenerative-wellness-nc/">Regenerative Wellness NC case study</a></li>
+        <li><a href="/case-studies/top-dog-waste/">Top Dog Waste case study</a></li>
       </ul>
     </section>
     <section class="sitemap-section" aria-labelledby="sitemap-services">

@@ -27,6 +27,21 @@
       "permanent": true
     },
     {
+      "source": "/work/the-lynx-med-spa.html",
+      "destination": "/case-studies/the-lynx-med-spa/",
+      "permanent": true
+    },
+    {
+      "source": "/work/regenerative-wellness-nc.html",
+      "destination": "/case-studies/regenerative-wellness-nc/",
+      "permanent": true
+    },
+    {
+      "source": "/work/top-dog-waste.html",
+      "destination": "/case-studies/top-dog-waste/",
+      "permanent": true
+    },
+    {
       "source": "/blog/:slug([^/.]+)",
       "destination": "/blog/:slug/",
       "permanent": true
@@ -169,6 +184,30 @@
     {
       "source": "/case-studies/the-resumer/",
       "destination": "/case-studies/the-resumer.html"
+    },
+    {
+      "source": "/case-studies/the-lynx-med-spa",
+      "destination": "/case-studies/the-lynx-med-spa.html"
+    },
+    {
+      "source": "/case-studies/the-lynx-med-spa/",
+      "destination": "/case-studies/the-lynx-med-spa.html"
+    },
+    {
+      "source": "/case-studies/regenerative-wellness-nc",
+      "destination": "/case-studies/regenerative-wellness-nc.html"
+    },
+    {
+      "source": "/case-studies/regenerative-wellness-nc/",
+      "destination": "/case-studies/regenerative-wellness-nc.html"
+    },
+    {
+      "source": "/case-studies/top-dog-waste",
+      "destination": "/case-studies/top-dog-waste.html"
+    },
+    {
+      "source": "/case-studies/top-dog-waste/",
+      "destination": "/case-studies/top-dog-waste.html"
     },
     {
       "source": "/admin/blog",
