@@ -136,13 +136,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="blog-article-content" id="blog-article-content"></div>
       <aside class="blog-toc" id="blog-toc" aria-label="Table of contents"></aside>
     </div>
-    <div class="service-wrap">
-      <div class="blog-share" id="blog-share" aria-label="Share article"></div>
-      <p style="margin-top:28px"><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss a project with us <span aria-hidden="true">→</span></a></p>
-    </div>
-    <section class="blog-related service-wrap" id="blog-related" hidden>
-      <h2>Related articles</h2>
-      <div class="blog-grid"></div>
+    <section class="blog-article-end" id="blog-article-end" aria-label="Next steps" hidden>
+      <div class="service-wrap">
+        <div class="blog-article-cta">
+          <p>Need WordPress, Elementor, or WooCommerce help for a project like this?</p>
+          <a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss a project with us <span aria-hidden="true">→</span></a>
+        </div>
+        <section class="blog-related-services" id="blog-related-services" aria-labelledby="blog-related-services-heading" hidden>
+          <h2 id="blog-related-services-heading">Related services</h2>
+          <div class="blog-related-services__grid" id="blog-related-services-grid"></div>
+        </section>
+        <section class="blog-related" id="blog-related" hidden>
+          <h2 id="blog-related-articles-heading">Related articles</h2>
+          <div class="blog-grid" id="blog-related-grid"></div>
+        </section>
+      </div>
     </section>
   </main>
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden>

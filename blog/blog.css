@@ -526,16 +526,108 @@
   cursor: pointer;
 }
 
-.blog-related {
-  padding: 48px 0 64px;
+/* Article footer: CTA + related services + related articles (single background band) */
+.blog-article-end {
+  margin-top: 8px;
+  padding: 40px 0 72px;
   border-top: 1px solid #e8ecf4;
-  background: #f8f9fd;
+  background: linear-gradient(180deg, #fff 0%, #f4f7fb 18%, #f4f7fb 100%);
 }
 
+.blog-article-end .service-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.blog-article-cta {
+  margin: 0;
+  padding: 28px 32px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(11, 38, 64, 0.06);
+}
+
+.blog-article-cta p {
+  margin: 0 0 16px;
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.blog-related-services h2,
 .blog-related h2 {
   margin: 0 0 20px;
   color: var(--blog-ink);
   font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.blog-related-services__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.blog-related-service {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 22px 20px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.blog-related-service:hover {
+  border-color: rgba(106, 69, 227, 0.35);
+  box-shadow: 0 14px 36px rgba(106, 69, 227, 0.1);
+  transform: translateY(-2px);
+}
+
+.blog-related-service h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--blog-ink);
+}
+
+.blog-related-service p {
+  margin: 0;
+  flex: 1;
+  color: #64748b;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.blog-related-service__link {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blog-accent, #6a45e3);
+}
+
+.blog-related {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.blog-related .blog-grid {
+  gap: 20px;
+}
+
+@media (max-width: 960px) {
+  .blog-related-services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-article-cta {
+    padding: 22px 20px;
+  }
 }
 
 @media (max-width: 960px) {

@@ -6,6 +6,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
+const { renderRelatedServicesSection } = require('../lib/blog-related-services');
 const {
   gtmHead,
   gtmBody,
@@ -210,12 +211,23 @@ function renderArticlePage(post, bodyHtml, related) {
   const title = `${post.seoTitle || post.title} | Premium Developers Blog`;
   const description = post.metaDescription || post.excerpt || post.title;
   const img = resolveAssetUrl(post.featuredImage?.url || '/assets/images/og/premium-developers-og.jpg');
-  const relatedHtml = related.length
-    ? `<section class="blog-related service-wrap">
-      <h2>Related articles</h2>
+  const relatedArticlesHtml = related.length
+    ? `<section class="blog-related" aria-labelledby="blog-related-articles-heading">
+      <h2 id="blog-related-articles-heading">Related articles</h2>
       <div class="blog-grid">${related.map(renderArchiveCard).join('')}</div>
     </section>`
     : '';
+
+  const articleEndHtml = `<section class="blog-article-end" aria-label="Next steps">
+    <div class="service-wrap">
+      <div class="blog-article-cta">
+        <p>Need WordPress, Elementor, or WooCommerce help for a project like this?</p>
+        <a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss a project with us <span aria-hidden="true">→</span></a>
+      </div>
+      ${renderRelatedServicesSection(post)}
+      ${relatedArticlesHtml}
+    </div>
+  </section>`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -249,10 +261,7 @@ ${siteChromeNav({ active: 'blog' })}
   <div class="service-wrap blog-article-layout">
     <div class="blog-article-content">${bodyHtml}</div>
   </div>
-  <div class="service-wrap">
-    <p style="margin-top:28px"><a class="btn btn--primary" href="/contact?reason=Project%20discussion">Discuss a project with us <span aria-hidden="true">→</span></a></p>
-  </div>
-  ${relatedHtml}
+  ${articleEndHtml}
 </main>
 ${siteChromeFooter()}
 <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden><svg class="ico" aria-hidden="true"><use href="#i-arrow" /></svg></button>
