@@ -82,11 +82,21 @@
   margin: 14px 0 0;
 }
 
-.service-inline-cta a {
+.service-inline-cta a:not(.btn) {
   color: var(--purple, #6a45e3);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.service-inline-cta a.btn {
+  text-decoration: none;
+}
+
+.service-inline-cta a.btn--primary,
+.service-inline-cta a.btn--primary:hover,
+.service-inline-cta a.btn--primary:focus-visible {
+  color: #fff;
 }
 
 .service-actions .btn--ghost.pd-lead-cta,
