@@ -185,6 +185,14 @@
     {
       "source": "/blog/",
       "destination": "/blog/index.html"
+    },
+    {
+      "source": "/sitemap",
+      "destination": "/sitemap/index.html"
+    },
+    {
+      "source": "/sitemap/",
+      "destination": "/sitemap/index.html"
     }
   ]
 }

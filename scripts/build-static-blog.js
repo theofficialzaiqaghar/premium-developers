@@ -367,19 +367,7 @@ async function main() {
     console.log('Wrote', path.relative(root, path.join(dir, 'index.html')));
   }
 
-  const lastmods = posts.map((p) => toSitemapDate(p.publishedAt));
-  const urlEntries = [
-    `  <url><loc>${SITE}/blog/</loc><lastmod>${lastmods[0]}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
-    ...posts.map(
-      (p, i) =>
-        `  <url><loc>${SITE}${articleUrl(p.slug)}</loc><lastmod>${lastmods[i]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`
-    )
-  ];
-  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries.join(
-    '\n'
-  )}\n</urlset>\n`;
-  fs.writeFileSync(sitemapBlogPath, sitemapXml, 'utf8');
-  console.log('Wrote', path.relative(root, sitemapBlogPath));
+  require('./build-sitemap');
 
   console.log(`Static blog: ${posts.length} articles.`);
 }
