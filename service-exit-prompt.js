@@ -36,7 +36,20 @@
   function contactHref() {
     const profile = window.PD_getServiceProfile?.();
     const reason = profile?.contactReason || 'Project%20discussion';
-    return `/contact?reason=${reason}`;
+    if (typeof window.PD_buildContactUrl === 'function') {
+      return window.PD_buildContactUrl(reason);
+    }
+    return `/contact?reason=${reason}#contact-form`;
+  }
+
+  function closePrompt() {
+    if (!dialog?.open) return;
+    dialog.classList.add('pd-service-exit-dialog--closing');
+    window.setTimeout(() => {
+      dialog.close();
+      dialog.classList.remove('pd-service-exit-dialog--closing');
+      document.body.classList.remove('pd-service-exit-open');
+    }, 220);
   }
 
   function openPrompt() {
@@ -54,26 +67,35 @@
       dialog.className = 'pd-service-exit-dialog';
       dialog.setAttribute('aria-labelledby', 'pd-service-exit-title');
       dialog.innerHTML = `
-        <div class="pd-service-exit" style="position:relative">
-          <button type="button" class="pd-service-exit__close" aria-label="Close">&times;</button>
-          <p class="pd-service-exit__eyebrow">Before you go…</p>
+        <div class="pd-service-exit">
+          <div class="pd-service-exit__accent" aria-hidden="true"></div>
+          <header class="pd-service-exit__head">
+            <div class="pd-service-exit__brand">
+              <img class="pd-service-exit__mark" src="/logo.svg" alt="" width="40" height="40" decoding="async">
+              <span class="pd-service-exit__brand-text">Premium Developers</span>
+            </div>
+            <button type="button" class="pd-service-exit__close" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </header>
+          <p class="pd-service-exit__eyebrow">Still exploring?</p>
           <h2 class="pd-service-exit__title" id="pd-service-exit-title">Have a website project in mind?</h2>
-          <p class="pd-service-exit__text">Let's discuss what's possible—we reply with clear scope and next steps.</p>
+          <p class="pd-service-exit__text">Tell us what you need—we reply with honest scope and practical next steps. No pressure.</p>
           <div class="pd-service-exit__actions">
-            <a class="btn btn--primary pd-service-exit__primary" href="${contactHref()}">Talk to Our Team</a>
-            <button type="button" class="btn btn--ghost pd-service-exit__ghost">Stay on page</button>
+            <a class="btn btn--primary pd-service-exit__primary" href="${contactHref()}">Talk to our team</a>
+            <button type="button" class="pd-service-exit__later">Continue browsing</button>
           </div>
         </div>`;
       document.body.appendChild(dialog);
 
-      dialog.querySelector('.pd-service-exit__close')?.addEventListener('click', () => dialog.close());
-      dialog.querySelector('.pd-service-exit__ghost')?.addEventListener('click', () => dialog.close());
+      dialog.querySelector('.pd-service-exit__close')?.addEventListener('click', closePrompt);
+      dialog.querySelector('.pd-service-exit__later')?.addEventListener('click', closePrompt);
       dialog.addEventListener('click', (e) => {
-        if (e.target === dialog) dialog.close();
+        if (e.target === dialog) closePrompt();
       });
       dialog.addEventListener('cancel', (e) => {
         e.preventDefault();
-        dialog.close();
+        closePrompt();
       });
       dialog.querySelector('.pd-service-exit__primary')?.addEventListener('click', () => {
         track('service_exit_prompt_click', { page_path: window.location.pathname });
@@ -85,6 +107,7 @@
       { page_path: window.location.pathname },
       `service_exit_prompt_view:${window.location.pathname}`
     );
+    document.body.classList.add('pd-service-exit-open');
     dialog.showModal();
   }
 

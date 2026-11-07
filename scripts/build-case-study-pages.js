@@ -129,7 +129,7 @@ ${siteChromeNav({ active: 'portfolio' })}
         </ul>
         <div class="case-study-hero__actions">
           <a class="btn btn--primary" href="${esc(cs.liveUrl)}" target="_blank" rel="noopener noreferrer">View live website <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="/contact?reason=${cs.contactReason}">Discuss a similar project</a>
+          <a class="btn btn--ghost" href="/contact?reason=${cs.contactReason}#contact-form">Discuss a similar project</a>
         </div>
       </div>
       <figure class="case-study-hero__media"><img src="${cs.image}" alt="${esc(cs.imageAlt)}" width="1200" height="800" loading="eager" fetchpriority="high" decoding="async"></figure>
@@ -202,7 +202,7 @@ ${serviceLinks}
           <h2 id="case-study-similar-title">Want a website with similar quality?</h2>
           <p>${esc(cs.ctaBody)}</p>
         </div>
-        <a class="btn btn--primary" href="/contact?reason=${cs.contactReason}">Discuss a Similar Project <span aria-hidden="true">→</span></a>
+        <a class="btn btn--primary" href="/contact?reason=${cs.contactReason}#contact-form">Discuss a Similar Project <span aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>

@@ -430,13 +430,52 @@
     });
   }
 
+  function scrollContactFormIntoView() {
+    const target =
+      document.getElementById('contact-form') ||
+      document.querySelector('.contact-form-card');
+    if (!target) return;
+
+    const nav = document.getElementById('nav');
+    const offset = (nav?.offsetHeight || 76) + 20;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    });
+
+    window.setTimeout(() => {
+      const focusable = target.querySelector(
+        'input:not([type="hidden"]):not([tabindex="-1"]), select, textarea, button'
+      );
+      if (focusable instanceof HTMLElement) {
+        focusable.focus({ preventScroll: true });
+      }
+      target.classList.add('contact-form-card--focused');
+      window.setTimeout(() => target.classList.remove('contact-form-card--focused'), 2400);
+    }, 450);
+  }
+
   function initContactPageForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
     const track = window.pdTrack || (() => {});
-    const urlReason = new URLSearchParams(window.location.search).get('reason');
+    const params = new URLSearchParams(window.location.search);
+    const urlReason = params.get('reason');
     track('contact_page_view', { inquiry_reason: urlReason || '(not set)' });
     initLeadForm(form, { formName: 'contact', submitLabel: 'Send message' });
+
+    const shouldScroll =
+      window.location.hash === '#contact-form' || Boolean(urlReason);
+    if (!shouldScroll) return;
+
+    const runScroll = () => requestAnimationFrame(() => scrollContactFormIntoView());
+    if (document.readyState === 'complete') {
+      runScroll();
+    } else {
+      window.addEventListener('load', runScroll, { once: true });
+    }
   }
 
   function buildHomeFormMarkup(prefix) {

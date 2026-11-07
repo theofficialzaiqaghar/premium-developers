@@ -91,78 +91,187 @@
   background: rgba(11, 38, 64, 0.14);
 }
 
-/* Exit prompt (engaged desktop visitors, service pages) */
+/* Exit prompt — bottom sheet near FAB, light backdrop */
 .pd-service-exit-dialog {
-  max-width: 420px;
-  width: min(420px, calc(100vw - 32px));
-  margin: auto;
+  position: fixed;
+  inset: auto clamp(12px, 3vw, 24px) calc(88px + env(safe-area-inset-bottom, 0px)) auto;
+  width: min(400px, calc(100vw - 24px));
+  max-width: 400px;
+  margin: 0;
   padding: 0;
-  border: none;
-  border-radius: 16px;
-  background: transparent;
-  box-shadow: 0 24px 60px rgba(11, 38, 64, 0.22);
-}
-
-.pd-service-exit-dialog::backdrop {
-  background: rgba(11, 38, 64, 0.45);
-}
-
-.pd-service-exit {
-  padding: 24px 22px 20px;
-  border-radius: 16px;
+  border: 1px solid rgba(106, 69, 227, 0.14);
+  border-radius: 20px;
   background: #fff;
+  color: #0b2640;
+  box-shadow:
+    0 22px 48px rgba(11, 38, 64, 0.14),
+    0 2px 8px rgba(11, 38, 64, 0.06);
+  overflow: hidden;
   font-family: var(--font, 'Plus Jakarta Sans', system-ui, sans-serif);
 }
 
-.pd-service-exit__eyebrow {
-  margin: 0 0 6px;
-  font-size: 0.78rem;
+.pd-service-exit-dialog:not([open]) {
+  display: none;
+}
+
+.pd-service-exit-dialog[open] {
+  animation: pd-service-exit-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.pd-service-exit-dialog--closing[open] {
+  animation: pd-service-exit-out 0.22s ease-in both;
+}
+
+.pd-service-exit-dialog::backdrop {
+  background: rgba(248, 250, 252, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.pd-service-exit {
+  position: relative;
+  padding: 18px 20px 20px;
+}
+
+.pd-service-exit__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6a45e3, #25d366 55%, #6a45e3);
+  opacity: 0.85;
+}
+
+.pd-service-exit__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.pd-service-exit__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pd-service-exit__mark {
+  flex-shrink: 0;
+  border-radius: 10px;
+}
+
+.pd-service-exit__brand-text {
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: #0b2640;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pd-service-exit__close {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e8ecf4;
+  border-radius: 999px;
+  background: #fff;
+  color: #64748b;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.pd-service-exit__close:hover {
+  border-color: rgba(106, 69, 227, 0.35);
+  color: #0b2640;
+}
+
+.pd-service-exit__eyebrow {
+  margin: 0 0 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: #6a45e3;
 }
 
 .pd-service-exit__title {
   margin: 0 0 8px;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: #0b2640;
+  line-height: 1.25;
 }
 
 .pd-service-exit__text {
-  margin: 0 0 18px;
-  color: #475569;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  margin: 0 0 16px;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.55;
 }
 
 .pd-service-exit__actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
 }
 
 .pd-service-exit__primary {
-  flex: 1;
-  min-width: 140px;
+  width: 100%;
+  justify-content: center;
   text-align: center;
 }
 
-.pd-service-exit__ghost {
-  flex: 1;
-  min-width: 100px;
-}
-
-.pd-service-exit__close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
+.pd-service-exit__later {
+  width: 100%;
   border: none;
   background: transparent;
-  color: #94a3b8;
-  font-size: 1.4rem;
+  color: #64748b;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  line-height: 1;
+  padding: 6px 0 2px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pd-service-exit__later:hover {
+  color: #0b2640;
+}
+
+@keyframes pd-service-exit-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pd-service-exit-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+body.pd-service-exit-open .pd-whatsapp-widget {
+  z-index: 45;
+}
+
+body:has(.pd-service-scroll-cta.is-visible) .pd-service-exit-dialog[open] {
+  inset-block-end: calc(132px + env(safe-area-inset-bottom, 0px));
 }
 
 /* Case study CTA reveal */

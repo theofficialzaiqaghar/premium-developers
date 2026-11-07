@@ -1,4 +1,9 @@
 (() => {
+  window.PD_buildContactUrl = function buildContactUrl(reasonToken) {
+    const token = reasonToken || 'Project%20discussion';
+    return `/contact?reason=${token}#contact-form`;
+  };
+
   const SCROLL_BAR_THRESHOLD = 0.6;
   const ENGAGE_SCROLL = 0.25;
   const ENGAGE_MS = 15000;
@@ -84,7 +89,7 @@
     bar.setAttribute('aria-label', 'Project discussion prompt');
 
     const contactReason = profile.contactReason || 'Project%20discussion';
-    const href = `/contact?reason=${contactReason}`;
+    const href = window.PD_buildContactUrl(contactReason);
 
     bar.innerHTML = `
       <div class="pd-service-scroll-cta__inner">
