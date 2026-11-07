@@ -1,12 +1,17 @@
 (function () {
   const SITE_ORIGIN = window.PD_BLOG_CONFIG?.siteOrigin || 'https://www.premiumdevelopers.co';
   const DEFAULT_OG = `${SITE_ORIGIN}/assets/images/og/premium-developers-og.jpg`;
+  const PAGE_SIZE = 6;
 
   const search = document.getElementById('blog-search');
   const grid = document.getElementById('blog-grid');
   const featured = document.getElementById('blog-featured');
   const fallbackNote = document.getElementById('blog-static-fallback-note');
+  const pagination = document.getElementById('blog-pagination');
   if (!grid) return;
+
+  const mode = document.body.getAttribute('data-blog-archive');
+  const isStatic = mode === 'static' || mode === 'server';
 
   function escapeHtml(value) {
     return String(value ?? '')
@@ -14,97 +19,6 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
-  }
-
-  function resolveFeaturedImageSrc(article) {
-    const url = String(article?.featuredImage?.url || '').trim();
-    if (!url) return DEFAULT_OG;
-    if (/^https?:\/\//i.test(url)) return url;
-    if (url.startsWith('/')) return `${SITE_ORIGIN}${url}`;
-    return `${SITE_ORIGIN}/${url.replace(/^\.\//, '')}`;
-  }
-
-  function featuredAlt(article) {
-    const alt = article?.featuredImage?.alt;
-    if (alt) return alt;
-    return article?.title ? `${article.title} — Premium Developers` : 'Premium Developers blog article';
-  }
-
-  function formatDate(iso) {
-    if (!iso) return '';
-    try {
-      return new Intl.DateTimeFormat('en-GB', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      }).format(new Date(iso));
-    } catch {
-      return '';
-    }
-  }
-
-  function categoryTags(slugs) {
-    if (!slugs?.length) return '';
-    const chips = slugs
-      .slice(0, 2)
-      .map((s) => `<span class="blog-card__cat">${escapeHtml(s.replace(/-/g, ' '))}</span>`)
-      .join('');
-    return `<div class="blog-card__cats">${chips}</div>`;
-  }
-
-  function articleUrl(slug) {
-    return `${SITE_ORIGIN}/blog/${encodeURIComponent(slug)}/`;
-  }
-
-  function renderArchiveCard(article) {
-    const url = articleUrl(article.slug);
-    const imgSrc = resolveFeaturedImageSrc(article);
-    const title = escapeHtml(article.title);
-    const excerpt = escapeHtml(article.excerpt || '');
-    const author = escapeHtml(article.author || 'Premium Developers');
-    const date = escapeHtml(formatDate(article.publishedAt));
-    const slugAttr = escapeHtml(article.slug || '');
-    const titleAttr = escapeHtml((article.title || '').toLowerCase());
-    return `<a class="blog-card" href="${url}" data-title="${titleAttr}" data-slug="${slugAttr}">
-      <figure class="blog-card__thumb"><img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(featuredAlt(article))}" loading="lazy" decoding="async"></figure>
-      <div class="blog-card__body">
-        ${categoryTags(article.categorySlugs)}
-        <h3>${title}</h3>
-        <p>${excerpt}</p>
-        <div class="blog-meta"><span>${author}</span><span>${date}</span></div>
-      </div>
-    </a>`;
-  }
-
-  function renderFeaturedCard(article) {
-    const url = articleUrl(article.slug);
-    const imgSrc = resolveFeaturedImageSrc(article);
-    return `<a class="blog-featured__card" href="${url}">
-      <figure class="blog-featured__media"><img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(featuredAlt(article))}" loading="eager" fetchpriority="high" decoding="async"></figure>
-      <div class="blog-featured__body">
-        <span class="blog-badge">Featured article</span>
-        <h2>${escapeHtml(article.title)}</h2>
-        <p>${escapeHtml(article.excerpt || '')}</p>
-        <div class="blog-meta"><span>${escapeHtml(article.author || 'Premium Developers')}</span><span>${escapeHtml(formatDate(article.publishedAt))}</span></div>
-      </div>
-    </a>`;
-  }
-
-  function renderArchive(items) {
-    if (!items.length) {
-      grid.innerHTML =
-        '<div class="blog-empty"><h2>No published articles yet</h2><p>Check back soon for WordPress, WooCommerce, Elementor, and web development insights from Premium Developers.</p></div>';
-      if (featured) featured.hidden = true;
-      return;
-    }
-
-    const [first, ...rest] = items;
-    if (featured) {
-      featured.hidden = false;
-      featured.innerHTML = renderFeaturedCard(first);
-    }
-    grid.innerHTML = rest.map(renderArchiveCard).join('');
-    if (fallbackNote) fallbackNote.hidden = true;
   }
 
   function cards() {
@@ -119,7 +33,7 @@
       const title = card.getAttribute('data-title') || card.textContent.toLowerCase();
       const slug = card.getAttribute('data-slug') || '';
       const match = !q || title.includes(q) || slug.includes(q);
-      card.hidden = !match;
+      card.dataset.filtered = match ? '1' : '0';
       if (match) visible += 1;
     }
     if (featured) {
@@ -130,22 +44,69 @@
       }
     }
     grid.dataset.empty = visible === 0 && q ? 'true' : 'false';
+    if (isStatic) {
+      currentPage = 1;
+      applyPagination();
+    }
   }
 
-  function archiveErrorMessage(status) {
-    if (status === 503) {
-      return '<div class="blog-empty"><h2>Blog is temporarily unavailable</h2><p>The blog database is not connected yet. On Vercel, add <strong>UPSTASH_REDIS_REST_URL</strong> and <strong>UPSTASH_REDIS_REST_TOKEN</strong> in Project → Settings → Environment Variables, then redeploy.</p></div>';
-    }
-    if (status === 404) {
-      return '<div class="blog-empty"><h2>Blog API not found</h2><p>Open the blog at <a href="/blog/">/blog/</a> on your deployed site (not the <code>blog/index.html</code> file directly). Redeploy the latest code if this persists.</p></div>';
-    }
-    return '<div class="blog-empty"><h2>Could not load articles</h2><p>Use <a href="/blog/">/blog/</a> on your live site, or run <code>vercel dev</code> locally (plain Live Server cannot load the CMS).</p></div>';
+  let currentPage = 1;
+
+  function visibleCards() {
+    return cards().filter((c) => c.dataset.filtered !== '0');
   }
+
+  function applyPagination() {
+    if (!isStatic || !pagination) return;
+    const list = visibleCards();
+    const size = Number(pagination.getAttribute('data-page-size')) || PAGE_SIZE;
+    const totalPages = Math.max(1, Math.ceil(list.length / size));
+
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    list.forEach((card, index) => {
+      const page = Math.floor(index / size) + 1;
+      card.hidden = page !== currentPage;
+    });
+
+    if (totalPages <= 1) {
+      pagination.innerHTML = '';
+      pagination.hidden = true;
+      return;
+    }
+
+    pagination.hidden = false;
+    let html = '';
+    if (currentPage > 1) {
+      html += `<button type="button" class="blog-pagination__btn" data-page="${currentPage - 1}">Previous</button>`;
+    }
+    html += '<span class="blog-pagination__pages">';
+    for (let p = 1; p <= totalPages; p += 1) {
+      const active = p === currentPage ? ' is-active' : '';
+      html += `<button type="button" class="blog-pagination__num${active}" data-page="${p}" aria-current="${p === currentPage ? 'page' : 'false'}">${p}</button>`;
+    }
+    html += '</span>';
+    if (currentPage < totalPages) {
+      html += `<button type="button" class="blog-pagination__btn" data-page="${currentPage + 1}">Next</button>`;
+    }
+    pagination.innerHTML = html;
+  }
+
+  pagination?.addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-page]');
+    if (!btn) return;
+    currentPage = Number(btn.getAttribute('data-page')) || 1;
+    applyPagination();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 
   async function hydrateIfEmpty() {
-    const mode = document.body.getAttribute('data-blog-archive');
-    if (mode === 'static' || mode === 'server') {
+    if (isStatic) {
       if (fallbackNote) fallbackNote.hidden = true;
+      cards().forEach((c) => {
+        c.dataset.filtered = '1';
+      });
+      applyPagination();
       return;
     }
     if (mode !== 'client') {
@@ -170,9 +131,16 @@
       status = res.status;
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      renderArchive(Array.isArray(data.items) ? data.items : []);
+      const items = Array.isArray(data.items) ? data.items : [];
+      if (!items.length) {
+        grid.innerHTML =
+          '<div class="blog-empty"><h2>No published articles yet</h2><p>Check back soon for WordPress, WooCommerce, Elementor, and web development insights from Premium Developers.</p></div>';
+      }
     } catch {
-      grid.innerHTML = archiveErrorMessage(status);
+      grid.innerHTML =
+        status === 404
+          ? '<div class="blog-empty"><h2>Articles could not be loaded</h2><p>This site uses a static blog. Redeploy the latest build or open <a href="/blog/">/blog/</a> on the live domain.</p></div>'
+          : '<div class="blog-empty"><h2>Could not load articles</h2><p>Open <a href="/blog/">/blog/</a> on your live site.</p></div>';
     } finally {
       grid.removeAttribute('aria-busy');
       if (fallbackNote) fallbackNote.hidden = true;

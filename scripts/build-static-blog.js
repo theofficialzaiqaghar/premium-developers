@@ -16,6 +16,8 @@ const {
 const root = path.join(__dirname, '..');
 const manifestPath = path.join(root, 'content', 'blog-seo-pack', 'manifest.json');
 const backupPath = path.join(root, 'content', 'blog-seo-pack', 'seo-pack-10-draft.backup.json');
+const sitemapBlogPath = path.join(root, 'sitemap-blog.xml');
+const ARCHIVE_PAGE_SIZE = 6;
 const bodiesDir = path.join(root, 'content', 'blog-seo-pack', 'bodies');
 const blogIndexPath = path.join(root, 'blog', 'index.html');
 const SITE = 'https://www.premiumdevelopers.co';
@@ -67,9 +69,29 @@ function articleUrl(slug) {
 const FALLBACK_IMG = `${SITE}/assets/images/og/premium-developers-og.jpg`;
 
 /** Responsive Unsplash URLs; passthrough for other hosts. */
+function resolveAssetUrl(url) {
+  const u = String(url || '').trim();
+  if (!u) return FALLBACK_IMG;
+  if (/^https?:\/\//i.test(u)) return u;
+  if (u.startsWith('/')) return `${SITE}${u}`;
+  return `${SITE}/${u.replace(/^\.\//, '')}`;
+}
+
 function buildResponsiveImage(rawUrl, { variant = 'card' } = {}) {
   const fallback = FALLBACK_IMG;
   const url = String(rawUrl || '').trim() || fallback;
+  if (url.startsWith('/') || (!url.includes('images.unsplash.com') && !/^https?:\/\//i.test(url))) {
+    const src = resolveAssetUrl(url);
+    const w = variant === 'hero' ? 1200 : 640;
+    const h = variant === 'hero' ? 630 : 400;
+    return {
+      src,
+      srcset: '',
+      sizes: variant === 'hero' ? '100vw' : '(max-width: 640px) 100vw, (max-width: 960px) 50vw, 320px',
+      width: w,
+      height: h
+    };
+  }
   if (!url.includes('images.unsplash.com')) {
     const w = variant === 'hero' ? 1200 : 640;
     const h = variant === 'hero' ? 630 : 400;
@@ -187,7 +209,7 @@ function renderArticlePage(post, bodyHtml, related) {
   const canonical = `${SITE}${articleUrl(post.slug)}`;
   const title = `${post.seoTitle || post.title} | Premium Developers Blog`;
   const description = post.metaDescription || post.excerpt || post.title;
-  const img = post.featuredImage?.url || `${SITE}/assets/images/og/premium-developers-og.jpg`;
+  const img = resolveAssetUrl(post.featuredImage?.url || '/assets/images/og/premium-developers-og.jpg');
   const relatedHtml = related.length
     ? `<section class="blog-related service-wrap">
       <h2>Related articles</h2>
@@ -240,8 +262,12 @@ ${scriptsBlock()}
 }
 
 async function verifyImageUrl(url) {
+  const u = String(url || '').trim();
+  if (!u || u.startsWith('/') || (!/^https?:\/\//i.test(u) && !u.includes('unsplash'))) {
+    return true;
+  }
   try {
-    const res = await fetch(url.split('?')[0] + '?auto=format&fit=crop&w=400&q=80', { method: 'HEAD' });
+    const res = await fetch(u.split('?')[0] + '?auto=format&fit=crop&w=400&q=80', { method: 'HEAD' });
     return res.ok;
   } catch {
     return false;
@@ -250,16 +276,24 @@ async function verifyImageUrl(url) {
 
 async function main() {
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  const backup = JSON.parse(fs.readFileSync(backupPath, 'utf8'));
-  const bodyBySlug = new Map(backup.articles.map((a) => [a.slug, a.bodyHtml]));
+  let backupArticles = [];
+  if (fs.existsSync(backupPath)) {
+    try {
+      backupArticles = JSON.parse(fs.readFileSync(backupPath, 'utf8')).articles || [];
+    } catch {
+      backupArticles = [];
+    }
+  }
+  const bodyBySlug = new Map(backupArticles.map((a) => [a.slug, a.bodyHtml]));
 
   const posts = manifest
     .sort((a, b) => a.publishPriority - b.publishPriority)
     .map((entry, i) => ({
       ...entry,
-      excerpt: backup.articles.find((a) => a.slug === entry.slug)?.excerpt || entry.metaDescription,
+      excerpt: entry.metaDescription,
       publishedAt: PUBLISHED_DATES[i] || PUBLISHED_DATES[0],
-      bodyHtml: bodyBySlug.get(entry.slug) || fs.readFileSync(path.join(bodiesDir, entry.bodyFile), 'utf8')
+      bodyHtml:
+        bodyBySlug.get(entry.slug) || fs.readFileSync(path.join(bodiesDir, entry.bodyFile), 'utf8')
     }));
 
   for (const post of posts) {
@@ -276,6 +310,7 @@ async function main() {
   const [featured, ...rest] = posts;
   const featuredHtml = `<div id="blog-featured" class="blog-featured">${renderFeaturedCard(featured)}</div>`;
   const gridHtml = rest.map(renderArchiveCard).join('\n      ');
+  const paginationHtml = `<nav class="blog-pagination" id="blog-pagination" aria-label="Blog pages" data-page-size="${ARCHIVE_PAGE_SIZE}"></nav>`;
 
   let indexHtml = fs.readFileSync(blogIndexPath, 'utf8');
   indexHtml = indexHtml.replace(
@@ -287,7 +322,8 @@ async function main() {
     `${featuredHtml}
       <div id="blog-grid" class="blog-grid" aria-live="polite">
       ${gridHtml}
-      </div>`
+      </div>
+      ${paginationHtml}`
   );
   indexHtml = indexHtml.replace(
     /<p id="blog-static-fallback-note"[\s\S]*?<\/p>\s*/i,
@@ -308,16 +344,52 @@ async function main() {
   fs.writeFileSync(blogIndexPath, indexHtml, 'utf8');
   console.log('Updated', path.relative(root, blogIndexPath));
 
+  const allowedSlugs = new Set(posts.map((p) => p.slug));
+  const blogRoot = path.join(root, 'blog');
+  for (const name of fs.readdirSync(blogRoot, { withFileTypes: true })) {
+    if (!name.isDirectory()) continue;
+    if (['node_modules'].includes(name.name)) continue;
+    if (!allowedSlugs.has(name.name)) {
+      fs.rmSync(path.join(blogRoot, name.name), { recursive: true, force: true });
+      console.log('Removed legacy blog folder', name.name);
+    }
+  }
+
   for (const post of posts) {
     const dir = path.join(root, 'blog', post.slug);
     fs.mkdirSync(dir, { recursive: true });
-    const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+    const related = posts
+      .filter((p) => p.slug !== post.slug)
+      .sort((a, b) => a.publishPriority - b.publishPriority)
+      .slice(0, 3);
     const html = renderArticlePage(post, post.bodyHtml, related);
     fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
     console.log('Wrote', path.relative(root, path.join(dir, 'index.html')));
   }
 
+  const lastmods = posts.map((p) => toSitemapDate(p.publishedAt));
+  const urlEntries = [
+    `  <url><loc>${SITE}/blog/</loc><lastmod>${lastmods[0]}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`,
+    ...posts.map(
+      (p, i) =>
+        `  <url><loc>${SITE}${articleUrl(p.slug)}</loc><lastmod>${lastmods[i]}</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>`
+    )
+  ];
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlEntries.join(
+    '\n'
+  )}\n</urlset>\n`;
+  fs.writeFileSync(sitemapBlogPath, sitemapXml, 'utf8');
+  console.log('Wrote', path.relative(root, sitemapBlogPath));
+
   console.log(`Static blog: ${posts.length} articles.`);
+}
+
+function toSitemapDate(iso) {
+  try {
+    return new Date(iso).toISOString().slice(0, 10);
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
 }
 
 main().catch((err) => {

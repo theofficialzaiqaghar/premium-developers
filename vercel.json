@@ -35,6 +35,106 @@
       "source": "/blog/index.html",
       "destination": "/blog/",
       "permanent": true
+    },
+    {
+      "source": "/blog/speed-up-wordpress-website",
+      "destination": "/blog/how-to-speed-up-wordpress-website/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/speed-up-wordpress-website/",
+      "destination": "/blog/how-to-speed-up-wordpress-website/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-vs-shopify",
+      "destination": "/blog/woocommerce-vs-shopify-uk/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-vs-shopify/",
+      "destination": "/blog/woocommerce-vs-shopify-uk/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-checkout-optimization",
+      "destination": "/blog/improve-woocommerce-checkout/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-checkout-optimization/",
+      "destination": "/blog/improve-woocommerce-checkout/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/wordpress-website-redesign-signs",
+      "destination": "/blog/signs-your-business-website-needs-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/wordpress-website-redesign-signs/",
+      "destination": "/blog/signs-your-business-website-needs-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/elementor-website-development-guide",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/elementor-website-development-guide/",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roofing-website-design-features",
+      "destination": "/blog/signs-your-business-website-needs-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/roofing-website-design-features/",
+      "destination": "/blog/signs-your-business-website-needs-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-website-development-cost",
+      "destination": "/blog/wordpress-website-cost-uk/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/woocommerce-website-development-cost/",
+      "destination": "/blog/wordpress-website-cost-uk/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hire-woocommerce-developer",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/hire-woocommerce-developer/",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/custom-woocommerce-development",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/custom-woocommerce-development/",
+      "destination": "/blog/woocommerce-website-development-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/small-business-website-design-guide",
+      "destination": "/blog/wordpress-vs-wix-small-business/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/small-business-website-design-guide/",
+      "destination": "/blog/wordpress-vs-wix-small-business/",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -77,10 +177,6 @@
     {
       "source": "/admin/blog/",
       "destination": "/admin/blog/index.html"
-    },
-    {
-      "source": "/sitemap-blog.xml",
-      "destination": "/api/sitemap-blog"
     },
     {
       "source": "/blog",
