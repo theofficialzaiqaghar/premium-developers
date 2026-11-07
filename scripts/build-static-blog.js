@@ -327,7 +327,7 @@ async function main() {
     '<body class="service-page blog-page" data-blog-archive="static">'
   );
   indexHtml = indexHtml.replace(
-    /<div id="blog-featured"[\s\S]*?<\/div>\s*<div id="blog-grid"[\s\S]*?<\/div>/,
+    /<div id="blog-featured"[\s\S]*?<nav class="blog-pagination" id="blog-pagination"[\s\S]*?<\/nav>/,
     `${featuredHtml}
       <div id="blog-grid" class="blog-grid" aria-live="polite">
       ${gridHtml}
