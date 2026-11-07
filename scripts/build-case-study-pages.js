@@ -105,6 +105,7 @@ ${JSON.stringify(jsonLd(cs), null, 2)}
 <link rel="stylesheet" href="/exit-intent.css">
 <link rel="stylesheet" href="/offer-popup.css">
 <link rel="stylesheet" href="/whatsapp-button.css">
+<link rel="stylesheet" href="/service-conversion.css">
 ${trackingStylesLink()}
 </head>
 <body class="service-page case-study-page">
@@ -195,7 +196,15 @@ ${serviceLinks}
       </aside>
     </div>
 
-    <section class="service-wrap"><div class="service-cta"><div><h2>${esc(cs.ctaHeadline)}</h2><p>${esc(cs.ctaBody)}</p></div><a class="btn btn--primary" href="/contact?reason=${cs.contactReason}">Contact Premium Developers <span aria-hidden="true">→</span></a></div></section>
+    <section class="service-wrap case-study-similar-cta" id="case-study-similar-cta" hidden aria-labelledby="case-study-similar-title">
+      <div class="service-cta">
+        <div>
+          <h2 id="case-study-similar-title">Want a website with similar quality?</h2>
+          <p>${esc(cs.ctaBody)}</p>
+        </div>
+        <a class="btn btn--primary" href="/contact?reason=${cs.contactReason}">Discuss a Similar Project <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
   </main>
   <button class="back-to-top" type="button" aria-label="Back to top" title="Back to top" hidden><span aria-hidden="true">↑</span></button>
 ${siteChromeFooter()}
@@ -203,6 +212,7 @@ ${siteChromeFooter()}
 <script src="/analytics.js"></script>
 ${trackingScriptsAfterAnalytics()}
 <script src="/whatsapp-config.js"></script>
+<script src="/service-conversion.js" defer></script>
 <script src="/whatsapp-button.js" defer></script>
 <script src="/exit-intent.js" data-frequency-days="30" defer></script>
 <script src="/offer-popup.js" defer></script>

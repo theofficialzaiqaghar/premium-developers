@@ -1,4 +1,9 @@
 (() => {
+  const path = window.location.pathname.replace(/\/$/, '');
+  if (/^\/services\/[^/]+\.html$/i.test(path) || path === '/services.html' || path === '/services') {
+    return;
+  }
+
   const track = window.pdTrack || (() => {});
   const script = document.currentScript;
   const frequencyDays = Math.max(1, Number(script?.dataset.frequencyDays) || 30);

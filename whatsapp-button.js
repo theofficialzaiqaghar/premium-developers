@@ -2,6 +2,7 @@
   if (document.querySelector('.pd-whatsapp-widget') || document.querySelector('.pd-whatsapp-fab')) return;
 
   const config = window.PD_WHATSAPP || {};
+  const conversion = window.PD_SERVICE_CONVERSION || {};
   const rawNumber = String(config.number || '').replace(/\D/g, '');
   if (!rawNumber) return;
 
@@ -9,11 +10,15 @@
   const trackOnce = window.pdTrackOnce || track;
 
   const TEASER_SESSION_KEY = 'pd_wa_service_teaser_seen';
-  const servicePageConfig = config.servicePage || {};
+
+  function serviceSlug() {
+    const path = window.location.pathname.replace(/\/$/, '');
+    const match = path.match(/^\/services\/([^/]+)\.html$/i);
+    return match ? match[1].toLowerCase() : '';
+  }
 
   function isServiceDetailPage() {
-    const path = window.location.pathname.replace(/\/$/, '');
-    return /^\/services\/[^/]+\.html$/i.test(path);
+    return Boolean(serviceSlug());
   }
 
   function isServicesHubPage() {
@@ -25,28 +30,34 @@
     return isServiceDetailPage() || isServicesHubPage();
   }
 
-  function serviceLabel() {
-    const fromBody = document.body.getAttribute('data-pd-primary-service');
-    if (fromBody) return fromBody.trim();
-    const h1 = document.querySelector('main h1, .service-hero h1, h1');
-    return h1?.textContent?.trim() || 'website project';
+  function getProfile() {
+    if (typeof window.PD_getServiceProfile === 'function') return window.PD_getServiceProfile();
+    if (isServicesHubPage()) return conversion.hub || null;
+    const slug = serviceSlug();
+    return conversion.bySlug?.[slug] || null;
   }
 
   function buildMessage() {
+    const profile = getProfile();
+    if (profile?.waMessage) return profile.waMessage;
     if (isServiceDetailPage()) {
-      const name = serviceLabel();
-      return (
-        config.serviceMessageTemplate?.replace('{service}', name) ||
-        `Hi Premium Developers, I'm viewing your ${name} service and would like to discuss my project on WhatsApp.`
-      );
+      const name =
+        document.body.getAttribute('data-pd-primary-service') ||
+        document.querySelector('main h1')?.textContent?.trim() ||
+        'your service';
+      return `Hi Premium Developers, I'm viewing your ${name} service and would like to discuss my project on WhatsApp.`;
     }
     if (isServicesHubPage()) {
-      return (
-        config.servicesHubMessage ||
-        "Hi Premium Developers, I'm browsing your services and would like to discuss which option fits my project on WhatsApp."
-      );
+      return conversion.hub?.waMessage || config.servicesHubMessage || config.defaultMessage;
     }
     return config.defaultMessage || "Hi Premium Developers, I'm interested in your website development services.";
+  }
+
+  function getTeaserCopy() {
+    const profile = getProfile();
+    if (profile?.waTeaser) return profile.waTeaser;
+    if (isServicesHubPage()) return config.servicesHubCtaText || "Questions about our services? Chat on WhatsApp";
+    return config.servicePage?.ctaText || 'Need this service? Chat on WhatsApp';
   }
 
   function waHref(message) {
@@ -60,11 +71,40 @@
   const enhanced = isServiceContext();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const teaserSeen = sessionStorage.getItem(TEASER_SESSION_KEY) === '1';
+  const needsScrollReveal = enhanced;
 
   const widget = document.createElement('div');
   widget.className = 'pd-whatsapp-widget';
   if (enhanced) widget.classList.add('pd-whatsapp-widget--service');
+  if (needsScrollReveal) widget.classList.add('pd-whatsapp-widget--await-scroll');
   widget.setAttribute('data-pd-whatsapp-root', 'true');
+
+  let teaserTimer = null;
+  let teaserAutoHideTimer = null;
+
+  const showWidgetAfterScroll = () => {
+    if (!needsScrollReveal || widget.classList.contains('pd-whatsapp-widget--scroll-ready')) return;
+    if (window.scrollY < 1) return;
+    widget.classList.remove('pd-whatsapp-widget--await-scroll');
+    widget.classList.add('pd-whatsapp-widget--scroll-ready');
+    scheduleTeaser();
+    window.removeEventListener('scroll', showWidgetAfterScroll);
+  };
+
+  const scheduleTeaser = () => {
+    if (!enhanced || teaserSeen || !teaserEl) return;
+    if (teaserTimer) return;
+    teaserTimer = window.setTimeout(() => {
+      if (sessionStorage.getItem(TEASER_SESSION_KEY) === '1') return;
+      widget.classList.add('pd-whatsapp-widget--teaser-live');
+      teaserAutoHideTimer = window.setTimeout(() => {
+        if (sessionStorage.getItem(TEASER_SESSION_KEY) !== '1') {
+          markTeaserSeen();
+          hideTeaser();
+        }
+      }, 14000);
+    }, 1200);
+  };
 
   if (enhanced && !reducedMotion) {
     const rings = document.createElement('div');
@@ -78,10 +118,28 @@
   let teaserEl = null;
   let dismissBtn = null;
 
+  const markTeaserSeen = () => {
+    try {
+      sessionStorage.setItem(TEASER_SESSION_KEY, '1');
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const hideTeaser = () => {
+    if (!teaserEl) return;
+    teaserEl.classList.add('pd-whatsapp-fab__teaser--hide');
+    widget.classList.remove('pd-whatsapp-widget--teaser-live');
+    window.clearTimeout(teaserAutoHideTimer);
+    window.setTimeout(() => {
+      teaserEl?.remove();
+      teaserEl = null;
+      dismissBtn = null;
+    }, 320);
+  };
+
   if (enhanced && !teaserSeen) {
-    const ctaCopy = isServicesHubPage()
-      ? config.servicesHubCtaText || servicePageConfig.ctaText
-      : servicePageConfig.ctaText || 'Need this service? Chat on WhatsApp';
+    const ctaCopy = getTeaserCopy();
 
     teaserEl = document.createElement('a');
     teaserEl.className = 'pd-whatsapp-fab__teaser';
@@ -98,31 +156,11 @@
     dismissBtn.innerHTML = '<span aria-hidden="true">×</span>';
     teaserEl.appendChild(dismissBtn);
 
-    const markTeaserSeen = () => {
-      try {
-        sessionStorage.setItem(TEASER_SESSION_KEY, '1');
-      } catch {
-        /* ignore */
-      }
-    };
-
-    const hideTeaser = () => {
-      if (!teaserEl) return;
-      teaserEl.classList.add('pd-whatsapp-fab__teaser--hide');
-      widget.classList.remove('pd-whatsapp-widget--teaser-live');
-      window.setTimeout(() => {
-        teaserEl?.remove();
-        teaserEl = null;
-        dismissBtn = null;
-      }, 320);
-    };
-
     dismissBtn.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
       markTeaserSeen();
       hideTeaser();
-      widget.classList.remove('pd-whatsapp-widget--teaser-live');
     });
 
     dismissBtn.addEventListener('pointerdown', (event) => event.stopPropagation());
@@ -138,17 +176,6 @@
     });
 
     widget.appendChild(teaserEl);
-
-    window.setTimeout(() => {
-      if (!teaserEl || sessionStorage.getItem(TEASER_SESSION_KEY) === '1') return;
-      widget.classList.add('pd-whatsapp-widget--teaser-live');
-      window.setTimeout(() => {
-        if (sessionStorage.getItem(TEASER_SESSION_KEY) !== '1') {
-          markTeaserSeen();
-          hideTeaser();
-        }
-      }, 14000);
-    }, 2800);
   }
 
   const link = document.createElement('a');
@@ -172,13 +199,8 @@
     </svg>`;
 
   link.addEventListener('click', () => {
-    if (teaserEl) {
-      try {
-        sessionStorage.setItem(TEASER_SESSION_KEY, '1');
-      } catch {
-        /* ignore */
-      }
-    }
+    markTeaserSeen();
+    hideTeaser();
     trackOnce(
       'click_whatsapp',
       {
@@ -192,6 +214,13 @@
 
   widget.appendChild(link);
   document.body.appendChild(widget);
+
+  if (needsScrollReveal) {
+    window.addEventListener('scroll', showWidgetAfterScroll, { passive: true });
+    showWidgetAfterScroll();
+  } else if (enhanced && !teaserSeen) {
+    scheduleTeaser();
+  }
 
   if (enhanced && !reducedMotion && !teaserSeen) {
     window.setTimeout(() => {
