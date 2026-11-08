@@ -267,6 +267,7 @@
 }
 
 .offer-form__field input,
+.offer-form__field select,
 .offer-form__field textarea {
   width: 100%;
   min-height: 46px;
@@ -276,6 +277,21 @@
   background: #fff;
   color: var(--ink, #0b1530);
   font: 400 .9rem/1.5 var(--font, system-ui, sans-serif);
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.offer-form__field select {
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6578' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.offer-form__field select:invalid {
+  color: #7b8798;
 }
 
 .offer-form__field textarea {
@@ -284,6 +300,7 @@
 }
 
 .offer-form__field input:focus-visible,
+.offer-form__field select:focus-visible,
 .offer-form__field textarea:focus-visible,
 .offer-form__services input:focus-visible,
 .offer-form__consent input:focus-visible {

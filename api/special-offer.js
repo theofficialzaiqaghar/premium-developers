@@ -13,6 +13,9 @@ const projectTimelines = new Set([
   'Flexible / not sure yet'
 ]);
 const availableServices = new Set([
+  'Website Development',
+  'Website Redesign',
+  'Elementor Development',
   'Website Speed & Performance Optimization',
   'SEO Optimization',
   'Content Writing',
