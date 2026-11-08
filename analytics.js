@@ -4,7 +4,7 @@
    * See docs/GOOGLE-ADS-READINESS.md for GTM / Google Ads setup.
    *
    * Primary Google Ads conversion (recommended trigger):
-   *   Event name: generate_lead
+   *   Event name: generate_lead (+ form_submit mirror for GA4/GTM setups that listen for form_submit)
    *   Fire only from successful /api/contact submissions (contact, service_inquiry, home_inquiry).
    *
    * Secondary / micro-conversions:
@@ -30,5 +30,42 @@
     if (window.__pdTrackedEvents.has(key)) return;
     window.__pdTrackedEvents.add(key);
     window.pdTrack(event, params);
+  };
+
+  /** Successful lead/contact submit: fires generate_lead and GA4-style form_submit once per dedupe key. */
+  window.pdTrackLeadSuccess = (params = {}, dedupeKey = '') => {
+    const formName = params.form_name || 'contact';
+    const key = dedupeKey || `lead:${formName}:${params.service_name || 'general'}`;
+    const payload = {
+      lead_outcome: 'success',
+      ...params
+    };
+    window.pdTrackOnce('generate_lead', payload, `generate_lead:${key}`);
+    window.pdTrackOnce(
+      'form_submit',
+      {
+        ...payload,
+        form_destination: params.form_destination || ''
+      },
+      `form_submit:${key}`
+    );
+  };
+
+  /** Any successful form (offer, exit, etc.): form_submit + optional custom event name. */
+  window.pdTrackFormSuccess = (customEvent, params = {}, dedupeKey = '') => {
+    const formName = params.form_name || 'unknown';
+    const key = dedupeKey || `form:${formName}`;
+    const payload = { lead_outcome: 'success', ...params };
+    if (customEvent) {
+      window.pdTrackOnce(customEvent, payload, `${customEvent}:${key}`);
+    }
+    window.pdTrackOnce(
+      'form_submit',
+      {
+        ...payload,
+        form_destination: params.form_destination || ''
+      },
+      `form_submit:${key}`
+    );
   };
 })();

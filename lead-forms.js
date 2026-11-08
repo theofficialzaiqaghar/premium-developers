@@ -145,6 +145,11 @@
     const timelineOptionalLabel = form.querySelector('#contact-timeline-optional');
     const submitStartedAt = Date.now();
     let submitting = false;
+    let formStartTracked = false;
+    const trackLeadSuccess = window.pdTrackLeadSuccess || ((_, p, k) => {
+      const trackO = window.pdTrackOnce || window.pdTrack || (() => {});
+      trackO('generate_lead', p, k ? `generate_lead:${k}` : '');
+    });
     const sourceInput = form.querySelector('input[name="sourcePage"]');
     if (sourceInput) sourceInput.value = window.location.pathname + window.location.search;
 
@@ -305,6 +310,24 @@
 
     updateProjectDetails();
 
+    form.addEventListener(
+      'focusin',
+      () => {
+        if (formStartTracked) return;
+        formStartTracked = true;
+        trackOnce(
+          'form_start',
+          {
+            form_name: formName,
+            form_id: form.id || '',
+            source_page: cleanSource(form.querySelector('input[name="sourcePage"]')?.value || window.location.pathname)
+          },
+          `form_start:${formName}:${form.id || 'form'}`
+        );
+      },
+      true
+    );
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       if (submitting) return;
@@ -382,11 +405,12 @@
         }
 
         const selectedServices = formData.getAll('services');
-        const conversionKey = `generate_lead:${formName}:${primaryService || selectedServices[0] || 'general'}`;
-        trackOnce(
-          'generate_lead',
+        const conversionKey = `${formName}:${primaryService || selectedServices[0] || 'general'}`;
+        trackLeadSuccess(
           {
             form_name: formName,
+            form_id: form.id || '',
+            form_destination: form.action || '/api/contact',
             inquiry_reason: payload.reason || 'Project discussion',
             service_name: primaryService || selectedServices[0] || '',
             services_selected: selectedServices.length ? selectedServices.join(', ') : '(none)',

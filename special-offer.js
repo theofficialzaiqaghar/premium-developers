@@ -171,15 +171,18 @@
       success.hidden = false;
       success.focus();
 
-      trackOnce(
+      const trackFormSuccess = window.pdTrackFormSuccess || ((name, p, k) => trackOnce(name, p, `${name}:${k}`));
+      trackFormSuccess(
         'special_offer_submit',
         {
           form_name: 'special_offer',
+          form_id: form.id || '',
+          form_destination: form.action || '/api/special-offer',
           services_selected: payload.services.join(', '),
           offer_type: '30_percent_off',
           marketing_consent: payload.consent === true
         },
-        `special_offer_submit:${submissionId}`
+        `special_offer:${submissionId}`
       );
     } catch (error) {
       setStatus(error instanceof Error

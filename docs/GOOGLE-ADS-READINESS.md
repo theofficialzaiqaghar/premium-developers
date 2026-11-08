@@ -6,7 +6,9 @@ This document describes what the **codebase** provides for Google Ads and what y
 
 | Event | When it fires | Use in Google Ads |
 | --- | --- | --- |
-| `generate_lead` | Successful POST to `/api/contact` only (`contact`, `service_inquiry`, `home_inquiry`) — once per submit via `pdTrackOnce` | **Primary conversion** |
+| `generate_lead` | Successful POST to `/api/contact` only (`contact`, `service_inquiry`, `home_inquiry`) — paired with `form_submit` | **Primary conversion** |
+| `form_submit` | Same successful submits as `generate_lead`, plus special-offer and exit-intent on success (`lead_outcome: success`) | GA4 recommended event / backup conversion trigger |
+| `form_start` | First focus inside a lead form (`contact`, `service_inquiry`, `home_inquiry`) | Funnel micro-conversion |
 | `click_whatsapp` | First WhatsApp FAB click per page | Optional micro-conversion |
 | `click_to_call` | First `tel:` link click per page | Optional micro-conversion |
 | `cta_click` | Service CTAs scrolling to `#project-inquiry` | Analytics only |
@@ -20,7 +22,7 @@ GTM container: **GTM-WF285DKZ**
 ## GTM setup (manual — not in repo)
 
 1. Enable **Consent Mode v2** support in GTM (Admin → Container settings).
-2. Create **Custom Event** triggers for `generate_lead`, `click_whatsapp`, etc.
+2. Create **Custom Event** triggers for `generate_lead`, **`form_submit`**, `form_start`, `click_whatsapp`, etc. (if GA4 only shows form starts, you are likely missing a trigger for `generate_lead` / `form_submit`.)
 3. For `generate_lead`, add trigger condition: `form_name` matches `contact|service_inquiry|home_inquiry` (optional extra safety).
 4. Tag GA4 events from those triggers; mark `generate_lead` as a conversion in GA4.
 5. Link GA4 ↔ Google Ads; import or create **Google Ads conversion** from the GA4 `generate_lead` event (or Ads tag firing on the same trigger).

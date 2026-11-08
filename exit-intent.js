@@ -220,15 +220,20 @@
       }
       form.hidden = true;
       showStatus('Thanks for your feedback! Your discount code has been sent to your email.', 'success');
-      const trackOnce = window.pdTrackOnce || track;
-      trackOnce(
+      const trackFormSuccess = window.pdTrackFormSuccess || ((name, p, k) => {
+        const trackOnceFn = window.pdTrackOnce || track;
+        trackOnceFn(name, p, `${name}:${k}`);
+      });
+      trackFormSuccess(
         'exit_offer_submit',
         {
           form_name: 'exit_intent',
+          form_id: form.id || '',
+          form_destination: '/api/exit-feedback',
           exit_reason: reason,
           marketing_consent: formData.get('consent') === 'on'
         },
-        `exit_offer_submit:${submissionId}`
+        `exit_intent:${submissionId}`
       );
     } catch (error) {
       showStatus(error instanceof Error ? error.message : 'We couldn’t process your request. Please try again.');
