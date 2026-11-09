@@ -105,6 +105,16 @@
   line-height: 1.5;
 }
 
+.blog-service-pointer {
+  padding: 14px 16px;
+  margin: 0 0 1.25rem;
+  border-left: 3px solid var(--purple);
+  background: #f7f5fc;
+  border-radius: 0 12px 12px 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
 .blog-search-empty {
   margin: 8px 0 28px;
 }

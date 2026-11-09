@@ -168,5 +168,90 @@
     },
     "bodyFile": "wordpress-website-maintenance-checklist.html",
     "publishPriority": 10
+  },
+  {
+    "id": "b2027011-0011-4011-8011-000000000011",
+    "slug": "woocommerce-developer-uk",
+    "title": "WooCommerce Developer UK: What Does a WooCommerce Developer Actually Do?",
+    "seoTitle": "WooCommerce Developer UK — What They Do",
+    "metaDescription": "Hire a WooCommerce developer in the UK. Learn what store developers do, when to hire, and how Premium Developers scopes checkout, payments, and catalogue work.",
+    "primaryKeyword": "woocommerce developer",
+    "categorySlugs": ["woocommerce", "guides"],
+    "tagSlugs": ["woocommerce", "uk", "ecommerce"],
+    "featuredImage": {
+      "url": "/assets/blog/woocommerce-developer-uk.webp",
+      "alt": "WooCommerce developer UK — online store checkout and product catalogue on WordPress",
+      "filename": "woocommerce-developer-uk.webp"
+    },
+    "bodyFile": "woocommerce-developer-uk.html",
+    "publishPriority": 11
+  },
+  {
+    "id": "b2027012-0012-4012-8012-000000000012",
+    "slug": "wordpress-website-cost-uk-2027",
+    "title": "How Much Does a WordPress Website Cost in the UK in 2027?",
+    "seoTitle": "WordPress Website Cost UK (2027 Guide)",
+    "metaDescription": "WordPress website cost UK in 2027: business sites, ecommerce, custom features, maintenance, and hidden costs. Plan budgets before you request a quote.",
+    "primaryKeyword": "wordpress website cost uk",
+    "categorySlugs": ["wordpress", "guides"],
+    "tagSlugs": ["wordpress", "uk", "pricing"],
+    "featuredImage": {
+      "url": "/assets/blog/wordpress-website-cost-uk-2027.webp",
+      "alt": "WordPress website cost UK 2027 — business owner planning a website budget",
+      "filename": "wordpress-website-cost-uk-2027.webp"
+    },
+    "bodyFile": "wordpress-website-cost-uk-2027.html",
+    "publishPriority": 12
+  },
+  {
+    "id": "b2027013-0013-4013-8013-000000000013",
+    "slug": "woocommerce-vs-shopify-2027",
+    "title": "WooCommerce vs Shopify in 2027: Which Is Better for UK Businesses?",
+    "seoTitle": "WooCommerce vs Shopify (2027 UK Comparison)",
+    "metaDescription": "WooCommerce vs Shopify in 2027 for UK businesses: costs, flexibility, ownership, integrations, scalability, and maintenance compared side by side.",
+    "primaryKeyword": "woocommerce vs shopify",
+    "categorySlugs": ["woocommerce", "guides"],
+    "tagSlugs": ["woocommerce", "uk", "ecommerce"],
+    "featuredImage": {
+      "url": "/assets/blog/woocommerce-vs-shopify-2027.jpg",
+      "alt": "WooCommerce vs Shopify 2027 — UK ecommerce platform comparison",
+      "filename": "woocommerce-vs-shopify-2027.jpg"
+    },
+    "bodyFile": "woocommerce-vs-shopify-2027.html",
+    "publishPriority": 13
+  },
+  {
+    "id": "b2027014-0014-4014-8014-000000000014",
+    "slug": "wordpress-maintenance-checklist-2027",
+    "title": "WordPress Website Maintenance in 2027: The Complete Business Owner's Checklist",
+    "seoTitle": "WordPress Website Maintenance Checklist (2027)",
+    "metaDescription": "WordPress website maintenance checklist for 2027: updates, backups, security, uptime, speed, forms, and database health for UK business owners.",
+    "primaryKeyword": "wordpress website maintenance checklist",
+    "categorySlugs": ["wordpress", "guides"],
+    "tagSlugs": ["wordpress", "maintenance"],
+    "featuredImage": {
+      "url": "/assets/blog/wordpress-maintenance-checklist-2027.webp",
+      "alt": "WordPress maintenance checklist 2027 — updates and backups for a business website",
+      "filename": "wordpress-maintenance-checklist-2027.webp"
+    },
+    "bodyFile": "wordpress-maintenance-checklist-2027.html",
+    "publishPriority": 14
+  },
+  {
+    "id": "b2027015-0015-4015-8015-000000000015",
+    "slug": "future-of-business-websites-2027",
+    "title": "The Future of Business Websites in 2027: AI Search, AI Agents and Smarter Ecommerce",
+    "seoTitle": "Future of Business Websites in 2027",
+    "metaDescription": "AI search for businesses and AI ecommerce trends in 2027: assistants, automation, structured product data, and human-led customer experience on WordPress.",
+    "primaryKeyword": "AI search for businesses",
+    "categorySlugs": ["guides", "woocommerce"],
+    "tagSlugs": ["wordpress", "ecommerce", "guides"],
+    "featuredImage": {
+      "url": "/assets/blog/future-of-business-websites-2027.avif",
+      "alt": "Future of business websites 2027 — AI search and ecommerce trends",
+      "filename": "future-of-business-websites-2027.avif"
+    },
+    "bodyFile": "future-of-business-websites-2027.html",
+    "publishPriority": 15
   }
 ]

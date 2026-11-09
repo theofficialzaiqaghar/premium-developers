@@ -60,8 +60,14 @@ const PUBLISHED_DATES = [
   '2025-10-14T10:00:00.000Z',
   '2025-10-21T10:00:00.000Z',
   '2025-10-28T10:00:00.000Z',
-  '2025-11-04T10:00:00.000Z'
+  '2025-11-04T10:00:00.000Z',
+  '2026-11-10T10:00:00.000Z',
+  '2026-11-17T10:00:00.000Z',
+  '2026-11-24T10:00:00.000Z',
+  '2026-12-01T10:00:00.000Z',
+  '2026-12-08T10:00:00.000Z'
 ];
+const FEATURED_SLUG = 'woocommerce-developer-uk';
 
 function articleUrl(slug) {
   return `/blog/${encodeURIComponent(slug)}/`;
@@ -316,7 +322,8 @@ async function main() {
     }
   }
 
-  const [featured, ...rest] = posts;
+  const featured = posts.find((p) => p.slug === FEATURED_SLUG) || posts[0];
+  const rest = posts.filter((p) => p !== featured);
   const featuredHtml = `<div id="blog-featured" class="blog-featured">${renderFeaturedCard(featured)}</div>`;
   const gridHtml = rest.map(renderArchiveCard).join('\n      ');
   const paginationHtml = `<nav class="blog-pagination" id="blog-pagination" aria-label="Blog pages" data-page-size="${ARCHIVE_PAGE_SIZE}"></nav>`;
