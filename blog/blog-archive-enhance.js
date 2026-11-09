@@ -168,8 +168,8 @@
     filtersEl.innerHTML = [
       '<button type="button" class="blog-filter-btn is-active" data-category="">All topics</button>',
       ...entries.map(
-        ([cat, count]) =>
-          `<button type="button" class="blog-filter-btn" data-category="${cat.replace(/"/g, '&quot;')}">${label(cat)} <span class="blog-filter-btn__count">${count}</span></button>`
+        ([cat]) =>
+          `<button type="button" class="blog-filter-btn" data-category="${cat.replace(/"/g, '&quot;')}">${label(cat)}</button>`
       )
     ].join('');
     filtersEl.dataset.built = 'true';

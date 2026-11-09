@@ -105,11 +105,6 @@
   line-height: 1.5;
 }
 
-.blog-filter-btn__count {
-  opacity: .75;
-  font-weight: 600;
-}
-
 .blog-search-empty {
   margin: 8px 0 28px;
 }
