@@ -180,6 +180,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="stylesheet" href="/cookie-consent.css">
   <link rel="stylesheet" href="contact-page.css">
   <link rel="stylesheet" href="/service-inquiry.css">
+  <link rel="stylesheet" href="/homepage-motion.css">
 </head>
 
 <body>
@@ -417,10 +418,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </span>
 
 
-          <h1>
-            WordPress Development Company for
-            <span class="grad">Fast,</span> High-Converting Websites
+          <h1 class="hero__title" data-hero-title data-hero-state="reveal">
+            <span class="hero__line" aria-hidden="false">
+              <span class="hero__word" style="--i:0">WordPress</span><span class="hero__word" style="--i:1">Development</span><span class="hero__word" style="--i:2">Company</span><span class="hero__word" style="--i:3">for</span>
+            </span>
+            <span class="hero__line hero__line--rotating">
+              <span class="hero-rotator" data-hero-rotator>
+                <span class="hero-rotator__ghost" aria-hidden="true">High-Converting</span>
+                <span class="hero-rotator__viewport">
+                  <span class="hero-rotator__track" data-hero-rotator-track>
+                    <span class="hero-rotator__item">Fast</span>
+                    <span class="hero-rotator__item">High-Converting</span>
+                    <span class="hero-rotator__item">SEO-Friendly</span>
+                    <span class="hero-rotator__item">Business-Driven</span>
+                  </span>
+                </span>
+                <span class="sr-only" data-hero-rotator-live aria-live="polite">Fast</span>
+              </span><span class="hero__word" style="--i:4">Websites</span>
+            </span>
           </h1>
+          <noscript>
+            <style>
+              .hero__title .hero__word,.hero-rotator{opacity:1!important;transform:none!important}
+              .hero-rotator__track{transform:none!important}
+              .hero-rotator__item:not(:first-child){display:none}
+            </style>
+          </noscript>
 
 
           <p class="lead">
@@ -934,158 +957,122 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>
 
 
-        <div class="grid grid--3">
+        <div class="process-timeline" data-process-timeline>
+
+          <div class="process-timeline__rail" aria-hidden="true">
+
+            <div class="process-timeline__line">
+
+              <div class="process-timeline__progress" data-process-progress></div>
+
+            </div>
+
+            <div class="process-timeline__markers">
+
+              <span class="process-timeline__marker" data-process-marker data-process-step="0" aria-hidden="true">01</span>
+              <span class="process-timeline__marker" data-process-marker data-process-step="1" aria-hidden="true">02</span>
+              <span class="process-timeline__marker" data-process-marker data-process-step="2" aria-hidden="true">03</span>
+              <span class="process-timeline__marker" data-process-marker data-process-step="3" aria-hidden="true">04</span>
+
+            </div>
+
+          </div>
 
 
-          <article class="card why__c">
+          <div class="grid grid--process">
 
-            <span class="icon-box">
+            <article class="card why__c process-step" data-process-step="0" tabindex="0">
 
-              <svg class="ico">
-                <use href="#i-search" />
-              </svg>
+              <span class="icon-box">
 
-            </span>
+                <svg class="ico">
+                  <use href="#i-search" />
+                </svg>
 
-            <h3>
-              01. Understand
-            </h3>
+              </span>
 
-            <p>
+              <h3>
+                01. Discover &amp; Strategize
+              </h3>
 
-              We review your requirements, website,
-              audience, existing technology, and
-              business objectives.
+              <p>
 
-            </p>
+                We understand your business, audience, and objectives to build a clear project strategy, define the right features, and establish a solid foundation.
 
-          </article>
+              </p>
 
-
-          <article class="card why__c">
-
-            <span class="icon-box">
-
-              <svg class="ico">
-                <use href="#i-target" />
-              </svg>
-
-            </span>
-
-            <h3>
-              02. Plan
-            </h3>
-
-            <p>
-
-              We define the structure, functionality,
-              content requirements, and development
-              approach before implementation.
-
-            </p>
-
-          </article>
+            </article>
 
 
-          <article class="card why__c">
+            <article class="card why__c process-step" data-process-step="1" tabindex="0">
 
-            <span class="icon-box">
+              <span class="icon-box">
 
-              <svg class="ico">
-                <use href="#i-pen" />
-              </svg>
+                <svg class="ico">
+                  <use href="#i-pen" />
+                </svg>
 
-            </span>
+              </span>
 
-            <h3>
-              03. Design
-            </h3>
+              <h3>
+                02. Design &amp; Experience
+              </h3>
 
-            <p>
+              <p>
 
-              We create a clean visual direction focused
-              on usability, responsive behavior,
-              and your brand.
+                We transform your vision into a polished, user-focused design with intuitive navigation, responsive layouts, and a consistent brand experience.
 
-            </p>
+              </p>
 
-          </article>
+            </article>
 
 
-          <article class="card why__c">
+            <article class="card why__c process-step" data-process-step="2" tabindex="0">
 
-            <span class="icon-box">
+              <span class="icon-box">
 
-              <svg class="ico">
-                <use href="#i-code" />
-              </svg>
+                <svg class="ico">
+                  <use href="#i-code" />
+                </svg>
 
-            </span>
+              </span>
 
-            <h3>
-              04. Develop
-            </h3>
+              <h3>
+                03. Build &amp; Optimize
+              </h3>
 
-            <p>
+              <p>
 
-              We implement the website using the right
-              WordPress, Elementor, WooCommerce,
-              and custom development solutions.
+                We bring the design to life using WordPress, Elementor, WooCommerce, and custom development, with a focus on performance, functionality, and reliability.
 
-            </p>
+              </p>
 
-          </article>
+            </article>
 
 
-          <article class="card why__c">
+            <article class="card why__c process-step" data-process-step="3" tabindex="0">
 
-            <span class="icon-box">
+              <span class="icon-box">
 
-              <svg class="ico">
-                <use href="#i-check" />
-              </svg>
+                <svg class="ico">
+                  <use href="#i-rocket" />
+                </svg>
 
-            </span>
+              </span>
 
-            <h3>
-              05. Test
-            </h3>
+              <h3>
+                04. Launch &amp; Grow
+              </h3>
 
-            <p>
+              <p>
 
-              We review responsiveness, functionality,
-              forms, integrations, performance,
-              and important user flows.
+                We thoroughly test and launch your website, then provide ongoing support, maintenance, and improvements to help your business grow.
 
-            </p>
+              </p>
 
-          </article>
+            </article>
 
-
-          <article class="card why__c">
-
-            <span class="icon-box">
-
-              <svg class="ico">
-                <use href="#i-wrench" />
-              </svg>
-
-            </span>
-
-            <h3>
-              06. Support
-            </h3>
-
-            <p>
-
-              After launch, we remain available for
-              maintenance, improvements, troubleshooting,
-              and future development.
-
-            </p>
-
-          </article>
-
+          </div>
 
         </div>
 
@@ -2336,6 +2323,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </button>
 
   <script src="script.js" defer></script>
+  <script src="/homepage-hero.js" defer></script>
+  <script src="/homepage-process.js" defer></script>
   <script src="/analytics.js"></script>
 <script src="/cookie-consent.js" defer></script>  <script src="/whatsapp-config.js"></script>
   <script src="/whatsapp-button.js" defer></script>

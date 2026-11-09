@@ -28,6 +28,41 @@ GTM container: **GTM-WF285DKZ**
 5. Link GA4 ↔ Google Ads; import or create **Google Ads conversion** from the GA4 `generate_lead` event (or Ads tag firing on the same trigger).
 6. Test with **GTM Preview** + **Tag Assistant** on production URLs after deploy.
 
+### If Preview shows `form_submit` / `generate_lead` but **Tags Fired: None**
+
+The site is working. GTM received the dataLayer push (you should see `lead_outcome: success`, `form_name`, `form_id`, etc.). Consent is not the blocker if **Current State** is Granted for `analytics_storage`.
+
+You still need **GA4 Event tags** wired to **Custom Event** triggers (the config tag `G-L1VTZF5Y5J` and `contact_page_view` only fire on page load / `contact_page_view`, not on form success).
+
+| Step | GTM |
+| --- | --- |
+| 1 | **Triggers → New → Custom Event** → Event name: `generate_lead` |
+| 2 | **Tags → New → Google Analytics: GA4 Event** → Configuration Tag = your GA4 config → Event name: `generate_lead` → Trigger = step 1. Add event parameters: `form_name`, `service_name`, `inquiry_reason`, `source_page`, `lead_outcome` (Data Layer Variable names must match keys pushed by the site). |
+| 3 | Optional duplicate trigger: Custom Event `form_submit` **and** `lead_outcome` equals `success` (avoids counting GTM’s automatic “Form Submit” when `formCanceled` is true because JavaScript uses `preventDefault()`). |
+| 4 | **Publish** container. Preview again → on event `generate_lead` → **Tags Fired** should list your GA4 Event tag → **Hits Sent** should show a hit. |
+| 5 | **GA4 → Admin → Events** → mark `generate_lead` as **Key event**. Realtime / DebugView should increment within minutes. |
+
+**Ignore for conversions:** GTM’s built-in **Form Submit** (often `gtm.formCanceled: true` on this site). Use **`generate_lead`** or custom **`form_submit`** with `lead_outcome: success` only.
+
+### Special offer form (`/special-offer/`)
+
+On **successful** submit (API OK + success message), the site pushes:
+
+| dataLayer `event` | When |
+| --- | --- |
+| `special_offer_submit` | Primary — use this in GTM (same pattern as `generate_lead`) |
+| `form_submit` | Mirror with `form_name: special_offer`, `lead_outcome: success` |
+
+Example parameters: `form_name`, `form_id`, `form_destination`, `offer_type` (`30_percent_off`), `services_selected`, `marketing_consent`, `lead_outcome`.
+
+**GTM (copy of contact setup):**
+
+1. **Variables** (Data Layer Variable): `offer_type`, `services_selected`, `marketing_consent`, `lead_outcome` (reuse `form_name` if you already have it).
+2. **Trigger → Custom Event** → Event name: `special_offer_submit` (no extra conditions for first test).
+3. **Tag → GA4 Event** → Configuration = your GA4 config tag → **Event name: `special_offer_submit`** (no `GA4 - ` prefix) → Trigger = step 2 → add Event Parameters from DLVs above.
+4. **Publish** → Preview on `https://www.premiumdevelopers.co/special-offer/` → accept cookies → submit test → select event **`special_offer_submit`** in sidebar → Tags Fired should show **Succeeded**.
+5. **GA4 → Admin → Events** → mark `special_offer_submit` as **Key event** only if you run offer-specific Ads (keep `generate_lead` as primary for main lead gen).
+
 ## Privacy & UK/EU consent (in codebase)
 
 - `consent-default.js` — Consent Mode defaults (denied) before GTM loads; restores saved choice from `localStorage`.
