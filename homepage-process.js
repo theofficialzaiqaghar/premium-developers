@@ -2,9 +2,8 @@
   const root = document.querySelector('[data-process-timeline]');
   if (!root) return;
 
-  const progress = root.querySelector('[data-process-progress]');
-  const steps = [...root.querySelectorAll('[data-process-step]')];
-  const markers = [...root.querySelectorAll('[data-process-marker]')];
+  const progressPaths = [...root.querySelectorAll('[data-process-progress]')];
+  const steps = [...root.querySelectorAll('.process-step[data-process-step]')];
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isCoarse =
     window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(hover: none)').matches;
@@ -30,9 +29,6 @@
       else step.removeAttribute('aria-current');
     });
 
-    markers.forEach((marker, i) => {
-      marker.classList.toggle('is-active', i === index);
-    });
   };
 
   const resolveIndex = el => {
@@ -98,14 +94,5 @@
     root.classList.add('is-visible');
   }
 
-  if (progress) {
-    progress.setAttribute('role', 'presentation');
-  }
-
-  const narrowMq = window.matchMedia('(max-width: 900px)');
-  const syncLayout = () => {
-    root.classList.toggle('process-timeline--vertical', narrowMq.matches);
-  };
-  narrowMq.addEventListener?.('change', syncLayout);
-  syncLayout();
+  progressPaths.forEach(path => path.setAttribute('role', 'presentation'));
 })();

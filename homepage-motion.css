@@ -145,97 +145,86 @@ html.has-motion .hero-rotator__track.is-instant {
   }
 }
 
-/* Process timeline */
+/* Process timeline — wavy path behind cards */
 .process-timeline {
-  margin-top: 8px;
+  position: relative;
+  margin-top: 12px;
+  padding: 8px 0 4px;
   --process-fill: 0;
   --navy-process: #0f3256;
 }
 
-.process-timeline__rail {
-  position: relative;
-  margin: 0 0 28px;
-  padding: 0 12px;
-}
-
-.process-timeline__line {
-  position: relative;
-  height: 3px;
-  border-radius: 999px;
-  background: #e3e8f0;
-  overflow: hidden;
-}
-
-.process-timeline__progress {
+.process-timeline__wave {
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.process-wave {
+  display: block;
+  width: 100%;
   height: 100%;
-  width: calc(var(--process-fill) * 100%);
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--navy-process), var(--purple));
-  transform-origin: left center;
-  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: width;
 }
 
-.process-timeline__markers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 14px;
+.process-wave--desktop {
+  position: absolute;
+  left: -2%;
+  width: 104%;
+  top: 50%;
+  height: clamp(100px, 18vw, 148px);
+  transform: translateY(-46%);
 }
 
-.process-timeline__marker {
-  justify-self: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid #dbe1ea;
-  background: #fff;
-  color: var(--navy-process);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  cursor: default;
-  padding: 0;
-  transition:
-    border-color 0.35s ease,
-    color 0.35s ease,
-    box-shadow 0.35s ease,
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+.process-wave--mobile {
+  display: none;
 }
 
-.process-timeline__marker:focus-visible {
-  outline: 2px solid var(--purple);
-  outline-offset: 3px;
+.process-wave__base {
+  stroke: #e3e8f0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.process-step.is-active .icon-box,
-.process-timeline.is-step-active .process-timeline__marker.is-active {
-  border-color: var(--purple);
-  color: var(--purple);
-  box-shadow: 0 0 0 4px rgba(106, 69, 227, 0.12);
+.process-wave__progress {
+  stroke: url(#process-wave-grad);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--process-fill, 0));
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: stroke-dashoffset;
 }
 
 .grid--process {
+  position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(22px, 3.2vw, 44px);
+  align-items: stretch;
 }
 
 .process-step {
+  position: relative;
+  z-index: 2;
   cursor: default;
   outline: none;
+  background: #fff;
+  isolation: isolate;
   transition:
     border-color 0.35s ease,
     box-shadow 0.35s ease,
-    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .process-step.is-active {
-  border-color: rgba(106, 69, 227, 0.35);
-  box-shadow: 0 12px 32px rgba(15, 50, 86, 0.08);
+  border-color: rgba(106, 69, 227, 0.4);
+  box-shadow:
+    0 18px 40px rgba(15, 50, 86, 0.1),
+    0 0 0 1px rgba(106, 69, 227, 0.08);
+  transform: translateY(-3px);
 }
 
 .process-step.is-active .icon-box {
@@ -262,58 +251,45 @@ html.has-motion .process-timeline.is-visible {
 }
 
 @media (max-width: 900px) {
-  .grid--process {
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .process-timeline {
+    padding-left: 12px;
   }
 
-  .process-timeline__markers {
+  .grid--process {
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 5vw, 28px);
+    padding-left: 28px;
+  }
+
+  .process-wave--desktop {
     display: none;
   }
 
-  .process-timeline.process-timeline--vertical {
-    display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: 0 16px;
-    align-items: stretch;
+  .process-wave--mobile {
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 8px;
+    width: 56px;
+    height: auto;
+    transform: none;
   }
 
-  .process-timeline.process-timeline--vertical .process-timeline__rail {
-    grid-column: 1;
-    grid-row: 1 / -1;
-    margin: 0;
-    padding: 8px 0 8px 4px;
-    height: 100%;
-  }
-
-  .process-timeline.process-timeline--vertical .process-timeline__line {
-    width: 3px;
-    height: 100%;
-    min-height: 120px;
-  }
-
-  .process-timeline.process-timeline--vertical .process-timeline__progress {
-    width: 100%;
-    height: calc(var(--process-fill) * 100%);
-    transition: height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .process-timeline.process-timeline--vertical .grid--process {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .process-timeline:not(.process-timeline--vertical) .process-timeline__rail {
-    margin-left: 8px;
-    margin-right: 8px;
+  .process-timeline__wave {
+    width: 72px;
+    right: auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .process-timeline__progress,
-  .process-step,
-  .process-timeline__marker {
+  .process-wave__progress,
+  .process-step {
     transition: none !important;
+  }
+
+  .process-step.is-active {
+    transform: none;
   }
 
   html.has-motion .process-timeline {
