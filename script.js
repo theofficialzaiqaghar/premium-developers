@@ -152,7 +152,7 @@
   const revealTargets = document.querySelectorAll(
     '.services .head > *, .svc, .about__copy > *, .mini__c, .about__img, .quote-card, ' +
     '.why .head > *, .process-step, .work .head > *, .proj, .stats__grid > div, .book__card, ' +
-    '.contact .head > *, .cc, .testi .head > *, .quote, .cta__in > *, .footer__grid > *'
+    '.testi .head > *, .quote, .cta__in > *, .footer__grid > *'
   );
 
   if (!reduceMotion && 'IntersectionObserver' in window && revealTargets.length) {
