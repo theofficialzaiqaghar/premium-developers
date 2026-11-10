@@ -29,10 +29,15 @@ const BLOG_DATES = [
   '2025-10-14',
   '2025-10-21',
   '2025-10-28',
-  '2025-11-04'
+  '2025-11-04',
+  '2025-11-11',
+  '2025-11-18',
+  '2025-11-25',
+  '2025-12-02',
+  '2025-12-09'
 ];
 
-const SITE_LASTMOD = '2026-11-08';
+const SITE_LASTMOD = '2026-11-11';
 
 const STATIC_PAGES = [
   { loc: `${SITE}/`, changefreq: 'weekly', priority: '1.0' },
@@ -96,8 +101,9 @@ function loadBlogPosts() {
 }
 
 function writeXmlSitemaps(posts) {
+  const latestBlogLastmod = posts[posts.length - 1]?.lastmod || SITE_LASTMOD;
   const blogOnly = [
-    xmlEntry({ loc: `${SITE}/blog/`, lastmod: posts[0]?.lastmod || SITE_LASTMOD, changefreq: 'weekly', priority: '0.8' }),
+    xmlEntry({ loc: `${SITE}/blog/`, lastmod: latestBlogLastmod, changefreq: 'weekly', priority: '0.8' }),
     ...posts.map((p) =>
       xmlEntry({ loc: p.loc, lastmod: p.lastmod, changefreq: 'monthly', priority: '0.7' })
     )
