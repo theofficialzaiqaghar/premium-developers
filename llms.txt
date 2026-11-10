@@ -31,6 +31,7 @@
 - WooCommerce development (primary): https://www.premiumdevelopers.co/services/woocommerce-development.html
 - WordPress development: https://www.premiumdevelopers.co/services/wordpress-development.html
 - Elementor development: https://www.premiumdevelopers.co/services/elementor-development.html
+- Divi development (custom Divi developer / design): https://www.premiumdevelopers.co/divi-development/
 - Custom WordPress plugin development: https://www.premiumdevelopers.co/services/custom-wordpress-plugin-development.html
 - Custom WordPress / broader development: https://www.premiumdevelopers.co/services/custom-development.html
 - Website redesign and development: https://www.premiumdevelopers.co/services/website-redesign.html

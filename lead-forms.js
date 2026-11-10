@@ -2,6 +2,7 @@
   const AVAILABLE_SERVICES = [
     'WordPress Development',
     'Elementor Development',
+    'Divi Development',
     'WooCommerce Development',
     'Website Redesign',
     'Custom Development',

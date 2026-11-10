@@ -22,6 +22,11 @@
       "permanent": true
     },
     {
+      "source": "/services/divi-development.html",
+      "destination": "https://www.premiumdevelopers.co/divi-development/",
+      "permanent": true
+    },
+    {
       "source": "/special-offer.html",
       "destination": "/special-offer/",
       "permanent": true
@@ -237,6 +242,14 @@
     {
       "source": "/sitemap/",
       "destination": "/sitemap/index.html"
+    },
+    {
+      "source": "/divi-development",
+      "destination": "/services/divi-development.html"
+    },
+    {
+      "source": "/divi-development/",
+      "destination": "/services/divi-development.html"
     }
   ],
   "headers": [

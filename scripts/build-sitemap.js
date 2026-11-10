@@ -46,6 +46,7 @@ const STATIC_PAGES = [
   { loc: `${SITE}/services.html`, changefreq: 'monthly', priority: '0.9' },
   { loc: `${SITE}/services/wordpress-development.html`, changefreq: 'monthly', priority: '0.9' },
   { loc: `${SITE}/services/elementor-development.html`, changefreq: 'monthly', priority: '0.9' },
+  { loc: `${SITE}/divi-development/`, changefreq: 'monthly', priority: '0.88' },
   { loc: `${SITE}/services/woocommerce-development.html`, changefreq: 'monthly', priority: '0.9' },
   { loc: `${SITE}/services/custom-wordpress-plugin-development.html`, changefreq: 'monthly', priority: '0.85' },
   { loc: `${SITE}/services/website-redesign.html`, changefreq: 'monthly', priority: '0.75' },
