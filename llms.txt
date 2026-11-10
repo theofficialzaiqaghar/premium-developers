@@ -1,5 +1,5 @@
 # Premium Developers
-# Last updated: 2026-11-09
+# Last updated: 2026-11-11
 # Canonical website: https://www.premiumdevelopers.co/
 # LLMS reference: https://www.premiumdevelopers.co/llms.txt
 
@@ -11,7 +11,12 @@
 - **Email:** hello@premiumdevelopers.co
 - **Business type:** Web development agency focused on business websites and related product engineering
 - **Founder (public site):** Muhammad Saad Ullah Khan — see https://www.premiumdevelopers.co/about
-- **Portfolio (external):** https://contra.com/muhammadsaadullahkhan
+- **Founder LinkedIn:** https://www.linkedin.com/in/saadullahkhan-premiumdevelopers/
+- **Company LinkedIn:** https://www.linkedin.com/company/premium-developers-co/
+- **Instagram:** https://www.instagram.com/premiumdevelopers_official
+- **Facebook (founder):** https://www.facebook.com/p/Muhammad-Saad-Ullah-Khan-61595269371970/
+- **Contra:** https://contra.com/muhammadsaadullahkhan/about
+- **Upwork:** https://www.upwork.com/freelancers/~0181e957ec9a52d41b
 
 ## Contact and key pages
 - Home: https://www.premiumdevelopers.co/

@@ -6,6 +6,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
+const { buildBlogPostingGraph } = require('../lib/seo-jsonld');
 const { renderRelatedServicesSection } = require('../lib/blog-related-services');
 const {
   gtmHead,
@@ -191,7 +192,8 @@ function headLinks() {
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/blog/blog.css">
   <link rel="stylesheet" href="/service-pages.css">
@@ -217,6 +219,16 @@ function renderArticlePage(post, bodyHtml, related) {
   const title = `${post.seoTitle || post.title} | Premium Developers Blog`;
   const description = post.metaDescription || post.excerpt || post.title;
   const img = resolveAssetUrl(post.featuredImage?.url || '/assets/images/og/premium-developers-og.jpg');
+  const jsonLd = buildBlogPostingGraph(
+    {
+      title: post.title,
+      metaDescription: post.metaDescription,
+      excerpt: post.excerpt,
+      publishedAt: post.publishedAt,
+      imageUrl: img
+    },
+    canonical
+  );
   const relatedArticlesHtml = related.length
     ? `<section class="blog-related" aria-labelledby="blog-related-articles-heading">
       <h2 id="blog-related-articles-heading">Related articles</h2>
@@ -250,6 +262,9 @@ ${headLinks()}
   <meta property="og:image" content="${escapeAttr(img)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${escapeAttr(img)}">
+  <script type="application/ld+json">
+${JSON.stringify(jsonLd, null, 2)}
+  </script>
 </head>
 <body class="service-page blog-page" data-blog-archive="static">
 ${gtmBody()}
