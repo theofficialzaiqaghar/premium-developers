@@ -13,6 +13,7 @@
     "sitemap:build": "node scripts/build-sitemap.js",
     "site:patch-socials": "node scripts/patch-social-profiles.js",
     "site:patch-seo": "node scripts/patch-seo-fixes.js",
+    "site:patch-adsense": "node scripts/patch-adsense.js",
     "case-studies:build": "node scripts/build-case-study-pages.js",
     "ads:patch-site": "node scripts/patch-google-ads-site.js"
   },
