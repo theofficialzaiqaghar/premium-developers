@@ -160,6 +160,66 @@
       "source": "/blog/small-business-website-design-guide/",
       "destination": "/blog/wordpress-vs-wix-small-business/",
       "permanent": true
+    },
+    {
+      "source": "/blog/elementor-vs-divi",
+      "destination": "/blog/divi-vs-elementor/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/elementor-vs-divi/",
+      "destination": "/blog/divi-vs-elementor/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-vs-elementor",
+      "destination": "/blog/divi-vs-elementor/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-vs-elementor/",
+      "destination": "/blog/divi-vs-elementor/",
+      "permanent": true
+    },
+    {
+      "source": "/speed-up-divi-website",
+      "destination": "/blog/speed-up-divi-website/",
+      "permanent": true
+    },
+    {
+      "source": "/speed-up-divi-website/",
+      "destination": "/blog/speed-up-divi-website/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-website-redesign",
+      "destination": "/blog/divi-website-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-website-redesign/",
+      "destination": "/blog/divi-website-redesign/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-woocommerce-website",
+      "destination": "/blog/divi-woocommerce-website/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-woocommerce-website/",
+      "destination": "/blog/divi-woocommerce-website/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-website-cost-uk",
+      "destination": "/blog/divi-website-cost-uk/",
+      "permanent": true
+    },
+    {
+      "source": "/divi-website-cost-uk/",
+      "destination": "/blog/divi-website-cost-uk/",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -34,23 +34,6 @@
     "publishPriority": 2
   },
   {
-    "id": "b2026003-0003-4003-8003-000000000003",
-    "slug": "elementor-vs-divi",
-    "title": "Elementor vs Divi: Which WordPress Page Builder Is Better in 2026?",
-    "seoTitle": "Elementor vs Divi (2026 Comparison)",
-    "metaDescription": "Compare Elementor vs Divi to find the best WordPress page builder for your website. Explore design flexibility, performance, features and ease of use.",
-    "primaryKeyword": "Elementor vs Divi",
-    "categorySlugs": ["wordpress", "guides"],
-    "tagSlugs": ["elementor", "wordpress"],
-    "featuredImage": {
-      "url": "/assets/blog/elementor-vs-divi.jpg",
-      "alt": "Elementor vs Divi — WordPress page builder comparison for business websites",
-      "filename": "elementor-vs-divi.jpg"
-    },
-    "bodyFile": "elementor-vs-divi.html",
-    "publishPriority": 3
-  },
-  {
     "id": "b2026004-0004-4004-8004-000000000004",
     "slug": "woocommerce-website-development-guide",
     "title": "WooCommerce Website Development: Essential Features Every Online Store Needs",
@@ -253,5 +236,90 @@
     },
     "bodyFile": "future-of-business-websites-2027.html",
     "publishPriority": 15
+  },
+  {
+    "id": "b2027016-0016-4016-8016-000000000016",
+    "slug": "divi-website-redesign",
+    "title": "Divi Website Redesign: 7 Signs Your Business Website Needs an Update",
+    "seoTitle": "Divi Website Redesign: 7 Signs Your Business Website Needs an Update",
+    "metaDescription": "Is your Divi website outdated or difficult to use? Discover seven signs it needs a redesign and how a modern website can improve user experience.",
+    "primaryKeyword": "Divi website redesign",
+    "categorySlugs": ["divi", "web-design"],
+    "tagSlugs": ["divi", "wordpress", "uk"],
+    "featuredImage": {
+      "url": "/assets/blog/divi-website-redesign.jpg",
+      "alt": "Divi website redesign — modern business website layout refresh",
+      "filename": "divi-website-redesign.jpg"
+    },
+    "bodyFile": "divi-website-redesign.html",
+    "publishPriority": 16
+  },
+  {
+    "id": "b2027017-0017-4017-8017-000000000017",
+    "slug": "speed-up-divi-website",
+    "title": "How to Speed Up a Divi Website: A Practical Optimization Guide",
+    "seoTitle": "How to Speed Up a Divi Website: A Practical Optimization Guide",
+    "metaDescription": "Is your Divi website slow? Learn how to improve loading speed through image optimization, caching, CSS, JavaScript and better performance settings.",
+    "primaryKeyword": "How to speed up a Divi website",
+    "categorySlugs": ["divi", "performance"],
+    "tagSlugs": ["divi", "wordpress", "performance"],
+    "featuredImage": {
+      "url": "/assets/blog/speed-up-divi-website.webp",
+      "alt": "Improve Divi website performance — faster loading on desktop and mobile",
+      "filename": "speed-up-divi-website.webp"
+    },
+    "bodyFile": "speed-up-divi-website.html",
+    "publishPriority": 17
+  },
+  {
+    "id": "b2027018-0018-4018-8018-000000000018",
+    "slug": "divi-vs-elementor",
+    "title": "Divi vs Elementor: Which Is Better for Your Business Website?",
+    "seoTitle": "Divi vs Elementor: Which Is Better for Your Business Website?",
+    "metaDescription": "Comparing Divi vs Elementor? Discover the differences in design flexibility, performance, pricing, maintenance and features to choose the right WordPress builder.",
+    "primaryKeyword": "Divi vs Elementor",
+    "categorySlugs": ["divi", "guides"],
+    "tagSlugs": ["divi", "elementor", "wordpress"],
+    "featuredImage": {
+      "url": "/assets/blog/divi-vs-elementor.png",
+      "alt": "Divi vs Elementor — choosing a WordPress page builder for business",
+      "filename": "divi-vs-elementor.png"
+    },
+    "bodyFile": "divi-vs-elementor.html",
+    "publishPriority": 18
+  },
+  {
+    "id": "b2027019-0019-4019-8019-000000000019",
+    "slug": "divi-woocommerce-website",
+    "title": "Divi WooCommerce Website: Essential Features for a Better Online Store",
+    "seoTitle": "Divi WooCommerce Website: Essential Features for a Better Online Store",
+    "metaDescription": "Planning a Divi WooCommerce store? Explore essential design, product page, mobile shopping, checkout and user experience features for your online business.",
+    "primaryKeyword": "Divi WooCommerce website",
+    "categorySlugs": ["divi", "woocommerce"],
+    "tagSlugs": ["divi", "woocommerce", "ecommerce"],
+    "featuredImage": {
+      "url": "/assets/blog/divi-woocommerce-website.webp",
+      "alt": "Divi WooCommerce website — product page and mobile store layout",
+      "filename": "divi-woocommerce-website.webp"
+    },
+    "bodyFile": "divi-woocommerce-website.html",
+    "publishPriority": 19
+  },
+  {
+    "id": "b2027020-0020-4020-8020-000000000020",
+    "slug": "divi-website-cost-uk",
+    "title": "How Much Does a Divi Website Cost in the UK? A Business Guide",
+    "seoTitle": "How Much Does a Divi Website Cost in the UK? A Business Guide",
+    "metaDescription": "Find out what affects the cost of a Divi website in the UK, including design, development, hosting, customization, functionality and ongoing maintenance.",
+    "primaryKeyword": "Divi website cost UK",
+    "categorySlugs": ["divi", "uk", "pricing"],
+    "tagSlugs": ["divi", "uk", "pricing"],
+    "featuredImage": {
+      "url": "/assets/blog/divi-website-cost-uk.jpg",
+      "alt": "Divi website cost UK — planning a custom Divi website budget",
+      "filename": "divi-website-cost-uk.jpg"
+    },
+    "bodyFile": "divi-website-cost-uk.html",
+    "publishPriority": 20
   }
 ]

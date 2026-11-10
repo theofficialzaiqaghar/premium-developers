@@ -66,9 +66,14 @@ const PUBLISHED_DATES = [
   '2026-11-17T10:00:00.000Z',
   '2026-11-24T10:00:00.000Z',
   '2026-12-01T10:00:00.000Z',
-  '2026-12-08T10:00:00.000Z'
+  '2026-12-08T10:00:00.000Z',
+  '2026-12-15T10:00:00.000Z',
+  '2026-12-22T10:00:00.000Z',
+  '2026-12-29T10:00:00.000Z',
+  '2027-01-05T10:00:00.000Z',
+  '2027-01-12T10:00:00.000Z'
 ];
-const FEATURED_SLUG = 'woocommerce-developer-uk';
+const FEATURED_SLUG = 'divi-website-redesign';
 
 function articleUrl(slug) {
   return `/blog/${encodeURIComponent(slug)}/`;

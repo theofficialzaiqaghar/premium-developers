@@ -34,10 +34,15 @@ const BLOG_DATES = [
   '2025-11-18',
   '2025-11-25',
   '2025-12-02',
-  '2025-12-09'
+  '2025-12-09',
+  '2026-12-15',
+  '2026-12-22',
+  '2026-12-29',
+  '2027-01-05',
+  '2027-01-12'
 ];
 
-const SITE_LASTMOD = '2026-11-11';
+const SITE_LASTMOD = '2026-11-12';
 
 const STATIC_PAGES = [
   { loc: `${SITE}/`, changefreq: 'weekly', priority: '1.0' },
