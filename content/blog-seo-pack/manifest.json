@@ -321,5 +321,22 @@
     },
     "bodyFile": "divi-website-cost-uk.html",
     "publishPriority": 20
+  },
+  {
+    "id": "b2027021-0021-4021-8021-000000000021",
+    "slug": "small-business-website-features",
+    "title": "What Should a Small Business Website Include? 12 Essential Features for 2026",
+    "seoTitle": "12 Essential Small Business Website Features (2026)",
+    "metaDescription": "Discover 12 essential small business website features for 2026, from mobile-friendly design and SEO to website security, speed and lead generation.",
+    "primaryKeyword": "small business website features",
+    "categorySlugs": ["small-business", "web-design", "guides"],
+    "tagSlugs": ["small-business", "web-design", "wordpress", "seo", "uk"],
+    "featuredImage": {
+      "url": "/assets/blog/small-business-website-features.jpg",
+      "alt": "Small business website features — professional responsive site layout on laptop and mobile",
+      "filename": "small-business-website-features.jpg"
+    },
+    "bodyFile": "small-business-website-features.html",
+    "publishPriority": 21
   }
 ]
