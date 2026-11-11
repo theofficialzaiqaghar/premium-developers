@@ -12,18 +12,24 @@
 
   let activeIndex = -1;
   let tappedIndex = -1;
-  let mobileScrollActive = false;
 
   const fillForIndex = index => {
     if (index < 0) return 0;
     return Math.min(1, (index + 1) / steps.length);
   };
 
-  const setActive = index => {
+  const setProgressFill = fill => {
+    const clamped = Math.min(1, Math.max(0, fill));
+    root.style.setProperty('--process-fill', String(clamped));
+    root.classList.toggle('is-step-active', clamped > 0.02);
+  };
+
+  const setActive = (index, options = {}) => {
+    const { fill } = options;
     activeIndex = index;
-    const fill = fillForIndex(index);
-    root.style.setProperty('--process-fill', String(fill));
-    root.classList.toggle('is-step-active', index >= 0);
+    const resolvedFill = typeof fill === 'number' ? fill : fillForIndex(index);
+    setProgressFill(resolvedFill);
+    root.classList.toggle('is-step-active', index >= 0 || resolvedFill > 0.02);
 
     steps.forEach((step, i) => {
       const on = i === index;
@@ -31,7 +37,6 @@
       if (on) step.setAttribute('aria-current', 'step');
       else step.removeAttribute('aria-current');
     });
-
   };
 
   const resolveIndex = el => {
@@ -69,7 +74,7 @@
         setActive(tappedIndex);
         return;
       }
-      if (isMobileLayout() && mobileScrollActive && activeIndex >= 0) return;
+      if (isMobileLayout() && tappedIndex < 0 && activeIndex >= 0) return;
       if (!isMobileLayout()) setActive(-1);
     });
   };
@@ -78,57 +83,70 @@
     root.addEventListener('click', event => {
       const step = event.target.closest('[data-process-step]');
       if (!step) return;
-      const index = resolveIndex(step);
-      mobileScrollActive = false;
-      tappedIndex = index;
-      setActive(index);
+      tappedIndex = resolveIndex(step);
+      setActive(tappedIndex);
     });
   };
 
-  const bindMobileScrollProgress = () => {
-    if (reduceMotion || !('IntersectionObserver' in window)) return;
+  const syncMobileProgress = () => {
+    if (!isMobileLayout() || tappedIndex >= 0) return;
 
-    const visibleSteps = new Set();
-    let lastScrollIndex = 0;
+    const rect = root.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > vh) return;
 
-    const stepObserver = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          const idx = resolveIndex(entry.target);
-          if (idx < 0) return;
-          if (entry.isIntersecting) visibleSteps.add(idx);
-          else visibleSteps.delete(idx);
-        });
+    const startY = vh * 0.88;
+    const endY = vh * 0.18;
+    const span = Math.max(1, rect.height + (startY - endY));
+    const traveled = startY - rect.top;
+    const fill = Math.min(1, Math.max(0, traveled / span));
 
-        if (!isMobileLayout() || (tappedIndex >= 0 && !mobileScrollActive)) return;
-
-        if (visibleSteps.size === 0) {
-          setActive(lastScrollIndex);
-          return;
-        }
-
-        lastScrollIndex = Math.max(...visibleSteps);
-        mobileScrollActive = true;
-        setActive(lastScrollIndex);
-      },
-      {
-        threshold: [0.35, 0.55, 0.75],
-        rootMargin: '-12% 0px -22% 0px'
+    const focusY = vh * 0.4;
+    let highlight = 0;
+    let nearest = Infinity;
+    steps.forEach((step, i) => {
+      const r = step.getBoundingClientRect();
+      const center = r.top + r.height * 0.5;
+      const dist = Math.abs(center - focusY);
+      if (dist < nearest) {
+        nearest = dist;
+        highlight = i;
       }
-    );
+    });
 
-    steps.forEach(step => stepObserver.observe(step));
+    setActive(highlight, { fill });
+  };
+
+  const bindMobileScrollProgress = () => {
+    if (reduceMotion) return;
+
+    let ticking = false;
+    const schedule = () => {
+      if (!isMobileLayout() || tappedIndex >= 0) return;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        syncMobileProgress();
+      });
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) schedule();
+    });
 
     mobileMq.addEventListener('change', () => {
       if (!isMobileLayout()) {
-        visibleSteps.clear();
         tappedIndex = -1;
-        mobileScrollActive = false;
         setActive(-1);
       } else if (tappedIndex < 0) {
-        mobileScrollActive = true;
+        syncMobileProgress();
       }
     });
+
+    schedule();
   };
 
   steps.forEach(step => {
@@ -140,17 +158,13 @@
   if (isCoarse) bindTap();
   bindMobileScrollProgress();
 
-  if (isMobileLayout() && tappedIndex < 0) {
-    mobileScrollActive = true;
-    setActive(0);
-  }
-
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           root.classList.add('is-visible');
+          if (isMobileLayout() && tappedIndex < 0) syncMobileProgress();
           io.unobserve(root);
         }
       },

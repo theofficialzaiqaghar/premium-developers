@@ -340,6 +340,11 @@ html.has-motion .process-timeline.is-visible {
     transform: scale(1.04);
   }
 
+  .process-wave__progress {
+    transition: stroke-dashoffset 0.18s linear;
+    will-change: auto;
+  }
+
   html.has-motion .process-timeline.is-visible .process-step,
   html.has-motion .process-timeline.is-visible .process-step.is-revealed {
     transform: none;
