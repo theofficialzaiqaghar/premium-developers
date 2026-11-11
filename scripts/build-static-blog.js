@@ -14,6 +14,7 @@ const {
   trackingStylesLink,
   trackingScriptsAfterAnalytics
 } = require('../lib/tracking-snippets');
+const { ensureBlogArchiveTracking } = require('../lib/blog-archive-tracking');
 
 const root = path.join(__dirname, '..');
 const manifestPath = path.join(root, 'content', 'blog-seo-pack', 'manifest.json');
@@ -377,6 +378,7 @@ async function main() {
     /<script src="\/blog\/config\.js"><\/script>\s*/i,
     ''
   );
+  indexHtml = ensureBlogArchiveTracking(indexHtml);
   fs.writeFileSync(blogIndexPath, indexHtml, 'utf8');
   console.log('Updated', path.relative(root, blogIndexPath));
 

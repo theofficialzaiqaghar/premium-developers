@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <!-- Consent Mode (must load before Google Tag Manager) -->
+  <script src="/consent-default.js"></script>
+  <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -137,9 +140,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="stylesheet" href="/exit-intent.css">
   <link rel="stylesheet" href="/offer-popup.css">
   <link rel="stylesheet" href="/whatsapp-button.css">
+  <link rel="stylesheet" href="/cookie-consent.css">
 </head>
 <body class="service-page blog-page" data-blog-archive="static">
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF285DKZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF285DKZ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -511,13 +518,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="/contact">Contact</a>
         <a href="/privacy-policy.html">Privacy</a>
         <a href="/terms-and-conditions.html">Terms</a>
+        <a href="#" data-pd-open-cookie-settings>Cookie settings</a>
       </span>
     </div>
   </footer>
 
 <script src="/blog/blog-archive-enhance.js" defer></script>
     <script src="/script.js" defer></script>
-<script src="/analytics.js"></script>  <script src="/whatsapp-config.js"></script>
+<script src="/analytics.js"></script>  <script src="/cookie-consent.js" defer></script>
+  <script src="/whatsapp-config.js"></script>
   <script src="/whatsapp-button.js" defer></script>
 
   <script src="/exit-intent.js" data-frequency-days="30" defer></script>

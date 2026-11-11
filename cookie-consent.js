@@ -45,8 +45,9 @@
     banner.hidden = true;
   }
 
-  function buildBanner() {
-    if (document.getElementById('pd-cookie-banner')) return null;
+  function getBannerElement() {
+    const existing = document.getElementById('pd-cookie-banner');
+    if (existing) return existing;
 
     const banner = document.createElement('aside');
     banner.id = 'pd-cookie-banner';
@@ -57,10 +58,10 @@
     banner.innerHTML = `
       <span class="pd-cookie-banner__kicker">Privacy</span>
       <h2 class="pd-cookie-banner__title" id="pd-cookie-banner-title">Cookie preferences</h2>
-      <p>We use essential cookies so the site works. If you agree, we also use analytics and ads tools (Google Tag Manager, GA4, Google Ads) to measure visits and leads. <a href="/privacy-policy.html">Privacy policy</a></p>
+      <p>We use essential cookies so the site works. If you agree, we also use analytics and advertising tools (Google Tag Manager, GA4, Google Ads, Google AdSense) to measure visits, show ads, and track leads. <a href="/privacy-policy.html">Privacy policy</a></p>
       <div class="pd-cookie-settings" id="pd-cookie-settings" hidden>
         <label><input type="checkbox" id="pd-consent-analytics" checked> Analytics cookies (measure site use and form performance)</label>
-        <label><input type="checkbox" id="pd-consent-marketing"> Marketing cookies (Google Ads measurement and remarketing)</label>
+        <label><input type="checkbox" id="pd-consent-marketing"> Marketing &amp; advertising cookies (Google Ads, Google AdSense, measurement and remarketing)</label>
       </div>
       <div class="pd-cookie-banner__actions">
         <button type="button" class="pd-cookie-banner__accept" data-pd-consent="accept-all">Accept all</button>
@@ -73,15 +74,11 @@
     return banner;
   }
 
-  function commitChoice(banner, choice) {
-    saveChoice(choice);
-    applyConsent(choice);
-    hideBanner(banner);
-  }
+  let bannerEventsBound = false;
 
-  function showBanner() {
-    const banner = buildBanner();
-    if (!banner) return;
+  function bindBannerEvents(banner) {
+    if (bannerEventsBound) return;
+    bannerEventsBound = true;
 
     const settingsPanel = banner.querySelector('#pd-cookie-settings');
     const saveBtn = banner.querySelector('#pd-consent-save');
@@ -108,11 +105,35 @@
         marketing: Boolean(marketingInput?.checked)
       });
     });
+  }
 
+  function commitChoice(banner, choice) {
+    saveChoice(choice);
+    applyConsent(choice);
+    hideBanner(banner);
+  }
+
+  function resetBannerUi(banner) {
+    const settingsPanel = banner.querySelector('#pd-cookie-settings');
+    const saveBtn = banner.querySelector('#pd-consent-save');
+    const analyticsInput = banner.querySelector('#pd-consent-analytics');
+    const marketingInput = banner.querySelector('#pd-consent-marketing');
+    if (settingsPanel) settingsPanel.hidden = true;
+    if (saveBtn) saveBtn.hidden = true;
+    if (analyticsInput) analyticsInput.checked = true;
+    if (marketingInput) marketingInput.checked = false;
+  }
+
+  function showBanner() {
+    const banner = getBannerElement();
+    if (!banner) return;
+    bindBannerEvents(banner);
+    resetBannerUi(banner);
     banner.hidden = false;
   }
 
   window.PDOpenCookieSettings = () => {
+    applyConsent({ analytics: false, marketing: false });
     try {
       window.localStorage.removeItem(STORAGE_KEY);
     } catch {
