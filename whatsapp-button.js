@@ -168,11 +168,16 @@
     teaserEl.addEventListener('click', (event) => {
       if (event.target.closest('.pd-whatsapp-fab__teaser-dismiss')) return;
       markTeaserSeen();
-      trackOnce(
-        'click_whatsapp',
-        { link_url: hrefBase, page_path: window.location.pathname, placement: 'service_teaser' },
-        `click_whatsapp_teaser:${window.location.pathname}`
-      );
+      const waParams = {
+        link_url: hrefBase,
+        page_path: window.location.pathname,
+        placement: 'service_teaser'
+      };
+      if (typeof window.pdTrackWhatsAppClick === 'function') {
+        window.pdTrackWhatsAppClick(waParams, `whatsapp:service_teaser:${window.location.pathname}`);
+      } else {
+        trackOnce('click_whatsapp', waParams, `click_whatsapp_teaser:${window.location.pathname}`);
+      }
     });
 
     widget.appendChild(teaserEl);
@@ -201,15 +206,17 @@
   link.addEventListener('click', () => {
     markTeaserSeen();
     hideTeaser();
-    trackOnce(
-      'click_whatsapp',
-      {
-        link_url: hrefBase,
-        page_path: window.location.pathname,
-        placement: enhanced ? 'service_fab' : 'fab'
-      },
-      `click_whatsapp:${window.location.pathname}`
-    );
+    const placement = enhanced ? 'service_fab' : 'fab';
+    const waParams = {
+      link_url: hrefBase,
+      page_path: window.location.pathname,
+      placement
+    };
+    if (typeof window.pdTrackWhatsAppClick === 'function') {
+      window.pdTrackWhatsAppClick(waParams, `whatsapp:${placement}:${window.location.pathname}`);
+    } else {
+      trackOnce('click_whatsapp', waParams, `click_whatsapp:${window.location.pathname}`);
+    }
   });
 
   widget.appendChild(link);

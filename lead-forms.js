@@ -416,7 +416,8 @@
             service_name: primaryService || selectedServices[0] || '',
             services_selected: selectedServices.length ? selectedServices.join(', ') : '(none)',
             source_page: payload.sourcePage,
-            has_promo_code: Boolean(String(payload.promoCode || '').trim())
+            has_promo_code: Boolean(String(payload.promoCode || '').trim()),
+            method: 'form'
           },
           conversionKey
         );
@@ -489,7 +490,7 @@
     const params = new URLSearchParams(window.location.search);
     const urlReason = params.get('reason');
     track('contact_page_view', { inquiry_reason: urlReason || '(not set)' });
-    initLeadForm(form, { formName: 'contact', submitLabel: 'Send message' });
+    initLeadForm(form, { formName: 'contact', submitLabel: 'Send project enquiry' });
 
     const shouldScroll =
       window.location.hash === '#contact-form' || Boolean(urlReason);

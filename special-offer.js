@@ -171,19 +171,21 @@
       success.hidden = false;
       success.focus();
 
+      const offerParams = {
+        form_name: 'special_offer',
+        form_id: form.id || '',
+        form_destination: form.action || '/api/special-offer',
+        services_selected: payload.services.join(', '),
+        offer_type: '30_percent_off',
+        marketing_consent: payload.consent === true,
+        method: 'form'
+      };
+      const offerKey = `special_offer:${submissionId}`;
+      if (typeof window.pdTrackLeadSuccess === 'function') {
+        window.pdTrackLeadSuccess(offerParams, offerKey);
+      }
       const trackFormSuccess = window.pdTrackFormSuccess || ((name, p, k) => trackOnce(name, p, `${name}:${k}`));
-      trackFormSuccess(
-        'special_offer_submit',
-        {
-          form_name: 'special_offer',
-          form_id: form.id || '',
-          form_destination: form.action || '/api/special-offer',
-          services_selected: payload.services.join(', '),
-          offer_type: '30_percent_off',
-          marketing_consent: payload.consent === true
-        },
-        `special_offer:${submissionId}`
-      );
+      trackFormSuccess('special_offer_submit', offerParams, offerKey);
     } catch (error) {
       setStatus(error instanceof Error
         ? error.message

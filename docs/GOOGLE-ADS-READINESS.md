@@ -6,16 +6,18 @@ This document describes what the **codebase** provides for Google Ads and what y
 
 | Event | When it fires | Use in Google Ads |
 | --- | --- | --- |
-| `generate_lead` | Successful POST to `/api/contact` only (`contact`, `service_inquiry`, `home_inquiry`) — paired with `form_submit` | **Primary conversion** |
-| `form_submit` | Same successful submits as `generate_lead`, plus special-offer and exit-intent on success (`lead_outcome: success`) | GA4 recommended event / backup conversion trigger |
+| `generate_lead` | Successful POST to `/api/contact` (`contact`, `service_inquiry`, `home_inquiry`), successful special-offer submit, and WhatsApp CTA clicks (`method: whatsapp`) — paired with `form_submit` for form channels | **Primary conversion** — mark as GA4 **key event** |
+| `form_submit` | Same successful form submits as `generate_lead` (forms only; `lead_outcome: success`, `method: form`) | GA4 recommended event / backup conversion trigger |
 | `form_start` | First focus inside a lead form (`contact`, `service_inquiry`, `home_inquiry`) | Funnel micro-conversion |
-| `click_whatsapp` | First WhatsApp FAB click per page | Optional micro-conversion |
+| `click_whatsapp` | First WhatsApp FAB/teaser click per page (also fires `generate_lead` with `method: whatsapp`) | Optional micro-conversion |
 | `click_to_call` | First `tel:` link click per page | Optional micro-conversion |
 | `cta_click` | Service CTAs scrolling to `#project-inquiry` | Analytics only |
 | `contact_page_view` | Contact page load | Analytics only |
 | `special_offer_submit` | Successful special-offer API submit | Do **not** use as primary Ads conversion |
 | `exit_offer_submit` | Successful exit-intent discount email | Do **not** use as primary Ads conversion |
 | `pd_consent_update` | Cookie banner save | Consent diagnostics |
+
+**Do not expect from this marketing site:** `purchase`, `close_convert_lead`, or `qualify_lead`. Those require ecommerce checkout or CRM qualification. If they are marked as GA4 key events but never fire, mark `generate_lead` as the key event instead (or unmark the unused ones).
 
 GTM container: **GTM-WF285DKZ**
 
@@ -50,7 +52,8 @@ On **successful** submit (API OK + success message), the site pushes:
 
 | dataLayer `event` | When |
 | --- | --- |
-| `special_offer_submit` | Primary — use this in GTM (same pattern as `generate_lead`) |
+| `generate_lead` | Primary lead event (`form_name: special_offer`, `method: form`) |
+| `special_offer_submit` | Offer-specific mirror for Ads segmentation |
 | `form_submit` | Mirror with `form_name: special_offer`, `lead_outcome: success` |
 
 Example parameters: `form_name`, `form_id`, `form_destination`, `offer_type` (`30_percent_off`), `services_selected`, `marketing_consent`, `lead_outcome`.
