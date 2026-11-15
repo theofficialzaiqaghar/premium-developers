@@ -8,6 +8,8 @@
     'Custom Development',
     'Custom WordPress Plugin Development',
     'Landing Pages',
+    'Instagram Reels Creation',
+    'AI Image Generation',
     'Speed & Performance',
     'Maintenance & Support',
     'Essential Web',

@@ -73,6 +73,26 @@ window.PD_SERVICE_CONVERSION = {
       },
       contactReason: 'Landing%20page'
     },
+    'instagram-reels-creation': {
+      waTeaser: 'Need Instagram Reels for Your Brand?',
+      waMessage:
+        "Hi, I'm interested in Instagram Reels creation for my business. I'd like to discuss the brief.",
+      scrollBar: {
+        headline: 'Planning short-form Reels for your brand?',
+        action: "Let's Discuss Your Project →"
+      },
+      contactReason: 'Instagram%20Reels'
+    },
+    'ai-image-generation': {
+      waTeaser: 'Need AI Marketing Visuals?',
+      waMessage:
+        "Hi, I'm interested in AI image generation for marketing visuals. I'd like to discuss my brand and use cases.",
+      scrollBar: {
+        headline: 'Need brand-ready AI visuals?',
+        action: "Let's Discuss Your Project →"
+      },
+      contactReason: 'AI%20image%20generation'
+    },
     'maintenance-support': {
       waTeaser: 'Need WordPress Maintenance?',
       waMessage:

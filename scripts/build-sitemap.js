@@ -58,6 +58,8 @@ const STATIC_PAGES = [
   { loc: `${SITE}/services/website-redesign.html`, changefreq: 'monthly', priority: '0.75' },
   { loc: `${SITE}/services/custom-development.html`, changefreq: 'monthly', priority: '0.75' },
   { loc: `${SITE}/services/landing-pages.html`, changefreq: 'monthly', priority: '0.7' },
+  { loc: `${SITE}/services/instagram-reels-creation.html`, changefreq: 'monthly', priority: '0.75' },
+  { loc: `${SITE}/services/ai-image-generation.html`, changefreq: 'monthly', priority: '0.75' },
   { loc: `${SITE}/services/speed-performance.html`, changefreq: 'monthly', priority: '0.75' },
   { loc: `${SITE}/services/maintenance-support.html`, changefreq: 'monthly', priority: '0.7' },
   { loc: `${SITE}/services/essential-web.html`, changefreq: 'monthly', priority: '0.7' },
