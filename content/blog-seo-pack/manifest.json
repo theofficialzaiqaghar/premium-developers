@@ -36,9 +36,9 @@
   {
     "id": "b2026004-0004-4004-8004-000000000004",
     "slug": "woocommerce-website-development-guide",
-    "title": "WooCommerce Website Development: Essential Features Every Online Store Needs",
-    "seoTitle": "WooCommerce Website Development — Essential Features",
-    "metaDescription": "Learn which features make a successful WooCommerce website, from secure payments and mobile-friendly design to product pages, checkout and SEO.",
+    "title": "WooCommerce website development: features every UK store needs",
+    "seoTitle": "WooCommerce Website Development: Features UK Stores Need",
+    "metaDescription": "A practical WooCommerce website development checklist: catalogue, checkout, payments, mobile UX and SEO for UK store owners.",
     "primaryKeyword": "WooCommerce website development",
     "categorySlugs": ["woocommerce"],
     "tagSlugs": ["woocommerce", "ecommerce"],
@@ -155,10 +155,10 @@
   {
     "id": "b2027011-0011-4011-8011-000000000011",
     "slug": "woocommerce-developer-uk",
-    "title": "WooCommerce Developer UK: What Does a WooCommerce Developer Actually Do?",
-    "seoTitle": "WooCommerce Developer UK — What They Do",
-    "metaDescription": "Hire a WooCommerce developer in the UK. Learn what store developers do, when to hire, and how Premium Developers scopes checkout, payments, and catalogue work.",
-    "primaryKeyword": "woocommerce developer",
+    "title": "What does a WooCommerce developer actually do?",
+    "seoTitle": "What Does a WooCommerce Developer Do? (UK Guide)",
+    "metaDescription": "Learn what a WooCommerce developer does day to day—catalogue, checkout, payments—and when a UK business should hire one.",
+    "primaryKeyword": "what does a woocommerce developer do",
     "categorySlugs": ["woocommerce", "guides"],
     "tagSlugs": ["woocommerce", "uk", "ecommerce"],
     "featuredImage": {
@@ -338,5 +338,35 @@
     },
     "bodyFile": "small-business-website-features.html",
     "publishPriority": 21
+  },
+  {
+    "id": "b2026022-0022-4022-8022-000000000022",
+    "slug": "woocommerce-website-cost-uk",
+    "title": "How Much Does a WooCommerce Website Cost in the UK?",
+    "seoTitle": "WooCommerce Website Cost UK: Complete Pricing Guide",
+    "metaDescription": "Find out how much a WooCommerce website costs in the UK. Explore development, design, hosting, payment gateway, plugin and maintenance costs.",
+    "excerpt": "Planning to launch an online store? Discover the costs of building and running a WooCommerce website in the UK, including design, development, hosting, plugins and ongoing maintenance.",
+    "primaryKeyword": "WooCommerce website cost UK",
+    "secondaryKeywords": [
+      "WooCommerce development cost UK",
+      "Cost of WooCommerce website",
+      "WooCommerce website design cost",
+      "WooCommerce developer UK",
+      "WooCommerce store development",
+      "WooCommerce maintenance cost UK",
+      "How much does WooCommerce cost",
+      "Custom WooCommerce development UK",
+      "WooCommerce website pricing"
+    ],
+    "categorySlugs": ["woocommerce", "guides", "pricing"],
+    "tagSlugs": ["woocommerce", "uk", "pricing", "ecommerce"],
+    "featuredImage": {
+      "url": "/assets/blog/woocommerce-website-cost-uk.webp",
+      "alt": "WooCommerce website cost UK — planning an online store budget on a laptop",
+      "filename": "woocommerce-website-cost-uk.webp"
+    },
+    "bodyFile": "woocommerce-website-cost-uk.html",
+    "publishedAt": "2026-11-18T10:00:00.000Z",
+    "publishPriority": 22
   }
 ]

@@ -327,8 +327,8 @@ async function main() {
     .sort((a, b) => a.publishPriority - b.publishPriority)
     .map((entry, i) => ({
       ...entry,
-      excerpt: entry.metaDescription,
-      publishedAt: PUBLISHED_DATES[i] || PUBLISHED_DATES[0],
+      excerpt: entry.excerpt || entry.metaDescription,
+      publishedAt: entry.publishedAt || PUBLISHED_DATES[i] || PUBLISHED_DATES[0],
       bodyHtml:
         bodyBySlug.get(entry.slug) || fs.readFileSync(path.join(bodiesDir, entry.bodyFile), 'utf8')
     }));
