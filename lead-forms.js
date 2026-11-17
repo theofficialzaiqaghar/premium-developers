@@ -26,6 +26,25 @@
     'Flexible / not sure yet'
   ];
 
+  const PACKAGE_PRESETS = {
+    starter: {
+      label: 'Starter — Essential Website (launch price £139)',
+      services: ['Essential Web', 'WordPress Development', 'Elementor Development']
+    },
+    business: {
+      label: 'Business — Professional Website (launch price £200)',
+      services: ['WordPress Development', 'Elementor Development', 'Landing Pages']
+    },
+    ecommerce: {
+      label: 'E-Commerce — Complete Online Store (launch price £349)',
+      services: ['WooCommerce Development', 'WordPress Development', 'Elementor Development']
+    },
+    'care-plan': {
+      label: 'Website Care Plan (launch price £39/month)',
+      services: ['Maintenance & Support']
+    }
+  };
+
   function escapeHtml(value) {
     return String(value)
       .replace(/&/g, '&amp;')
@@ -166,13 +185,19 @@
     const websiteUrlField = getField('websiteUrl');
     const timelineField = getField('projectTimeline');
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const packageKey = (urlParams.get('package') || '').trim().toLowerCase();
+    const packagePreset = PACKAGE_PRESETS[packageKey] || null;
+
     if (reasonField && reasonField.tagName === 'SELECT') {
-      const requestedReason = new URLSearchParams(window.location.search).get('reason');
+      const requestedReason = urlParams.get('reason');
       if (requestedReason) {
         const matchingOption = [...reasonField.options].find(
           (option) => option.value.toLowerCase() === requestedReason.toLowerCase()
         );
         if (matchingOption) reasonField.value = matchingOption.value;
+      } else if (packagePreset) {
+        reasonField.value = 'Project discussion';
       }
     }
 
@@ -312,6 +337,24 @@
     });
 
     updateProjectDetails();
+
+    if (packagePreset && isProjectDiscussion()) {
+      if (serviceOptions.length) {
+        const wanted = new Set(packagePreset.services.map((name) => name.toLowerCase()));
+        serviceOptions.forEach((option) => {
+          option.checked = wanted.has(option.value.toLowerCase());
+        });
+        setServicesError('');
+      }
+      const messageField = getField('message');
+      if (messageField && !messageField.value.trim()) {
+        messageField.value = `I'm interested in the ${packagePreset.label} package from the launch offer.`;
+      }
+      const promoField = form.elements.namedItem('promoCode');
+      if (promoField && !promoField.value.trim()) {
+        promoField.value = 'LAUNCH30';
+      }
+    }
 
     form.addEventListener(
       'focusin',
@@ -491,11 +534,17 @@
     const track = window.pdTrack || (() => {});
     const params = new URLSearchParams(window.location.search);
     const urlReason = params.get('reason');
-    track('contact_page_view', { inquiry_reason: urlReason || '(not set)' });
+    const urlPackage = params.get('package');
+    track('contact_page_view', {
+      inquiry_reason: urlReason || '(not set)',
+      package: urlPackage || '(not set)'
+    });
     initLeadForm(form, { formName: 'contact', submitLabel: 'Send project enquiry' });
 
     const shouldScroll =
-      window.location.hash === '#contact-form' || Boolean(urlReason);
+      window.location.hash === '#contact-form' ||
+      Boolean(urlReason) ||
+      Boolean(urlPackage);
     if (!shouldScroll) return;
 
     const runScroll = () => requestAnimationFrame(() => scrollContactFormIntoView());
