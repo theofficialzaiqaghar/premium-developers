@@ -43,7 +43,7 @@
 }
 
 .launch-pricing__badge--offer {
-  background: linear-gradient(135deg, #5530c9, var(--purple));
+  background: #6a45e3;
   color: #fff;
 }
 
