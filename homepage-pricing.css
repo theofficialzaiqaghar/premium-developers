@@ -13,7 +13,7 @@
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
-  background: linear-gradient(90deg, var(--navy), var(--amber), var(--navy));
+  background: linear-gradient(90deg, var(--navy), var(--purple), var(--navy));
   opacity: .85;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .launch-pricing__badge--offer {
-  background: linear-gradient(135deg, #c47a00, var(--amber));
-  color: #1a1200;
+  background: linear-gradient(135deg, #5530c9, var(--purple));
+  color: #fff;
 }
 
 .launch-pricing__banner-note {
@@ -102,7 +102,7 @@
   inset: 0 0 auto;
   height: 4px;
   border-radius: 16px 16px 0 0;
-  background: var(--navy);
+  background: var(--purple);
 }
 
 .price-card__ribbon {
@@ -112,8 +112,8 @@
   z-index: 1;
   padding: 5px 10px;
   border-radius: 999px;
-  background: var(--amber);
-  color: #1a1200;
+  background: var(--purple);
+  color: #fff;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .06em;
@@ -194,8 +194,8 @@
   height: 26px;
   padding: 0 10px;
   border-radius: 6px;
-  background: rgba(242, 162, 30, .16);
-  color: #8a5400;
+  background: rgba(106, 69, 227, .12);
+  color: var(--purple);
   font-size: 11px;
   font-weight: 800;
   letter-spacing: .06em;
@@ -312,7 +312,7 @@
 }
 
 .care-plan__scope--out h4 {
-  color: #8b4513;
+  color: var(--purple);
 }
 
 .care-plan__scope ul {
@@ -343,7 +343,7 @@
 }
 
 .care-plan__scope--out li::before {
-  background: #c47a00;
+  background: var(--purple);
 }
 
 .care-plan__note {
