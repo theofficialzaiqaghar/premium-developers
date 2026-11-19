@@ -28,7 +28,7 @@ const publishedArticle = {
   categorySlugs: ['wordpress'],
   tagSlugs: [],
   featuredImage: {
-    url: 'https://www.premiumdevelopers.co/assets/images/og/premium-developers-og.jpg',
+    url: 'https://premiumdevelopers.co/assets/images/og/premium-developers-og.jpg',
     alt: 'WordPress performance illustration',
     filename: ''
   },
@@ -45,7 +45,7 @@ test('renderArticlePage includes crawlable content and SEO tags', () => {
   const html = renderArticlePage(publishedArticle, []);
   assert.match(html, /<h1[^>]*>WordPress Performance Tips<\/h1>/);
   assert.match(html, /Full article body visible in HTML/);
-  assert.match(html, /<link rel="canonical" href="https:\/\/www\.premiumdevelopers\.co\/blog\/wordpress-performance-tips\/"/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/premiumdevelopers\.co\/blog\/wordpress-performance-tips\/"/);
   assert.match(html, /<meta name="description" content="Practical ways to speed up WordPress without breaking your stack\."/);
   assert.match(html, /property="og:type" content="article"/);
   assert.match(html, /"@type": "Article"/);
@@ -61,7 +61,7 @@ test('renderNotFoundPage uses noindex', () => {
 
 test('renderArchivePage includes crawlable article links', () => {
   const html = renderArchivePage([publishedArticle]);
-  assert.match(html, /href="https:\/\/www\.premiumdevelopers\.co\/blog\/wordpress-performance-tips\/"/);
+  assert.match(html, /href="https:\/\/premiumdevelopers\.co\/blog\/wordpress-performance-tips\/"/);
   assert.match(html, /Featured article/);
 });
 
@@ -159,7 +159,7 @@ test('sitemap includes only published URLs with lastmod', async () => {
   const res = mockResponse();
   await sitemapBlog({ method: 'GET', url: '/api/sitemap-blog', headers: {} }, res);
   assert.equal(res.statusCode, 200);
-  assert.match(res.body, /<loc>https:\/\/www\.premiumdevelopers\.co\/blog\/wordpress-performance-tips\/<\/loc>/);
+  assert.match(res.body, /<loc>https:\/\/premiumdevelopers\.co\/blog\/wordpress-performance-tips\/<\/loc>/);
   assert.match(res.body, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.doesNotMatch(res.body, /draft-two/);
 });
@@ -167,6 +167,6 @@ test('sitemap includes only published URLs with lastmod', async () => {
 test('canonicalArticleUrl uses trailing slash', () => {
   assert.equal(
     canonicalArticleUrl('my-post'),
-    'https://www.premiumdevelopers.co/blog/my-post/'
+    'https://premiumdevelopers.co/blog/my-post/'
   );
 });

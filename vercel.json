@@ -2,8 +2,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "premiumdevelopers.co" }],
-      "destination": "https://www.premiumdevelopers.co/:path*",
+      "has": [{ "type": "host", "value": "www.premiumdevelopers.co" }],
+      "destination": "https://premiumdevelopers.co/:path*",
       "permanent": true
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "source": "/services/divi-development.html",
-      "destination": "https://www.premiumdevelopers.co/divi-development/",
+      "destination": "https://premiumdevelopers.co/divi-development/",
       "permanent": true
     },
     {

@@ -1,4 +1,4 @@
-# Premium Developers — https://www.premiumdevelopers.co/
+# Premium Developers — https://premiumdevelopers.co/
 # Search and AI discovery crawlers are welcome; GPTBot (model training) is blocked.
 
 User-agent: *
@@ -32,6 +32,6 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://www.premiumdevelopers.co/sitemap.xml
-Sitemap: https://www.premiumdevelopers.co/sitemap-blog.xml
-Sitemap: https://www.premiumdevelopers.co/video-sitemap.xml
+Sitemap: https://premiumdevelopers.co/sitemap.xml
+Sitemap: https://premiumdevelopers.co/sitemap-blog.xml
+Sitemap: https://premiumdevelopers.co/video-sitemap.xml

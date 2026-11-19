@@ -1,9 +1,9 @@
 {
   "lighthouseVersion": "13.6.0",
-  "requestedUrl": "https://www.premiumdevelopers.co/",
-  "mainDocumentUrl": "https://www.premiumdevelopers.co/",
-  "finalDisplayedUrl": "https://www.premiumdevelopers.co/",
-  "finalUrl": "https://www.premiumdevelopers.co/",
+  "requestedUrl": "https://premiumdevelopers.co/",
+  "mainDocumentUrl": "https://premiumdevelopers.co/",
+  "finalDisplayedUrl": "https://premiumdevelopers.co/",
+  "finalUrl": "https://premiumdevelopers.co/",
   "fetchTime": "2026-10-29T20:00:16.115Z",
   "gatherMode": "navigation",
   "runWarnings": [
@@ -260,7 +260,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "responseTime": 53
           }
         ],
@@ -558,7 +558,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "total": 12505.827999999996,
             "scripting": 829.608,
             "scriptParseCompile": 1.4480000000000002
@@ -570,13 +570,13 @@
             "scriptParseCompile": 0
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.js",
+            "url": "https://premiumdevelopers.co/exit-intent.js",
             "total": 1040.2440000000001,
             "scripting": 1009.828,
             "scriptParseCompile": 2.08
           },
           {
-            "url": "https://www.premiumdevelopers.co/_vercel/insights/script.js",
+            "url": "https://premiumdevelopers.co/_vercel/insights/script.js",
             "total": 620.0919999999999,
             "scripting": 617.4479999999999,
             "scriptParseCompile": 1.7360000000000002
@@ -685,7 +685,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -721,7 +721,7 @@
             "entity": "Google Fonts"
           },
           {
-            "url": "https://www.premiumdevelopers.co/_vercel/insights/script.js",
+            "url": "https://premiumdevelopers.co/_vercel/insights/script.js",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -739,7 +739,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/style.css",
+            "url": "https://premiumdevelopers.co/style.css",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -757,7 +757,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.css",
+            "url": "https://premiumdevelopers.co/exit-intent.css",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -775,7 +775,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/offer-popup.css",
+            "url": "https://premiumdevelopers.co/offer-popup.css",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -793,7 +793,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/logo.svg",
+            "url": "https://premiumdevelopers.co/logo.svg",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -811,7 +811,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/script.js",
+            "url": "https://premiumdevelopers.co/script.js",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -829,7 +829,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.js",
+            "url": "https://premiumdevelopers.co/exit-intent.js",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -847,7 +847,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/offer-popup.js",
+            "url": "https://premiumdevelopers.co/offer-popup.js",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -865,7 +865,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/assets/video/hero-showreel.mp4",
+            "url": "https://premiumdevelopers.co/assets/video/hero-showreel.mp4",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -901,7 +901,7 @@
             "entity": "Google Fonts"
           },
           {
-            "url": "https://www.premiumdevelopers.co/api/exit-feedback",
+            "url": "https://premiumdevelopers.co/api/exit-feedback",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -919,7 +919,7 @@
             "entity": "premiumdevelopers.co"
           },
           {
-            "url": "https://www.premiumdevelopers.co/favicon.svg",
+            "url": "https://premiumdevelopers.co/favicon.svg",
             "sessionTargetType": "page",
             "protocol": "h2",
             "cache": "none",
@@ -943,61 +943,61 @@
           "initiators": [
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 60,
               "columnNumber": 21
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 62,
               "columnNumber": 50
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 63,
               "columnNumber": 42
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 64,
               "columnNumber": 49
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 65,
               "columnNumber": 49
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 204,
               "columnNumber": 54
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 2188,
               "columnNumber": 32
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 2189,
               "columnNumber": 63
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 2190,
               "columnNumber": 38
             },
             {
               "type": "parser",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "lineNumber": 1914,
               "columnNumber": 40
             },
@@ -1035,7 +1035,7 @@
         ],
         "items": [
           {
-            "origin": "https://www.premiumdevelopers.co",
+            "origin": "https://premiumdevelopers.co",
             "rtt": 22.56
           },
           {
@@ -1082,7 +1082,7 @@
             "serverResponseTime": 253.26700000000002
           },
           {
-            "origin": "https://www.premiumdevelopers.co",
+            "origin": "https://premiumdevelopers.co",
             "serverResponseTime": 252.7055
           },
           {
@@ -1421,7 +1421,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 4677,
             "startTime": 1308.3854999999999
           },
@@ -1431,22 +1431,22 @@
             "startTime": 7606.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 1573,
             "startTime": 9581.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 829,
             "startTime": 11602.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/_vercel/insights/script.js",
+            "url": "https://premiumdevelopers.co/_vercel/insights/script.js",
             "duration": 620,
             "startTime": 5985.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.js",
+            "url": "https://premiumdevelopers.co/exit-intent.js",
             "duration": 520,
             "startTime": 6605.3855
           },
@@ -1461,7 +1461,7 @@
             "startTime": 7125.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 281,
             "startTime": 9225.3855
           },
@@ -1476,12 +1476,12 @@
             "startTime": 1070.3854999999999
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 75,
             "startTime": 9506.3855
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "duration": 61,
             "startTime": 7545.3855
           }
@@ -1495,10 +1495,10 @@
         "debugData": {
           "type": "debugdata",
           "urls": [
-            "https://www.premiumdevelopers.co/",
+            "https://premiumdevelopers.co/",
             "Unattributable",
-            "https://www.premiumdevelopers.co/_vercel/insights/script.js",
-            "https://www.premiumdevelopers.co/exit-intent.js"
+            "https://premiumdevelopers.co/_vercel/insights/script.js",
+            "https://premiumdevelopers.co/exit-intent.js"
           ],
           "tasks": [
             {
@@ -1891,25 +1891,25 @@
         "type": "treemap-data",
         "nodes": [
           {
-            "name": "https://www.premiumdevelopers.co/_vercel/insights/script.js",
+            "name": "https://premiumdevelopers.co/_vercel/insights/script.js",
             "resourceBytes": 4522,
             "encodedBytes": 2094,
             "unusedBytes": 3992
           },
           {
-            "name": "https://www.premiumdevelopers.co/script.js",
+            "name": "https://premiumdevelopers.co/script.js",
             "resourceBytes": 5734,
             "encodedBytes": 0,
             "unusedBytes": 2058
           },
           {
-            "name": "https://www.premiumdevelopers.co/exit-intent.js",
+            "name": "https://premiumdevelopers.co/exit-intent.js",
             "resourceBytes": 11958,
             "encodedBytes": 0,
             "unusedBytes": 8778
           },
           {
-            "name": "https://www.premiumdevelopers.co/offer-popup.js",
+            "name": "https://premiumdevelopers.co/offer-popup.js",
             "resourceBytes": 3931,
             "encodedBytes": 9,
             "unusedBytes": 638
@@ -2714,7 +2714,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/assets/video/hero-showreel.mp4",
+            "url": "https://premiumdevelopers.co/assets/video/hero-showreel.mp4",
             "totalBytes": 3376096
           },
           {
@@ -2722,35 +2722,35 @@
             "totalBytes": 27301
           },
           {
-            "url": "https://www.premiumdevelopers.co/style.css",
+            "url": "https://premiumdevelopers.co/style.css",
             "totalBytes": 10814
           },
           {
-            "url": "https://www.premiumdevelopers.co/",
+            "url": "https://premiumdevelopers.co/",
             "totalBytes": 10518
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.js",
+            "url": "https://premiumdevelopers.co/exit-intent.js",
             "totalBytes": 3975
           },
           {
-            "url": "https://www.premiumdevelopers.co/_vercel/insights/script.js",
+            "url": "https://premiumdevelopers.co/_vercel/insights/script.js",
             "totalBytes": 2312
           },
           {
-            "url": "https://www.premiumdevelopers.co/script.js",
+            "url": "https://premiumdevelopers.co/script.js",
             "totalBytes": 1946
           },
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.css",
+            "url": "https://premiumdevelopers.co/exit-intent.css",
             "totalBytes": 1870
           },
           {
-            "url": "https://www.premiumdevelopers.co/offer-popup.js",
+            "url": "https://premiumdevelopers.co/offer-popup.js",
             "totalBytes": 1665
           },
           {
-            "url": "https://www.premiumdevelopers.co/offer-popup.css",
+            "url": "https://premiumdevelopers.co/offer-popup.css",
             "totalBytes": 1269
           }
         ],
@@ -2794,7 +2794,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/style.css",
+            "url": "https://premiumdevelopers.co/style.css",
             "totalBytes": 10814,
             "wastedBytes": 2412,
             "wastedPercent": 22.303417494420863
@@ -3048,7 +3048,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3067,7 +3067,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3086,7 +3086,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3117,7 +3117,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3136,7 +3136,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3155,7 +3155,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3174,7 +3174,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3193,7 +3193,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3212,7 +3212,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/script.js",
+              "url": "https://premiumdevelopers.co/script.js",
               "urlProvider": "network",
               "line": 75,
               "column": 34
@@ -3231,7 +3231,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3250,7 +3250,7 @@
             },
             "source": {
               "type": "source-location",
-              "url": "https://www.premiumdevelopers.co/",
+              "url": "https://premiumdevelopers.co/",
               "urlProvider": "network",
               "line": -2,
               "column": -2
@@ -3430,7 +3430,7 @@
               "type": "subitems",
               "items": [
                 {
-                  "frameUrl": "https://www.premiumdevelopers.co/"
+                  "frameUrl": "https://premiumdevelopers.co/"
                 }
               ]
             },
@@ -4021,7 +4021,7 @@
               "type": "network-tree",
               "chains": {
                 "572F9A8185934FEF3CBD8328B57FCAEE": {
-                  "url": "https://www.premiumdevelopers.co/",
+                  "url": "https://premiumdevelopers.co/",
                   "navStartToEndTime": 226,
                   "transferSize": 10518,
                   "isLongest": true,
@@ -4042,19 +4042,19 @@
                       }
                     },
                     "32300.5": {
-                      "url": "https://www.premiumdevelopers.co/exit-intent.css",
+                      "url": "https://premiumdevelopers.co/exit-intent.css",
                       "navStartToEndTime": 2930,
                       "transferSize": 1870,
                       "children": {}
                     },
                     "32300.6": {
-                      "url": "https://www.premiumdevelopers.co/offer-popup.css",
+                      "url": "https://premiumdevelopers.co/offer-popup.css",
                       "navStartToEndTime": 331,
                       "transferSize": 1269,
                       "children": {}
                     },
                     "32300.4": {
-                      "url": "https://www.premiumdevelopers.co/style.css",
+                      "url": "https://premiumdevelopers.co/style.css",
                       "navStartToEndTime": 318,
                       "transferSize": 10814,
                       "children": {}
@@ -4184,7 +4184,7 @@
         ],
         "items": [
           {
-            "url": "https://www.premiumdevelopers.co/exit-intent.css",
+            "url": "https://premiumdevelopers.co/exit-intent.css",
             "totalBytes": 1870
           },
           {
@@ -4193,11 +4193,11 @@
             "wastedMs": 1058
           },
           {
-            "url": "https://www.premiumdevelopers.co/offer-popup.css",
+            "url": "https://premiumdevelopers.co/offer-popup.css",
             "totalBytes": 1269
           },
           {
-            "url": "https://www.premiumdevelopers.co/style.css",
+            "url": "https://premiumdevelopers.co/style.css",
             "totalBytes": 10814,
             "wastedMs": 173
           }
@@ -5291,7 +5291,7 @@
     {
       "name": "premiumdevelopers.co",
       "origins": [
-        "https://www.premiumdevelopers.co"
+        "https://premiumdevelopers.co"
       ],
       "isFirstParty": true,
       "isUnrecognized": true

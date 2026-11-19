@@ -41,7 +41,7 @@ function patchGraph(graph, filePath) {
 
   const orgNode = JSON.parse(JSON.stringify(org));
   if (rel === 'about.html') {
-    orgNode.founder = { '@id': 'https://www.premiumdevelopers.co/about#founder' };
+    orgNode.founder = { '@id': 'https://premiumdevelopers.co/about#founder' };
   }
 
   next.unshift(orgNode);

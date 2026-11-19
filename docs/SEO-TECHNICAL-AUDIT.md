@@ -7,9 +7,9 @@
 
 | Item | Status |
 |------|--------|
-| **www preferred** | `vercel.json`: apex `premiumdevelopers.co` → `https://www.premiumdevelopers.co/:path*` (301) |
-| **Canonicals** | Core pages use `https://www.premiumdevelopers.co/...` |
-| **Home canonical** | `https://www.premiumdevelopers.co/` |
+| **www preferred** | `vercel.json`: apex `premiumdevelopers.co` → `https://premiumdevelopers.co/:path*` (301) |
+| **Canonicals** | Core pages use `https://premiumdevelopers.co/...` |
+| **Home canonical** | `https://premiumdevelopers.co/` |
 | **Sitemap** | `sitemap.xml`, `sitemap-blog.xml`; build via `npm run sitemap:build` |
 | **robots.txt** | Allows `/`, blocks `/admin/`, lists sitemaps |
 | **Duplicate home** | `/index.html` → `/` (301) added |
@@ -74,7 +74,7 @@ After deploy:
 
 ```bash
 curl -sI https://premiumdevelopers.co/services/woocommerce-development.html | findstr /i location
-curl -sI https://www.premiumdevelopers.co/ | findstr /i "200\|301"
+curl -sI https://premiumdevelopers.co/ | findstr /i "200\|301"
 ```
 
 Expect apex → `www` and final **200** on canonical URL.

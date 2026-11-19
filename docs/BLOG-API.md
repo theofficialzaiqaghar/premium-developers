@@ -1,6 +1,6 @@
 # Blog CMS HTTP API (Phase 3)
 
-Base URL (production): `https://www.premiumdevelopers.co`
+Base URL (production): `https://premiumdevelopers.co`
 
 Authentication uses an HttpOnly session cookie (`pd_blog_session`) plus CSRF header on mutating requests.
 

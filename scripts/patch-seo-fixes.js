@@ -8,7 +8,7 @@ const { organizationSameAsBlockJson } = require('../lib/seo-jsonld');
 
 const root = path.join(__dirname, '..');
 const ORG_IMAGE_MARKER =
-  '"image": "https://www.premiumdevelopers.co/assets/images/og/premium-developers-og.jpg"';
+  '"image": "https://premiumdevelopers.co/assets/images/og/premium-developers-og.jpg"';
 const SAMEAS_INJECT = organizationSameAsBlockJson('      ') + '      ' + ORG_IMAGE_MARKER;
 
 function walkHtml(dir, files = []) {
@@ -40,7 +40,7 @@ for (const file of walkHtml(root)) {
   }
 
   if (
-    html.includes('"@id": "https://www.premiumdevelopers.co/#organization"') &&
+    html.includes('"@id": "https://premiumdevelopers.co/#organization"') &&
     html.includes(ORG_IMAGE_MARKER) &&
     !html.includes('"sameAs":') &&
     html.includes('application/ld+json')

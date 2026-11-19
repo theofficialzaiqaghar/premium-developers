@@ -12,7 +12,7 @@
 ## Import steps (production or local)
 
 1. Deploy code that includes this backup file (or copy JSON to your machine).
-2. Open **https://www.premiumdevelopers.co/admin/blog/** and sign in.
+2. Open **https://premiumdevelopers.co/admin/blog/** and sign in.
 3. **Categories / tags:** Create once (or match slugs in backup):
    - Categories: `woocommerce`, `wordpress`, `web-design`, `guides`
    - Tags: `woocommerce`, `wordpress`, `elementor`, `ecommerce`, `roofing`, `performance`, `small-business`, `web-design`

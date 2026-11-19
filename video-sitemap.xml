@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
-    <loc>https://www.premiumdevelopers.co/</loc>
+    <loc>https://premiumdevelopers.co/</loc>
     <video:video>
-      <video:thumbnail_loc>https://www.premiumdevelopers.co/assets/images/og/premium-developers-og.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://premiumdevelopers.co/assets/images/og/premium-developers-og.jpg</video:thumbnail_loc>
       <video:title>Premium Developers — Website showreel</video:title>
       <video:description>Background showreel of Premium Developers WordPress, WooCommerce, and Elementor client work on the homepage.</video:description>
-      <video:content_loc>https://www.premiumdevelopers.co/assets/video/hero-showreel.mp4</video:content_loc>
+      <video:content_loc>https://premiumdevelopers.co/assets/video/hero-showreel.mp4</video:content_loc>
       <video:publication_date>2025-06-01T00:00:00+00:00</video:publication_date>
       <video:family_friendly>yes</video:family_friendly>
       <video:requires_subscription>no</video:requires_subscription>

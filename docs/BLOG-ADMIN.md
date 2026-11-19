@@ -1,6 +1,6 @@
 # Blog admin dashboard (Phase 5)
 
-URL: **https://www.premiumdevelopers.co/admin/blog/**
+URL: **https://premiumdevelopers.co/admin/blog/**
 
 ## Access
 

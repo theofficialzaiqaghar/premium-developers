@@ -13,7 +13,7 @@ const {
 const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
 
 const root = path.join(__dirname, '..');
-const SITE = 'https://www.premiumdevelopers.co';
+const SITE = 'https://premiumdevelopers.co';
 const manifestPath = path.join(root, 'content', 'blog-seo-pack', 'manifest.json');
 const sitemapXmlPath = path.join(root, 'sitemap.xml');
 const sitemapBlogPath = path.join(root, 'sitemap-blog.xml');

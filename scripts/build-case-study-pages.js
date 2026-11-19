@@ -9,7 +9,7 @@ const { CASE_STUDIES } = require('../lib/case-study-page-data');
 const { gtmHead, gtmBody, trackingStylesLink, trackingScriptsAfterAnalytics } = require('../lib/tracking-snippets');
 const { siteChromeIcons, siteChromeNav, siteChromeFooter } = require('../lib/site-chrome');
 
-const SITE = 'https://www.premiumdevelopers.co';
+const SITE = 'https://premiumdevelopers.co';
 const root = path.join(__dirname, '..');
 const outDir = path.join(root, 'case-studies');
 

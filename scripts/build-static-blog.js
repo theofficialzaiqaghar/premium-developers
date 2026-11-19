@@ -23,7 +23,7 @@ const sitemapBlogPath = path.join(root, 'sitemap-blog.xml');
 const ARCHIVE_PAGE_SIZE = 6;
 const bodiesDir = path.join(root, 'content', 'blog-seo-pack', 'bodies');
 const blogIndexPath = path.join(root, 'blog', 'index.html');
-const SITE = 'https://www.premiumdevelopers.co';
+const SITE = 'https://premiumdevelopers.co';
 
 function escapeHtml(value) {
   return String(value ?? '')

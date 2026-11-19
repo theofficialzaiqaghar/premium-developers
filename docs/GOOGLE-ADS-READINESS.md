@@ -63,7 +63,7 @@ Example parameters: `form_name`, `form_id`, `form_destination`, `offer_type` (`3
 1. **Variables** (Data Layer Variable): `offer_type`, `services_selected`, `marketing_consent`, `lead_outcome` (reuse `form_name` if you already have it).
 2. **Trigger → Custom Event** → Event name: `special_offer_submit` (no extra conditions for first test).
 3. **Tag → GA4 Event** → Configuration = your GA4 config tag → **Event name: `special_offer_submit`** (no `GA4 - ` prefix) → Trigger = step 2 → add Event Parameters from DLVs above.
-4. **Publish** → Preview on `https://www.premiumdevelopers.co/special-offer/` → accept cookies → submit test → select event **`special_offer_submit`** in sidebar → Tags Fired should show **Succeeded**.
+4. **Publish** → Preview on `https://premiumdevelopers.co/special-offer/` → accept cookies → submit test → select event **`special_offer_submit`** in sidebar → Tags Fired should show **Succeeded**.
 5. **GA4 → Admin → Events** → mark `special_offer_submit` as **Key event** only if you run offer-specific Ads (keep `generate_lead` as primary for main lead gen).
 
 ## Privacy & UK/EU consent (in codebase)
@@ -76,7 +76,7 @@ Example parameters: `form_name`, `form_id`, `form_destination`, `offer_type` (`3
 
 ## Pre-launch checklist (production)
 
-- [ ] Deploy latest build to `https://www.premiumdevelopers.co/`
+- [ ] Deploy latest build to `https://premiumdevelopers.co/`
 - [ ] Vercel env: `RESEND_API_KEY` (and Upstash vars if using exit/special-offer storage)
 - [ ] Submit test lead on homepage, one service page, and `/contact`; confirm email received
 - [ ] GTM Preview: exactly **one** `generate_lead` per successful submit

@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ORG_ID = 'https://www.premiumdevelopers.co/#organization';
-const WEB_ID = 'https://www.premiumdevelopers.co/#website';
+const ORG_ID = 'https://premiumdevelopers.co/#organization';
+const WEB_ID = 'https://premiumdevelopers.co/#website';
 
 async function walk(dir, acc = []) {
   for (const name of await readdir(dir, { withFileTypes: true })) {
@@ -51,7 +51,7 @@ for (const file of await walk(root)) {
       const checkRef = (obj) => {
         if (!obj || typeof obj !== 'object') return;
         if (obj['@id'] && obj['@id'] !== ORG_ID && obj['@id'] !== WEB_ID && !ids.has(obj['@id'])) {
-          const externalKnown = obj['@id'].startsWith('https://www.premiumdevelopers.co/about#');
+          const externalKnown = obj['@id'].startsWith('https://premiumdevelopers.co/about#');
           if (!externalKnown) {
             warnings.push(`${rel}: dangling @id reference ${obj['@id']}`);
           }
