@@ -11,7 +11,8 @@ This document describes what the **codebase** provides for Google Ads and what y
 | `form_start` | First focus inside a lead form (`contact`, `service_inquiry`, `home_inquiry`) | Funnel micro-conversion |
 | `click_whatsapp` | First WhatsApp FAB/teaser click per page (also fires `generate_lead` with `method: whatsapp`) | Optional micro-conversion |
 | `click_to_call` | First `tel:` link click per page | Optional micro-conversion |
-| `cta_click` | Service CTAs scrolling to `#project-inquiry` | Analytics only |
+| `cta_click` | Service CTAs scrolling to `#project-inquiry`, plus nav consultation CTAs | Analytics only |
+| `consultation_click` | Header/nav links to `/contact` (“Book a Consultation”) | Optional micro key event |
 | `contact_page_view` | Contact page load | Analytics only |
 | `special_offer_submit` | Successful special-offer API submit | Do **not** use as primary Ads conversion |
 | `exit_offer_submit` | Successful exit-intent discount email | Do **not** use as primary Ads conversion |

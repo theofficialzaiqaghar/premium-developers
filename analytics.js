@@ -102,4 +102,48 @@
       `form_submit:${key}`
     );
   };
+
+  /**
+   * Nav / header consultation CTAs that go to /contact (not in-page #project-inquiry).
+   * Fires consultation_click + cta_click for GA4/GTM funnels. Mark consultation_click as a
+   * GA4 key event only if you want micro-conversions; keep generate_lead as the primary lead KPI.
+   */
+  window.pdBindConsultationClicks = () => {
+    if (window.__pdConsultationClicksBound) return;
+    window.__pdConsultationClicksBound = true;
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target && event.target.closest
+          ? event.target.closest('a[href="/contact"], a[href^="/contact?"], a[href="/contact.html"]')
+          : null;
+        if (!link) return;
+        const text = (link.textContent || '').trim().slice(0, 80);
+        const href = link.getAttribute('href') || '/contact';
+        window.pdTrack('consultation_click', {
+          cta_text: text,
+          link_url: href,
+          placement: link.classList.contains('nav__mobile-cta')
+            ? 'nav_mobile'
+            : link.classList.contains('btn')
+              ? 'header_cta'
+              : 'inline'
+        });
+        window.pdTrack('cta_click', {
+          cta_text: text,
+          cta_location: 'consultation_nav',
+          link_target: href
+        });
+      },
+      true
+    );
+  };
+
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => window.pdBindConsultationClicks());
+    } else {
+      window.pdBindConsultationClicks();
+    }
+  }
 })();

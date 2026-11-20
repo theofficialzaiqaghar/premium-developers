@@ -1,0 +1,19 @@
+priority,keyword,tier,country,opportunity_type,evidence,primary_url,secondary_urls,action,kpi
+P0,woocommerce developer,1,UK+US,cannibalization+CTR,GSC ~398 impr / 0 clicks / pos~86; split across service+blog,/services/woocommerce-development.html,/blog/woocommerce-website-development-guide/,Make service primary; retarget blog to informational; internal links; rewrite title/meta,Clicks from this query; pos <=20
+P0,woocommerce developer uk,1,UK,gap+fit,Saved vol 40 KD12; aligns with UK GSC Woo cluster,/services/woocommerce-development.html,,Title H1 proof UK delivery + GBP CTA,UK clicks
+P0,custom woocommerce development services,1,US+UK,striking distance,GSC pos ~19 / 14 impr / 0 CTR,/services/woocommerce-development.html,,Expand custom services section + FAQ; CTA above fold,CTR >2% then ranking lift
+P0,woocommerce development services,1,UK+US,striking distance,GSC pos ~47 / 19 impr,/services/woocommerce-development.html,,Align H1/title; case study proof,pos <=20
+P1,elementor developer,1,UK+US,visibility without CTR,GSC 19 impr pos~86; saved CPC~$18.83,/services/elementor-development.html,,Rewrite title/meta; add Elementor case proof,Clicks >0 in 30d
+P1,wordpress developer uk,1,UK,high value seed,Saved vol 170 KD29 CPC~$19.87; weak GSC presence,/services/wordpress-development.html,,Dedicated UK-intent copy on WP service; FAQ pricing,Impressions+clicks UK
+P1,wordpress website development company,1,UK,commercial head,Saved vol 110 KD21 CPC~$11.10,/services/wordpress-development.html,/,,Differentiate from marketplace SERPs with process+SLA,Rank tracking
+P1,hire wordpress developer,1,UK,transactional,Saved vol 110 KD21 CPC~$8.54,/services/wordpress-development.html,,Compete with clear hire CTA; expect Upwork/Codeable in SERP,Qualified leads
+P1,divi development agency uk,1,UK,striking distance,GSC pos 47 / 6 impr,/divi-development/,,Strengthen UK agency framing + portfolio,pos <=20
+P1,website maintenance services,1,UK,volume estimate,Saved vol 320 KD0 CPC~$12.27 (validate intent),/services/maintenance-support.html,,Audit page for commercial intent match; packages,/Maintenance enquiries
+P2,shopify vs woocommerce,2,UK+US,content assist,GSC 49–53 impr / 0 clicks / pos~82–86,/blog/woocommerce-vs-shopify-uk/,/services/woocommerce-development.html,Improve comparison depth; CTA to Woo service,Assisted clicks to money page
+P2,woocommerce checkout optimization,2,US,mid funnel,GSC 11 impr pos~62,/blog/improve-woocommerce-checkout/,,Tighten title; link to Woo service,pos <=30
+P2,wordpress website cost uk,2,UK,commercial research,Saved vol 10 + GSC 9 impr,/blog/wordpress-website-cost-uk/,/contact,Keep GBP ranges honest; CTA quote,Leads from cost content
+P2,custom wordpress development services,1,UK+US,depth,GSC 24 impr pos~70,/services/custom-development.html,,Clarify vs WP service to reduce cannibalization,Unique query ownership
+P2,wordpress website maintenance packages,1,UK,package intent,Saved vol 50 CPC~$10.85,/services/maintenance-support.html,,Publish clear package table,Package page CTR
+P3,speed up wordpress website,3,UK+US,supporting,GSC speed cluster,/blog/how-to-speed-up-wordpress-website/,/services/speed-performance.html,Support performance service; avoid hire-intent targeting,Assisted conversions
+P3,divi vs elementor,2,US,comparison,GSC pos~35,/blog/divi-vs-elementor/,/divi-development/+/services/elementor-development.html,Bidirectional CTAs by builder,Service referrals
+P3,wordpress website development london,1,UK,local qualifier,Saved vol 40 KD22 — NOT a doorway page signal,/services/wordpress-development.html,,Mention London/UK delivery on existing WP page only,No new thin city URL
